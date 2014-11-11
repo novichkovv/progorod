@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="system_routes">
+        <column>id</column>
+        <column>project</column>
+        <column>alias</column>
+        <column>controller</column>
+        <column>title</column>
+        <column>parent</column>
+        <row>
+            <value>1</value>
+            <value>engine</value>
+            <value></value>
+            <value>test_controller.php</value>
+            <value>test</value>
+            <value>0</value>
+        </row>
+    </table>
+    <table name="firms">
+        <column>id</column>
+        <column>name</column>
+        <column>alias</column>
+        <column>controller</column>
+        <column>title</column>
+        <column>short_description</column>
+        <column>cdate</column>
+        <row>
+            <value>1</value>
+            <value>Эльдорадо</value>
+            <value>eldorado</value>
+            <value>firms_controller.php</value>
+            <value>Эльдорадо</value>
+            <value>Супермаркет электроники</value>
+            <value>2014-10-09 00:00:00</value>
+        </row>
+    </table>
+</dataset>
