@@ -28,7 +28,7 @@ class auth_module
                         setcookie ("user[login]", $_POST['login'], time() + 3600*24*365);
                         setcookie("user[password]", md5($_POST['password']), time() + 3600*24*365);
                     }
-                    header('Location: ' . (SITE_DIR == DOMAIN . '/' ? preg_replace("/^(http:\/\/)(.+)$/Ui", "$1user.$2", SITE_DIR) : SITE_DIR));
+                    header('Location: ' . (SITE_DIR == 'http://' . DOMAIN . '/' ?  'http://user. ' . DOMAIN : SITE_DIR));
 
                 }
             }
@@ -37,6 +37,7 @@ class auth_module
 
     public function check_auth()
     {
+
         $auth_model = new auth_model();
         if(isset($_SESSION['auth']) && $_SESSION['auth'])
         {

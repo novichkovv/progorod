@@ -14,7 +14,7 @@ define('SITE_DIR', ( !preg_match("/^http:\/\//",$_SERVER['HTTP_HOST']) ? 'http:/
 $arr = explode('.',$_SERVER['HTTP_HOST']);
 if($arr[0] != 'www')
     define('PROJECT',  $arr[0]);
-define('DOMAIN', 'http://' . $arr[count($arr) - 2] . '.' . $arr[count($arr) - 1]);
+define('DOMAIN', $arr[count($arr) - 2] . '.' . $arr[count($arr) - 1]);
 define('TEMPLATE_DIR', APP_DIR . 'templates' . DS . PROJECT . DS);
 define('DBTYPE', 'mysql');
 define('HOST', 'localhost');

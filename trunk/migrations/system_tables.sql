@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS system_routes (
    alias VARCHAR (255) NOT NULL,
    controller VARCHAR (255) NOT NULL,
    title VARCHAR (255) NOT NULL,
+   position INT NOT NULL,
    parent INT NOT NULL
 )ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
 
@@ -91,5 +92,31 @@ INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`
 VALUES (
   'admin','cities/regions','cities_controller.php', 'Регионы', 5
 );
+
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+VALUES (
+'user','','default_controller.php', 'Кабинет', 0
+);
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+VALUES (
+'user','firms','firms_controller.php', 'Мои фирмы', 0
+);
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+VALUES (
+  'user','malls','malls_controller.php', 'Мои центры', 0
+);
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+VALUES (
+  'user','nets','nets_controller.php', 'Мои сети', 0
+);
+
+CREATE TABLE IF NOT EXISTS user_cities (
+  id SERIAL PRIMARY KEY,
+  id_user BIGINT UNSIGNED,
+  id_city BIGINT UNSIGNED,
+  type TINYINT,
+  cdate DATETIME NOT NULL
+)ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 
 

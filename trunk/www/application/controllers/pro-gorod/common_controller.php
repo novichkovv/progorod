@@ -13,7 +13,6 @@ class common_controller extends controller
     }
     public function after_auth()
     {
-        //print_r($this->user);
     }
     public function ajax()
     {

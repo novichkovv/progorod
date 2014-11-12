@@ -30,7 +30,8 @@ class smarty_module
             'parts' => $system->parts,
             'template_folder' => $system->template_folder,
             'template_file' => $system->template_file,
-            'controller' => $system->controller
+            'controller' => $system->controller,
+            'city' => $system->city
         );
         $this->smarty->assign('system', $arr);
     }

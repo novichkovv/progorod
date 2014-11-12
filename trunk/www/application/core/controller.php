@@ -11,7 +11,7 @@ abstract class controller
     public $system;
     public  $tools;
     public $user;
-    public $breadcrumbs;
+    public $breadcrumbs = array();
     protected $log = array();
     abstract public  function init();
     public function ajax()
@@ -34,6 +34,14 @@ abstract class controller
     {
 
     }
+    public function add()
+    {
+
+    }
+    public function id()
+    {
+
+    }
     public function start()
     {
         $this->tools = new tools_module();
@@ -41,6 +49,10 @@ abstract class controller
         $this->first();
         if(isset($_REQUEST['ajax']))
             $this->ajax();
+        if(isset($_GET['add']))
+            $this->add();
+        if(isset($_GET['id']))
+            $this->id();
         $this->handler();
         $this->init();
         $auth->logout();
@@ -74,7 +86,11 @@ abstract class controller
                    }
                }
             }
-            if($breadcrumbs)$this->breadcrumbs = array_reverse($breadcrumbs);
+            if($breadcrumbs)
+            {
+                $this->breadcrumbs = array_merge($this->breadcrumbs, $breadcrumbs);
+                $this->breadcrumbs = array_reverse($this->breadcrumbs);
+            }
         }
         $this->t->assign('breadcrumbs', $this->breadcrumbs);
     }

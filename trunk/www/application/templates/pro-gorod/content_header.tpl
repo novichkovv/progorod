@@ -12,8 +12,21 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                {if $user.mail}
+                <li ><a href="http://user.{$smarty.const.DOMAIN}">Личный кабинет</a></li>
+                {else}
                 <li class="active"><a href="#registration" data-toggle="modal" role="button">Регистрация</a></li>
-                <li class="login"><a href="#login" data-toggle="modal" role="button">Вход</a></li>
+                {/if}
+                {if $user.mail}
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$user.mail} <b class="caret"></b></a>
+                        <span class="dropdown-menu">
+                            <span onclick="document.getElementById('logout_form').submit();">Выйти</span>
+                        </span>
+                    </li>
+                {else}
+                    <li class="login"><a href="#login" data-toggle="modal" role="button">Вход</a></li>
+                {/if}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Орехово-Зуево <b class="caret"></b></a>
                     <span class="dropdown-menu">

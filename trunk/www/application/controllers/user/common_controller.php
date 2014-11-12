@@ -13,7 +13,19 @@ class common_controller extends controller
     }
     public function after_auth()
     {
+        $this->breadcrumbs();
+        $system_model = new default_model('system_routes');
+        $tmp = $system_model->getByField('project', 'user', true, 'parent, position');
+        $sidebar = array();
+        foreach($tmp as $k => $v)
+        {
+            if(!$v['parent'])
+                $sidebar[$v['id']] = $v;
+            else
+                $sidebar[$v['parent']]['children'][$v['id']] = $v;
 
+        }
+        $this->t->assign('sidebar', $sidebar);
     }
     public function last()
     {
