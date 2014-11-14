@@ -7,6 +7,15 @@
  */
 class tools_module
 {
+    public $weekdays = array(
+        'mon' => 'Пн',
+        'tue' => 'Вт',
+        'wed' => 'Ср',
+        'thi' => 'Чт',
+        'fri' => 'Пт',
+        'sat' => 'Сб',
+        'sun' => 'Вс'
+    );
     public function idArray($result = array())
     {
         $res = array();
@@ -58,9 +67,34 @@ class tools_module
             return false;
 
     }
+    public function filterBuildings($building)
+    {
+        $building = strtr($building, array('.'=>' ', ',' => ''));
+        if($building)
+            $building = explode(' ', $building);
+        else return false;
+        $res = array();
+        foreach($building as $k => $str)
+        {
+            $str = $this->mb_ucfirst(trim($str));
+            $pattern[] = "/^(?:Д|Дом)$/i";
+            $replacement[] = '';
+            $pattern[] = "/^(?:С|Ст|Стр|Строе|Строен|Строени|Строение|Ст-е|Стр-е|С-ие|Ст-ие|Стр-ие|К|К-с|Кор|Корп|Корпу|Корпус|Кор-с|Ко-с|Др|Дро|Дроб|Дробь|Д-бь|\\|Зд)$/i";
+            $replacement[] = '/';
+            $res[$k] = trim(preg_replace($pattern, $replacement, $str));
+            if($res[$k] == '')unset($res[$k]);
+        }
+        if(isset($res) && $res != '')
+            return implode(' ',$res);
+        else
+            return false;
+
+    }
 
     public function mb_ucfirst($str, $enc = 'utf-8')
     {
         return mb_strtoupper(mb_substr($str, 0, 1, $enc), $enc).mb_substr($str, 1, mb_strlen($str, $enc), $enc);
     }
+
+
 }

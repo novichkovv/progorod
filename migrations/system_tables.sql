@@ -83,38 +83,34 @@ VALUES (
   'admin','cities','', 'Города', 0
 );
 
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
 VALUES (
-  'admin','cities/list','cities_controller.php', 'Города', 5
+  'admin','cities/list','cities_controller.php', 'Города', 2, 5
 );
 
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
 VALUES (
-  'admin','cities/regions','cities_controller.php', 'Регионы', 5
+  'admin','cities/regions','cities_controller.php', 'Регионы', 1, 5
 );
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
 VALUES (
-  'admin','cities/streets','cities_controller.php', 'Улицы', 5
+  'admin','cities/streets','cities_controller.php', 'Улицы', 3, 5
 );
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
 VALUES (
-  'admin','cities/buildings','cities_controller.php', 'Здания', 5
+  'admin','cities/buildings','cities_controller.php', 'Здания', 4, 5
 );
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
 VALUES (
-'user','','default_controller.php', 'Кабинет', 0
+'user','firms','firms_controller.php', 'Мои фирмы', 1, 0
 );
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
 VALUES (
-'user','firms','firms_controller.php', 'Мои фирмы', 0
+  'user','malls','malls_controller.php', 'Мои центры',2, 0
 );
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
 VALUES (
-  'user','malls','malls_controller.php', 'Мои центры', 0
-);
-INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
-VALUES (
-  'user','nets','nets_controller.php', 'Мои сети', 0
+  'user','nets','nets_controller.php', 'Мои сети', 3, 0
 );
 
 CREATE TABLE IF NOT EXISTS user_cities (

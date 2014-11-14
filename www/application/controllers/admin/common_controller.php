@@ -23,7 +23,7 @@ class common_controller extends controller
         }
         $this->breadcrumbs();
         $group_rights = $user_group_rights_model->getGroupRights();
-        $arr = $system_model->getByField('project', 'admin', true, 'parent');
+        $arr = $system_model->getByField('project', 'admin', true, 'parent,position');
         $sidebar = array();
         foreach($arr as $v)
         {
