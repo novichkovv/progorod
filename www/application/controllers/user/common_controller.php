@@ -31,8 +31,39 @@ class common_controller extends controller
     {
         if(!$this->user['id'])
         {
-            header('Location: ' . DOMAIN);
+            header('Location: http://' . DOMAIN);
             exit;
+        }
+    }
+
+    public function ajax()
+    {
+        switch($_REQUEST['action'])
+        {
+            case 'ajax_image_upload':
+                $upload_dir = ROOT_DIR . 'uploads' . DS . ( $_POST['dir'] ? $_POST['dir'] : 'temp' . DS );
+                if(!file_exists($upload_dir))
+                    mkdir($upload_dir, 777);
+                $ext = substr($_FILES['uploadfile']['name'],strpos($_FILES['uploadfile']['name'],'.'),strlen($_FILES['uploadfile']['name'])-1);
+                $filetypes = array('.jpg','.gif','.bmp','.png','.JPG','.BMP','.GIF','.PNG','.jpeg','.JPEG');
+                $file = $upload_dir . $_POST['name'].$ext;
+                if(!in_array($ext,$filetypes))
+                {
+                    echo "<p>Данный формат файлов не поддерживается</p>";
+                }
+                else
+                {
+                    if (copy($_FILES['uploadfile']['tmp_name'], $file))
+                    {
+                        echo "success";
+                    }
+                    else
+                    {
+                        echo "error";
+                    }
+                }
+                exit;
+            break;
         }
     }
 }

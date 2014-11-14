@@ -6,13 +6,13 @@
     {if !$value.nrow && !$params.nrow && !$value.row_nopen}
         <div class="row">
     {/if}
-        <div class="{if $value.lg || $value.col}col-lg-{$value.lg|default:$value.col}{elseif $params.col || $params.lg}col-lg-{$params.lg|default:$params.col}{/if} col-md-{if $value.col && !$value.md}{$value.col}{elseif $value.md}{$value.md}{elseif $params.col || $params.md}{$params.md|default:$params.col}{else}12{/if} {if $value.sm || $value.col}col-sm-{$value.sm|default:$value.col}{elseif $params.col || $params.sm}col-sm-{$params.sm|default:$params.col}{/if} {if $value.xs || $value.col}col-xs-{$value.xs|default:$value.col}{elseif $params.col || $params.xs}col-xs-{$params.xs|default:$params.col}{/if}">
+        <div class="{if $value.lg || $value.col}col-lg-{$value.lg|default:$value.col}{elseif $params.col || $params.lg}col-lg-{$params.lg|default:$params.col}{/if} {if $value.md || $value.col}col-md-{$value.md|default:$value.col}{elseif $params.col || $params.md}col-md-{$params.md|default:$params.col}{/if} {if $value.sm || $value.col}col-sm-{$value.sm|default:$value.col}{elseif $params.col || $params.sm}col-sm-{$params.sm|default:$params.col}{/if} {if $value.xs || $value.col}col-xs-{$value.xs|default:$value.col}{elseif $params.col || $params.xs}col-xs-{$params.xs|default:$params.col}{/if}">
             <label>{$value.label}</label>
             {if $value.type eq 'text' || $value.type eq 'password' || !$value.type}
                 <input name="{$field}" class="{$value.class|default:'form-control'}" {if $value.id}id="{$value.id}"{/if} type="{$value.type|default:'text'}" {foreach from=$value.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$value.data key=key item=val}data-{$key}="{$val}" {/foreach} value="{$row[$field]}" {if $value.placeholder}placeholder="{$value.placeholder}"{/if}  {if $value.autocomplete}autocomplete="{$value.autocomplete}"{/if} />
             {/if}
             {if $value.type eq 'textarea'}
-                <textarea name="{$field}" class="{$value.class|default:'form-control'}" {if $value.id}id="{$value.id}"{/if} {foreach from=$value.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$value.data key=key item=val}data-{$key}="{$val}" {/foreach} {if $value.placeholder}placeholder="{$value.placeholder}"{/if} {if $value.cols}cols="{$value.cols}"{/if} {if $value.rows}cols="{$value.rows}"{/if}>{$value.value}</textarea>
+                <textarea name="{$field}" class="{$value.class|default:'form-control'}" {if $value.id}id="{$value.id}"{/if} {foreach from=$value.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$value.data key=key item=val}data-{$key}="{$val}" {/foreach} {if $value.placeholder}placeholder="{$value.placeholder}"{/if} {if $value.cols}cols="{$value.cols}"{/if} {if $value.rows}rows="{$value.rows}"{/if}>{$row[$field]}</textarea>
             {/if}
             {if $value.type eq 'select'}
                 <select name="{$field}" class="{$value.class|default:'form-control'}" {if $value.id}id="{$value.id}"{/if} {foreach from=$value.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$value.data key=key item=val}data-{$key}="{$val}" {/foreach} {if $value.placeholder}placeholder="{$value.placeholder}"{/if}>
@@ -51,6 +51,9 @@
                     </div>
                 {/if}
             {/if}
+            {if $value.type eq 'hidden'}sgerhyjjhrt
+                <input type="hidden" value="{$row[$field]}" name="{$field}" />
+            {/if}
         </div>
 
     {if !$value.ngroup && !$params.ngroup && !$value.group_nclose}
@@ -60,19 +63,19 @@
             </div>
         {/if}
     {/foreach}
-    {if !$button.ngroup && !$params.ngroup && !$button.group_nopen}
+    {if !$params.button.ngroup && !$params.ngroup && !$params.button.group_nopen}
     <div class="form-group">
         {/if}
-        {if !$button.nrow && !$params.nrow && !$button.row_nopen}
+        {if !$params.button.nrow && !$params.nrow && !$params.button.row_nopen}
         <div class="row">
             {/if}
-            <div class="{if $button.lg}col-lg-{$button.lg}{elseif $button.col}col-lg-{$button.col}{/if} {if $button.md}col-md-{$button.md}{elseif $button.col}col-md-{$button.col}{else}col-md-12{/if} {if $button.sm}col-sm-{$button.sm}{elseif $button.col}col-sm-{$button.col}{/if} {if $button.xs}col-xs-{$button.xs}{elseif $button.col}col-xs-{$button.col}{/if}">
+            <div class="{if $params.button.lg}col-lg-{$params.button.lg}{elseif $button.col}col-lg-{$params.button.col}{/if} {if $params.button.md}col-md-{$button.md}{elseif $params.button.col}col-md-{$params.button.col}{else}col-md-12{/if} {if $params.button.sm}col-sm-{$params.button.sm}{elseif $params.button.col}col-sm-{$params.button.col}{/if} {if $params.button.xs}col-xs-{$params.button.xs}{elseif $params.button.col}col-xs-{$params.button.col}{/if}">
                 {if $button.tag eq 'button'}
-                    <button class="{$button.class|default: "btn btn-default"}" type="{$button.type|default:'submit'}" {if $button.id}id="{$button.id}"{/if} {foreach from=$button.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$button.data key=key item=val}data-{$key}="{$val}" {/foreach}>{$button.value|default:'Сохранить'}</button>
+                    <button class="{$params.button.class|default: "btn btn-default"}" type="{$params.button.type|default:'submit'}" {if $button.id}id="{$button.id}"{/if} {foreach from=$button.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$button.data key=key item=val}data-{$key}="{$val}" {/foreach}>{$button.value|default:'Сохранить'}</button>
                 {elseif $button.tag eq 'a'}
                     <a class="{$button.class|default: "btn btn-default"}" type="{$button.type|default:'submit'}" {if $button.id}id="{$button.id}"{/if} {foreach from=$button.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$button.data key=key item=val}data-{$key}="{$val}" {/foreach} href="{$button.href|default:''}">{$button.value|default:'Сохранить'}</a>
                 {else}
-                    <input name="add_button" class="{$button.class|default: "btn btn-default"}" type="{$button.type|default:'submit'}" {if $button.id}id="{$button.id}"{/if} {foreach from=$button.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$button.data key=key item=val}data-{$key}="{$val}" {/foreach} value="{$button.value|default:'Сохранить'}" />
+                    <input name="{$params.button.name|default:"add_button"}" class="{$params.button.class|default: "btn btn-default"}" type="{$params.button.type|default:'submit'}" {if $params.button.id}id="{$params.button.id}"{/if} {foreach from=$params.button.attributes key=key item=val}{$key}="{$val}" {/foreach} {foreach from=$params.button.data key=key item=val}data-{$key}="{$val}" {/foreach} value="{$params.button.value|default:'Сохранить'}" />
                 {/if}
             </div>
         </div>

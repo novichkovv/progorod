@@ -1,24 +1,6 @@
 $ = jQuery.noConflict();
-$(document).ready(function()
-{
-    $('[data-toggle=offcanvas]').click(function () {
-        $('.row-offcanvas').toggleClass('active')
-    });
-    new WOW().init();
-    $("#comment_textarea").focus(function()
-    {
-        $(this).animate({'height': '200px'}, 100);
-    });
-    $("a[data-toggle='tab']").click(function()
-    {
-        $('.tab-button').each(function()
-        {
-            $(this).removeClass('act');
-        });
-        $(this).parent('.tab-button').addClass('act');
-    });
 
-});
+
 var validate = function validate(form_id)
 {
     var form = $("#" + form_id);
@@ -83,4 +65,101 @@ var ajax = function ajax(params)
             }
         }
     )
-}
+};
+var image_upload = function(params){
+    var btn=$("#" + params.button);
+    var group = $(btn).closest('.form-group');
+    var status=$(group).find(".status");
+    var preview = $(group).find(".preview");
+    if(params.preview_height)
+        $(preview).css('height', params.preview_height + 'px');
+    if(params.preview_width)
+        $(preview).css('height', params.preview_width + 'px');
+    var extension;
+    new AjaxUpload(btn, {
+        action: 'http://' + document.domain,
+        name: 'uploadfile',
+        data: {
+            'name': params.name,
+            'ajax': true,
+            'action': 'ajax_image_upload'
+        },
+        onSubmit: function(file, ext){
+            extension = ext;
+            if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+                status.text('Поддерживаемые форматы JPG, PNG или GIF');
+                return false;
+            }
+            status.html('<img src="http://' + document.domain + '/images/main/preloader28.GIF" />');
+        },
+        onComplete: function(file, response){
+            status.html('');
+            if(response==="success")
+            {
+                $(preview).css('background-color', '#fff');
+                $(preview).html('' +
+                    '<img src="http://' + document.domain + '/uploads/' + (params.dir ? params.dir : 'temp/') + params.name + '.' + extension + '?'+Math.random()+'" />' +
+                    '<input type="hidden" name="image" value="' + params.name + '.' + extension + '">' +
+                    ( params.dir ? '<input type="hidden" name="dir" value="' + params.dir + '">' : '' ) +
+                    ( params.width ? '<input type="hidden" name="width" value="' + params.width + '">' : '' ) +
+                    ( params.height ? '<input type="hidden" name="height" value="' + params.height + '">' : '' ));
+                $(btn).html('Изменить файл')
+            } else
+            {
+                $('<li></li>').appendTo('#files').text('Файл не загружен' + file).addClass('error');
+            }
+        }
+    });
+
+};
+var suggest = function suggest(params)
+{
+    var group = $(params.input).parent();
+    $(group).append('<div class="suggests"></div>');
+    var settings = params;
+    $('body').on('keyup', params.input, function()
+    {
+        var input = $(this);
+        if(!settings.data)settings.data = {};
+        settings.data.value =  $(input).val();
+        for(var key in settings.get_data)
+        {
+            settings.data[key] = $(settings.get_data[key]).val();
+        }
+        var params = {
+            'action': settings.action,
+            values: settings.data,
+            callback: function(msg)
+            {
+                var container = $(group).children('.suggests');
+                $(container).html('');
+                if(!msg)return;
+                var suggests = JSON.parse(msg);
+                for(var i in suggests)
+                {
+                    $(container).append('<div class="suggest">' + suggests[i] + '</div> ');
+                }
+                var el = $(".suggest");
+                $(el).mouseover(function()
+                {
+                    $(this).css('background-color', '#eee');
+                });
+                $(el).mouseout(function()
+                {
+                    $(this).css('background-color', '#fff');
+                });
+                $(el).click(function()
+                {
+                    $(input).val($(this).html());
+                    $(container).html('');
+                });
+                $('body:not(.suggest)').click(function()
+                {
+                    $(container).html('');
+                })
+
+            }
+        };
+        ajax(params);
+    });
+};

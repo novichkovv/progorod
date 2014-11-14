@@ -7,8 +7,8 @@
  */
 class default_model extends model
 {
-    function __construct($table)
+    function __construct($table, $db = false)
     {
-        parent::__construct($table);
+        parent::__construct($table, $db);
     }
 }

@@ -18,7 +18,7 @@ class rights_controller extends controller
         $user_group_rights_model = new user_group_rights_model();
         $group_rights = $user_group_rights_model->getGroupRights();
         $system_routes_model = new default_model('system_routes');
-        $routes = $system_routes_model->getAll();
+        $routes = $system_routes_model->getByField('project', 'admin', true);
         $result = array();
         if($user_groups)
         {

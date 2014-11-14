@@ -14,6 +14,10 @@ class system_module
     public $controller;
     public $city;
     public $alias;
+    public $breadcrumbs = array();
+    public $log = array();
+    public $script = array();
+    public $style = array();
     function __construct()
     {
         $route = isset($_REQUEST['route']) ? trim($_REQUEST['route'], "/") : '';
