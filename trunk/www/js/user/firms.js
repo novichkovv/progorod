@@ -1,6 +1,5 @@
 $(document).ready(function()
 {
-    var city = $("select[name='city']");
     var body = $('body');
     group_select('region','city');
     group_select('division','subdivision');
@@ -11,12 +10,13 @@ $(document).ready(function()
         else
             $(".street-input").attr('disabled', 'disabled');
     });
-    $(body).on('keyup', ".street-input", function()
+    $(body).on('input', ".street-input", function()
     {
-        if($(this).val() != '' && $(this).val().length > 2)
+        if($(this).val() != '' )
             $(".building-input").removeAttr('disabled');
         else
             $(".building-input").attr('disabled', 'disabled');
+        $(this).closest('.address-group').find('.building-input').val('');
     });
     $(body).on('submit','#firm_form', function()
     {
@@ -30,12 +30,10 @@ $(document).ready(function()
     $.mask.definitions['Z'] = '[-_a-zA-Zа-яА-Я\/\.0-9&?=%]';
     $.mask.placeholder = ' ';
     $("input[name='site']").mask('http://ZZZZZ?ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
+    $(".phone").mask('+7(999)999-99-99');
     suggest({
         'action': 'street_suggest',
         'input': '.street-input',
-//        'data': {
-//            'city': $('select[name="city"]').val()
-//        },
         'get_data': {
             'city': 'select[name="city"]'
         }
@@ -51,12 +49,39 @@ $(document).ready(function()
     suggest({
         'action': 'building_suggest',
         'input': '.building-input',
-        'data': {
-            'city': $(city).val(),
-            'street': $(".street-input.resource").val()
+        'get_data': {
+            'city': 'select[name="city"]',
+            'street': ".street-input.resource"
         }
     });
+    $(body).on('click', ".add-address-group", function()
+    {
+        var button = $(this);
+        var id = $(".address-group").length;
+        var params = {
+            'action' : 'add_address_group',
+            'id' : id,
+            'callback': function(msg)
+            {
+                $(button).closest('.address-group').after(msg);
+                $(".phone").mask('+7(999)999-99-99');
+                $(button).remove();
+            }
+        };
+        ajax(params);
 
+    });
+    $('body').on('change', '.workdays_radio', function()
+    {
+        if($(this).prop('checked'))
+        {
+            $(this).closest('ul').find('li').each(function()
+            {
+                $(this).find('ul').addClass('hidden');
+            });
+            $(this).closest('li').find('ul').removeClass('hidden');
+        }
+    });
 
 });
 

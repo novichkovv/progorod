@@ -62,6 +62,7 @@ class firms_controller extends controller
             $values['region'] = $this->system->city['id_region'];
             $values['city'] = $this->system->city['id'];
         }
+        $this->assignDays();
         $this->t->assign('values', $values);
         $this->t->assign('regions', $regions);
         $this->t->assign('cities', $cities);
@@ -86,7 +87,52 @@ class firms_controller extends controller
                 echo json_encode($streets);
                 exit;
             break;
+
+            case 'building_suggest':
+                if(!$value = $this->tools->filterBuildings($_POST['value']))exit;
+                $cities_model = new default_model('cities');
+                $cities = $this->tools->idArray($cities_model->getAll());
+                $streets_model = new default_model('streets',$cities[$_POST['city']]['alias']);
+                $id_street = $streets_model->getByField('name', $_POST['street'])['id'];
+                $buildins_model = new cities_model('', $cities[$_POST['city']]['alias']);
+                $buildings = $buildins_model->buildingSuggest($value, $id_street);
+                if(count($buildings) == 1 && $buildings[0] == $_POST['value'])
+                {
+                    exit;
+                }
+                echo json_encode($buildings);
+                exit;
+            break;
+
+            case "add_address_group":
+                $this->assignDays();
+                $this->t->assign('id', $_POST['id']);
+                $this->t->display(TEMPLATE_DIR . 'firms' . DS . 'ajax' . DS . 'address_group.tpl');
+                exit;
+            break;
         }
+    }
+    private function assignDays()
+    {
+        $this->t->assign('weekdays', $this->tools->weekdays);
+        $hours = array();
+        for($i = 0; $i < 23; $i ++)
+        {
+            if($i < 10)
+                $hours[] = '0'. $i;
+            else
+                $hours[] = $i;
+        }
+        $this->t->assign('hours', $hours);
+        $minutes = array();
+        for($i = 0; $i < 59; $i ++)
+        {
+            if($i < 10)
+                $minutes[] = '0'. $i;
+            else
+                $minutes[] = $i;
+        }
+        $this->t->assign('minutes', $minutes);
     }
 
 }

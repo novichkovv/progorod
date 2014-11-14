@@ -122,16 +122,19 @@ var suggest = function suggest(params)
         var input = $(this);
         if(!settings.data)settings.data = {};
         settings.data.value =  $(input).val();
-        for(var key in settings.get_data)
+        if(settings.get_data)
         {
-            settings.data[key] = $(settings.get_data[key]).val();
+            for(var key in settings.get_data)
+            {
+                settings.data[key] = $(settings.get_data[key]).val();
+            }
         }
         var params = {
             'action': settings.action,
             values: settings.data,
             callback: function(msg)
             {
-                var container = $(group).children('.suggests');
+                var container = $(input).parent().find('.suggests');
                 $(container).html('');
                 if(!msg)return;
                 var suggests = JSON.parse(msg);
@@ -139,7 +142,7 @@ var suggest = function suggest(params)
                 {
                     $(container).append('<div class="suggest">' + suggests[i] + '</div> ');
                 }
-                var el = $(".suggest");
+                var el = $(container).children(".suggest");
                 $(el).mouseover(function()
                 {
                     $(this).css('background-color', '#eee');
@@ -161,5 +164,40 @@ var suggest = function suggest(params)
             }
         };
         ajax(params);
+    });
+};
+var group_select = function group_select(name, child_name)
+{
+    $("select[name='" + name + "']").change(function()
+    {
+        var group = $(this).closest('.select-group');
+        $(group).find('.error-require').each(function()
+        {
+            $(this).slideUp();
+        });
+        var id = $(this).val();
+        var children = $("#" + name + "_children_" + id);
+        var children_select = $(children).find('select');
+        if($(group).find("." + name + "_select:visible").length)
+        {
+            $(group).find("." + name + "_select").slideUp(100, function()
+            {
+                $(this).find('select').removeAttr('data-require');
+                $(this).find('select').removeAttr('name');
+                $(children_select).attr('data-require', '1');
+                $(children_select).attr('name', child_name);
+                $(children).slideDown();
+            });
+        }
+        else
+        {
+            $(children_select).attr('data-require', '1');
+            $(children_select).attr('name', child_name);
+            $(children).slideDown();
+        }
+    });
+    $("select[name='" + child_name + "']").change(function()
+    {
+        $(this).closest('.form-group').find('.error-require').slideUp();
     });
 };

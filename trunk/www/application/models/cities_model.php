@@ -75,4 +75,22 @@ class cities_model extends model
         }
         return $tmp;
     }
+
+    public function buildingSuggest($value, $street)
+    {
+        $stm = $this->pdo->prepare('
+        SELECT * FROM buildings WHERE name LIKE :name AND id_street = :id_street
+        ');
+        $res = $this->get_all($stm, array('name' => $value. '%', 'id_street' => $street));
+        if(!$res)
+        {
+            $res = $this->get_all($stm, array('name' => '%' . $value. '%', 'id_street' => $street));
+        }
+        $tmp = array();
+        foreach($res as $k => $v)
+        {
+            $tmp[$k] = $v['name'];
+        }
+        return $tmp;
+    }
 }
