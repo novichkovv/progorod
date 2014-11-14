@@ -77,6 +77,56 @@ class cities_controller extends controller
                 );
                 $crud->params($params);
             break;
+
+            case 'streets':
+                $crud = new crud_extension($this);
+                $params = array();
+                $params['city'] = true;
+                $params['xs'] = 12;
+                $params['sm'] = 6;
+                $params['sm'] = 4;
+                $params['default_model'] = 'streets';
+                $params['add_link_params'] = '&city=' . $_POST['city'];
+                $params['fields']['name'] = array(
+                    'label' => 'Название'
+                );
+                $crud->params($params);
+            break;
+
+            case 'buildings':
+                $crud = new crud_extension($this);
+
+                $params = array();
+                $params['city'] = true;
+                $params['xs'] = 12;
+                $params['sm'] = 6;
+                $params['sm'] = 4;
+                $params['default_model'] = 'buildings';
+                $params['add_link_params'] = '&city=' . $_POST['city'];
+                if($_GET['city'] || $_POST['city'])
+                {
+                    $city = $_POST['city'];
+                    if(!$_POST['city'])$city = $_GET['city'];
+                    $streets_model = new default_model('streets', $city);
+                    $tmp = $streets_model->getAll();
+                    $streets = array();
+                    foreach($tmp as $k => $v)
+                    {
+                        $streets[$k]['label'] = $v['name'];
+                        $streets[$k]['value'] = $v['id'];
+                    }
+                }
+                $params['fields']['id_street'] = array(
+                    'label' => 'Улица',
+                    'type' => 'select',
+                    'value' => $streets
+                );
+                $params['fields']['name'] = array(
+                    'label' => 'Здание'
+                );
+
+                $crud->params($params);
+            break;
         }
 
     }

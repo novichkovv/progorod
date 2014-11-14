@@ -24,12 +24,11 @@ class auth_module
                     }
                     else
                     {
-                        setcookie ("user[auth]", 1, time() + 3600*24*365);
-                        setcookie ("user[login]", $_POST['login'], time() + 3600*24*365);
-                        setcookie("user[password]", md5($_POST['password']), time() + 3600*24*365);
+                        setcookie ("user[auth]", 1, time() + 3600*24*365,'/', '.pro-gorod.loc');
+                        setcookie ("user[login]", $_POST['login'], time() + 3600*24*365,'/', '.pro-gorod.loc');
+                        setcookie("user[password]", md5($_POST['password']), time() + 3600*24*365,'/', '.pro-gorod.loc');
                     }
-                    header('Location: ' . (SITE_DIR == 'http://' . DOMAIN . '/' ?  'http://user. ' . DOMAIN : SITE_DIR));
-
+                    header('Location: ' . (SITE_DIR == 'http://' . DOMAIN . '/' ?  'http://user.' . DOMAIN : SITE_DIR));
                 }
             }
         }
@@ -60,9 +59,9 @@ class auth_module
             unset($_SESSION['auth']);
             unset($_SESSION['login']);
             unset($_SESSION['password']);
-            setcookie ("user[auth]", 0, time() - 3600);
-            setcookie ("user[login]", $_POST['login'], time() - 3600);
-            setcookie("user[password]", md5($_POST['password']), time() - 3600);
+            setcookie ("user[auth]", 0, time() - 3600,'/', '.pro-gorod.loc');
+            setcookie ("user[login]", $_POST['login'], time() - 3600,'/','.pro-gorod.loc');
+            setcookie("user[password]", md5($_POST['password']), time() - 3600,'/','.pro-gorod.loc');
             session_destroy();
             header('Location: ?');
         }

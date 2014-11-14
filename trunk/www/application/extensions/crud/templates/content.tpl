@@ -2,7 +2,7 @@
     {include $temp_dir|cat:'add.tpl'}
 {else}
  <div class="row">
-     <a href="{$smarty.const.SITE_DIR}{$system.alias}/?add=1" class="btn btn-primary">{$params.add_button.value|default:'Добавить'}</a>
+     <a href="{$smarty.const.SITE_DIR}{$system.alias}/?add=1{$params.add_link_params}" class="btn btn-primary">{$params.add_button.value|default:'Добавить'}</a>
  </div>
  <br>
 <div class="row">
@@ -51,8 +51,9 @@
                      {if !$params['no_actions']}
                          <td>
                              <a class="btn btn-default" href="{$smarty.const.SITE_DIR}{$system.alias}/?add=1&id={$item['id']}"><i class="glyphicon glyphicon-pencil"></i> </a>
-                             <a class="btn btn-warning" href="#modal" data-id="{$item['id']}" data-toggle="modal" role="button"><i class="glyphicon glyphicon-ban-circle"></i> </a>
-
+                            {if !$params['limits']['delete']}
+                                <a class="btn btn-warning" href="#modal" data-id="{$item['id']}" data-toggle="modal" role="button"><i class="glyphicon glyphicon-ban-circle"></i> </a>
+                            {/if}
                          </td>
                      {/if}
                  </tr>
@@ -63,6 +64,7 @@
      </div>
  </div>
  </div>
+{if !$params['limits']['delete']}
 <div class="modal fade" id="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -81,7 +83,7 @@
         </div>
     </div>
 </div>
-
+{/if}
 {/if}
 {literal}
     <script type="text/javascript">

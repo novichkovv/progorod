@@ -17,11 +17,11 @@ class model
         /**
          * connecting to database
         */
-        if($db)$this->db = $db;
+        $db ? $this->db = $db : $this->db = DEFAULT_DB;
         $dsn = DBTYPE . ':host=' . HOST . ';dbname=' . ( $this->db ? $this->db : DEFAULT_DB );// . ';charset=' . CHARSET;
-            $this->db = DEFAULT_DB;
         $this->pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
-        //$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(PDO::ATTR_ORACLE_NULLS ,PDO::NULL_TO_STRING);
         $this->pdo->exec("SET NAMES utf8");
         /*
          *  getting model and table
@@ -59,7 +59,7 @@ class model
         $stm = $this->pdo->prepare('SELECT * FROM ' . $this->table);
         return $this->get_row($stm);
     }
-    public function insert(array $row)
+    public function insert(array $row, $show = false)
     {
         if(isset($row['id']))
         {
@@ -87,6 +87,7 @@ class model
                 'INSERT INTO ' . $this->table . ' (' . implode(', ', $rows) . ') VALUES ( ' . implode(', ', $names) . ')'
         );
         $stm->execute($row);
+        if($show)echo $stm->queryString;
         if(!empty($id))return $id;
         return $this->pdo->lastInsertId();
     }

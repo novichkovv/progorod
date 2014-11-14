@@ -92,7 +92,14 @@ INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`
 VALUES (
   'admin','cities/regions','cities_controller.php', 'Регионы', 5
 );
-
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+VALUES (
+  'admin','cities/streets','cities_controller.php', 'Улицы', 5
+);
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
+VALUES (
+  'admin','cities/buildings','cities_controller.php', 'Здания', 5
+);
 INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `parent`)
 VALUES (
 'user','','default_controller.php', 'Кабинет', 0
@@ -118,5 +125,39 @@ CREATE TABLE IF NOT EXISTS user_cities (
   cdate DATETIME NOT NULL
 )ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+CREATE TABLE IF NOT EXISTS divisions (
+  id SERIAL PRIMARY KEY,
+  id_route BIGINT UNSIGNED,
+  name VARCHAR (255) NOT NULL,
+  title VARCHAR (255) NOT NULL,
+  keywords TEXT NOT NULL,
+  description TEXT NOT NULL,
+  creator BIGINT NOT NULL,
+  cdate DATETIME NOT NULL
+)ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+CREATE TABLE IF NOT EXISTS subdivisions (
+  id SERIAL PRIMARY KEY,
+  id_route BIGINT UNSIGNED,
+  id_division BIGINT UNSIGNED,
+  name VARCHAR (255) NOT NULL,
+  title VARCHAR (255) NOT NULL,
+  keywords TEXT NOT NULL,
+  description TEXT NOT NULL,
+  creator BIGINT NOT NULL,
+  cdate DATETIME NOT NULL
+)ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
+VALUES (
+  'admin','','', 'Меню', 4, 0
+);
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
+VALUES (
+  'admin','divisions','divisions_controller.php', 'Рубрики', 0, 12
+);
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
+VALUES (
+  'admin','subdivisions','divisions_controller.php', 'Разделы рубрик', 1, 12
+);
 
