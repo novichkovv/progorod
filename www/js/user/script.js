@@ -1,5 +1,11 @@
 $ = jQuery.noConflict();
-
+$(document).ready(function()
+{
+    $('body').on('click', '[data-close]', function()
+    {
+        $(this).closest("." + $(this).data('close')).remove();
+    });
+});
 
 var validate = function validate(form_id)
 {

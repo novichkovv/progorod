@@ -16,6 +16,15 @@ class tools_module
         'sat' => 'Сб',
         'sun' => 'Вс'
     );
+    public $simple_weekdays = array(
+        'mon',
+        'tue',
+        'wed',
+        'thi',
+        'fri',
+        'sat',
+        'sun'
+    );
     public function idArray($result = array())
     {
         $res = array();
@@ -76,11 +85,12 @@ class tools_module
         $res = array();
         foreach($building as $k => $str)
         {
-            $str = $this->mb_ucfirst(trim($str));
-            $pattern[] = "/^(?:Д|Дом)$/i";
+            $str = mb_strtolower(trim($str),'utf-8');
+            $pattern[] = "/^(?:д|дом)$/i";
             $replacement[] = '';
-            $pattern[] = "/^(?:С|Ст|Стр|Строе|Строен|Строени|Строение|Ст-е|Стр-е|С-ие|Ст-ие|Стр-ие|К|К-с|Кор|Корп|Корпу|Корпус|Кор-с|Ко-с|Др|Дро|Дроб|Дробь|Д-бь|\\|Зд)$/i";
-            $replacement[] = '/';
+            $pattern[] = "/^(?:ст|стр|строе|строен|строени|строение|ст-е|стр-е|с-ие|ст-ие|стр-ие|к|к-с|кор|корп|корпу|корпус|кор-с|ко-с|кр|кро|Зд)$/i";
+            $replacement[] = 'с';
+            $pattern[] = "/^(?:др|дроб|дробь|\\|д-бь)$/";
             $res[$k] = trim(preg_replace($pattern, $replacement, $str));
             if($res[$k] == '')unset($res[$k]);
         }
@@ -96,5 +106,109 @@ class tools_module
         return mb_strtoupper(mb_substr($str, 0, 1, $enc), $enc).mb_substr($str, 1, mb_strlen($str, $enc), $enc);
     }
 
+    public function parse_workdays($workdays)
+    {
+        $res = array();
+        $keys = array_keys($workdays);
+        if($workdays[$keys[0]]['always'])
+        {
+            $res['always'] = 1;
+        }
+        if($workdays[$keys[0]]['daily'] && count($workdays) == 1)
+        {
+            $arr = explode(':',$workdays[key($workdays)]['work_from']);
+            unset($arr[2]);
+            $res['daily']['from'] = implode(':', $arr);
+            $arr = explode(':',$workdays[key($workdays)]['work_to']);
+            unset($arr[2]);
+            $res['daily']['to'] = implode(':', $arr);
+
+
+        }
+        elseif($workdays[$keys[0]]['daily'] && count($workdays) == 2)
+        {
+
+            if($workdays[$keys[0]]['work_to'] > $workdays[$keys[1]]['work_to'])
+            {
+                $arr = explode(':', $workdays[$keys[0]]['work_from']);
+                unset($arr[2]);
+                $res['daily']['from'] = implode(':', $arr);
+                $arr = explode(':', $workdays[$keys[1]]['work_to']);
+                unset($arr[2]);
+                $res['daily']['to'] = implode(':', $arr);
+            }
+            else
+            {
+                $arr = explode(':', $workdays[$keys[1]]['work_from']);
+                unset($arr[2]);
+                $res['daily']['from'] = implode(':', $arr);
+                $arr = explode(':', $workdays[$keys[0]]['work_to']);
+                unset($arr[2]);
+                $res['daily']['to'] = implode(':', $arr);
+            }
+
+        }
+        else
+        {
+            foreach($workdays as $k => $v)
+            {
+                $workdays[$v['weekday']][] = $v;
+            }
+            foreach($workdays as $day => $v)
+            {
+                if(count($v) == 1)
+                {
+                    $arr = explode(':', $v[0]['work_from']);
+                    unset($arr[2]);
+                    if($arr[1] == '00')
+                        unset($arr[1]);
+                    $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
+                    $arr = explode(':', $v[0]['work_to']);
+                    unset($arr[2]);
+                    if($arr[1] == '00')
+                        unset($arr[1]);
+                    $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
+                }
+                $key = array_search($day,$this->simple_weekdays);
+//                echo $key;
+//                print_r($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]);
+                if($key > 1)
+                {
+                    if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['from'] == $res['schedule'][$this->weekdays[$day]]['from']
+                        && $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['to'] == $res['schedule'][$this->weekdays[$day]]['to']
+                    )
+                    {
+                        if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]]['from']  == $res['schedule'][$this->weekdays[$day]]['from']
+                            && $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]]['to']  == $res['schedule'][$this->weekdays[$day]]['to'])
+                        {
+                            $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['miss'] = 1;
+                            if(!$res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]]['miss'] == 1)
+                                $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]]['first'] = 1;
+                        }
+                    }
+                    if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]]['from'] == $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['from']
+                        && $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]]['to'] == $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['to'])
+                    {
+                        if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['from']  != $res['schedule'][$this->weekdays[$day]]['from']
+                            || $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['to']  != $res['schedule'][$this->weekdays[$day]]['to'])
+                        {
+                            $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['last'] = 1;
+                        }
+                    }
+//                    if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]] == array() || $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]] == 1)
+//                    {
+//                        if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]] == $res['schedule'][$this->weekdays[$day]])
+//                        {
+//                            $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]] = 1;
+//                        }
+//                    }
+                }
+            }
+        }
+
+        //print_r($res);
+
+        return $res;
+    }
 
 }

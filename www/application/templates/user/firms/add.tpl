@@ -57,6 +57,7 @@
                         </div>
                     {/foreach}
                 </div>
+                <hr>
                 <div class="form-group">
                     <label>Логотип</label>
                     <div class="row">
@@ -68,7 +69,7 @@
                                 {/if}
                             </div>
                             <div class="caption">
-                                <button id="upload_logo" class="btn btn-default">Выбрать файл</button>
+                                <button id="upload_logo" type="button" class="btn btn-default">Выбрать файл</button>
                                 <span class="status"></span>
                             </div>
                         </div>
@@ -88,117 +89,140 @@
                     <label>Web-сайт</label>
                     <input class="form-control" name="site" value="{$smarty.post.site}">
                 </div>
-                <div class="form-group address-group">
-                    <label>Адрес</label>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <input type="text" placeholder="Улица" {if !$values.city}disabled="disabled"{/if} class="street-input form-control" name="address[0][street]" value="{$smarty.post.address[0]['street']}" autocomplete="OFF" data-require="1">
-                            <div class="error-require">Неодбходимо ввести улицу</div>
-                        </div>
-                        <div class="col-xs-4">
-                            <input type="text" placeholder="Здание" {if !$values.address[0]}disabled="disabled"{/if}class="building-input form-control" name="address[0][building]" value="{$smarty.post.address[0]['building']}" data-require="1">
-                            <div class="error-require">Неодбходимо ввести здание</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Телефон</label>
-                        <input class="form-control phone" name="address[0][phone]" value="{$value.address[0].phone}">
-                    </div>
-                    <div class="form-group workdays-group">
-                        <label>Режим работы</label>
-                        <div class="radio">
-                        <ul class="list-unstyled">
-                            <li>
-                                <label>
-                                    <input type="radio" class="workdays_radio" checked="checked" name="name" >
-                                    Круглосуточно
-                                    <input type="hidden" name="address[0][workdays][24]" value="1">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" class="workdays_radio" name="name">
-                                    Ежедневно
-                                </label>
-                                <ul class="list-unstyled daily hidden">
-                                    <li>
-                                        <label>С</label>
-                                        <select name="address[0][workdays][daily][from][hour]">
-                                             {foreach from=$hours item=hour}
-                                                 <option value="{$hour}" {if $hour eq '09'}selected="selected"{/if}>{$hour}</option>
-                                             {/foreach}
-                                        </select>
-                                        <select name="address[0][workdays][daily][from][minute]">
-                                            {foreach from=$minutes item=minute}
-                                                <option value="{$minute}">{$minute}</option>
-                                            {/foreach}
-                                        </select>
-                                        <label>По</label>
-                                        <select name="address[0][workdays][daily][to][hour]">
-                                            {foreach from=$hours item=hour}
-                                                <option value="{$hour}" {if $hour eq '20'}selected="selected"{/if}>{$hour}</option>
-                                            {/foreach}
-                                        </select>
-                                        <select name="address[0][workdays][daily][to][minute]">
-                                            {foreach from=$minutes item=minute}
-                                                <option value="{$minute}">{$minute}</option>
-                                            {/foreach}
-                                        </select>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" class="workdays_radio"  name="name">
-                                    Выбрать дни
-                                </label>
-                                <ul class="list-unstyled choose hidden">
-                                    {foreach from=$weekdays key=name item=label}
+                <hr>
+                {foreach from=$values.address key=i item=item}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group address-group">
+                            <label>Адрес</label>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <input type="text" placeholder="Улица" {if !$values.city}disabled="disabled"{/if} class="street-input form-control" name="address[{$i}][street]" value="{$values.address[$i]['street']}" autocomplete="OFF" data-require="1">
+                                    <div class="error-require">Неодбходимо ввести улицу</div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" placeholder="Здание" {if !$values.address[$i]}disabled="disabled"{/if}class="building-input form-control" name="address[{$i}][building]" value="{$values.address[$i]['building']}" autocomplete="OFF" data-require="1">
+                                    <div class="error-require">Неодбходимо ввести здание</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Телефон</label>
+                                <input class="form-control phone" name="address[{$i}][phone]" value="{$values.address[$i].phone}">
+                            </div>
+                            <div class="form-group workdays-group">
+                                <label>Режим работы</label>
+                                <div class="radio">
+                                    <ul class="list-unstyled">
                                         <li>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                    <span class="weekday_label">{$label}</span>
-                                                </label>
-                                                <label>С</label>
-                                                <select name="address[0][workdays][{$name}][from][hour]">
-                                                    {foreach from=$hours item=hour}
-                                                        <option value="{$hour}" {if $hour eq '09'}selected="selected"{/if}>{$hour}</option>
-                                                    {/foreach}
-                                                </select>
-                                                <select name="address[0][workdays][daily][from][minute]">
-                                                    {foreach from=$minutes item=minute}
-                                                        <option value="{$minute}">{$minute}</option>
-                                                    {/foreach}
-                                                </select>
-                                                <label>По</label>
-                                                <select name="address[0][workdays][{$name}[to][hour]">
-                                                    {foreach from=$hours item=hour}
-                                                        <option value="{$hour}" {if $hour eq '20'}selected="selected"{/if}>{$hour}</option>
-                                                    {/foreach}
-                                                </select>
-                                                <select name="address[0][workdays][daily][to][minute]">
-                                                    {foreach from=$minutes item=minute}
-                                                        <option value="{$minute}">{$minute}</option>
-                                                    {/foreach}
-                                                </select>
-                                            </div>
+                                            <label>
+                                                <input type="radio" class="workdays_radio" {if $values.address[$i].workdays.radio neq 'daily' || $values.address[$i].workdays.radio neq 'schedule'}checked="checked"{/if} name="address[{$i}][workdays][radio]" value="24">
+                                                Круглосуточно
+                                            </label>
                                         </li>
-                                    {/foreach}
-                                </ul>
-                            </li>
-                        </ul>
+                                        <li>
+                                            <label>
+                                                <input type="radio" class="workdays_radio" {if $values.address[$i].workdays.radio eq 'daily'}checked="checked" {/if} name="address[{$i}][workdays][radio]" value="daily">
+                                                Ежедневно
+                                            </label>
+                                            <ul class="list-unstyled daily {if $values.address[$i]['workdays']['radio'] neq 'daily'}hidden{/if}">
+                                                <li>
+                                                    <label>С</label>
+                                                    <select name="address[{$i}][workdays][daily][from][hour]">
+                                                        {foreach from=$hours item=hour}
+                                                            <option value="{$hour}" {if $hour eq $values.address[$i]['workdays']['daily']['from']['hour']}selected="selected" {elseif !$values.address[$i]['workdays']['daily']['from']['hour'] && $hour eq '09'}selected="selected"{/if}>{$hour}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                    <select name="address[{$i}][workdays][daily][from][minute]">
+                                                        {foreach from=$minutes item=minute}
+                                                            <option value="{$minute}" {if $minute eq $values.address[$i]['workdays']['daily']['from']['minute']}selected="selected"{/if}>{$minute}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                    <label>По</label>
+                                                    <select name="address[{$i}][workdays][daily][to][hour]">
+                                                        {foreach from=$hours item=hour}
+                                                            <option value="{$hour}"  {if $hour eq $values.address[$i]['workdays']['daily']['to']['hour']}selected="selected" {elseif !$values.address[$i]['workdays']['daily']['to']['hour'] && $hour eq '20'}selected="selected"{/if}>{$hour}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                    <select name="address[{$i}][workdays][daily][to][minute]">
+                                                        {foreach from=$minutes item=minute}
+                                                            <option value="{$minute}" {if $minute eq $values.address[$i]['workdays']['daily']['to']['minute']}selected="selected"{/if}>{$minute}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" class="workdays_radio" value="schedule" {if $values.address[$i].workdays.radio eq 'schedule'}checked="checked" {/if}  name="address[{$i}][workdays][radio]">
+                                                Выбрать дни
+                                            </label>
+                                            <ul class="list-unstyled choose {if $values.address[$i].workdays.radio neq 'schedule'}hidden{/if}">
+                                                {foreach from=$weekdays key=name item=label}
+                                                    <li>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" value="1" name="address[{$i}][workdays][{$name}][checked]" {if $values.address[$i]['workdays'][$name]['checked']}checked="checked"{elseif !$values.address[$i].workdays && $name neq 'sat' && $name neq 'sun'}checked="checked" {/if}>
+                                                                <span class="weekday_label">{$label}</span>
+                                                                {$values.address[$i]['workdays'][$name]['from']['hour']}
+                                                            </label>
+                                                            <label>С</label>
+                                                            <select name="address[{$i}][workdays][{$name}][from][hour]">
+                                                                {foreach from=$hours item=hour}
+                                                                    <option value="{$hour}" {if  $hour eq $values.address[$i]['workdays'][$name]['from']['hour']}selected="selected" {elseif !$values.address[$i]['workdays'][$name]['from']['hour'] && $hour eq '09'}selected="selected"{/if}>{$hour}</option>
+                                                                {/foreach}
+                                                            </select>
+                                                            <select name="address[{$i}][workdays][{$name}][from][minute]">
+                                                                {foreach from=$minutes item=minute}
+                                                                    <option value="{$minute}" {if $minute eq $values.address[$i]['workdays'][$name]['from']['minute']}selected="selected" {/if}>{$minute}</option>
+                                                                {/foreach}
+                                                            </select>
+                                                            <label>По</label>
+                                                            <select name="address[{$i}][workdays][{$name}][to][hour]">
+                                                                {foreach from=$hours item=hour}
+                                                                    <option value="{$hour}" {if $hour eq $values.address[$i]['workdays'][$name]['to']['hour']}selected="selected" {elseif !$values.address[$i]['workdays'][$name]['to']['hour'] && $hour eq '20'}selected="selected"{/if}>{$hour}</option>
+                                                                {/foreach}
+                                                            </select>
+                                                            <select name="address[{$i}][workdays][{$name}][to][minute]">
+                                                                {foreach from=$minutes item=minute}
+                                                                    <option value="{$minute}" {if $minute eq $values.address[$i]['workdays'][$name]['to']['minute']}selected="selected" {/if}>{$minute}</option>
+                                                                {/foreach}
+                                                            </select>
+                                                        </div>
+                                                    </li>
+                                                {/foreach}
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {if $values.address|@count eq ($i + 1)}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
+                                    </div>
+                                </div>
+                            {/if}
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
                 </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-offset-2 col-md-8">
+            <div class="form-group">
+                <label>Опишите компанию</label>
+                <textarea class="ckeditor" id="editor1" name="description">{$values.description}</textarea>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
+            <input type="hidden" name="id_user" value="{$user['id']}">
             <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
         </div>
     </div>
+    <br>
 </form>
 

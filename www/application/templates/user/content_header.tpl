@@ -57,7 +57,7 @@
         <div class="col-xs-12 col-sm-8 main-content">
             <div class="log">
                 {foreach from=$log item=item}
-                    {$item}<hr>
+                    <pre>{$item}</pre><hr>
                 {/foreach}
             </div>
 

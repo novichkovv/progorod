@@ -157,3 +157,4 @@ VALUES (
   'admin','subdivisions','divisions_controller.php', 'Разделы рубрик', 1, 12
 );
 
+
