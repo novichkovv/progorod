@@ -66,7 +66,7 @@ class cities_model extends model
         $res = $this->get_all($stm, array('name' => $value. '%'));
         if(!$res)
         {
-            $res = $this->get_all($stm, array('name' => '%' . $value. '%'));
+            $res = $this->get_all($stm, array('name' => '% ' . $value. '%'));
         }
         $tmp = array();
         foreach($res as $k => $v)
@@ -84,7 +84,7 @@ class cities_model extends model
         $res = $this->get_all($stm, array('name' => $value. '%', 'id_street' => $street));
         if(!$res)
         {
-            $res = $this->get_all($stm, array('name' => '%' . $value. '%', 'id_street' => $street));
+            $res = $this->get_all($stm, array('name' => '% ' . $value. '%', 'id_street' => $street));
         }
         $tmp = array();
         foreach($res as $k => $v)
@@ -92,5 +92,35 @@ class cities_model extends model
             $tmp[$k] = $v['name'];
         }
         return $tmp;
+    }
+
+    function getCityStreetsBuildings()
+    {
+        $stm = $this->pdo->prepare('
+        SELECT
+            s.id id,
+            s.name street,
+            b.id_street,
+            b.id id_building,
+            b.name building
+        FROM
+            streets s
+        LEFT JOIN
+            buildings b
+            ON s.id = b.id_street
+        ');
+        $tmp = $this->get_all($stm);
+        $streets = array();
+        foreach($tmp as $k => $v)
+        {
+            foreach($v as $key => $row)
+            {
+                if(in_array($key, array('id', 'street')))
+                    $streets[$v['street']][$key] = $row;
+                else
+                    $streets[$v['street']]['buildings'][$v['building']][$key] = $row;
+            }
+        }
+        return $streets;
     }
 }

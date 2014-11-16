@@ -17,6 +17,16 @@ $(document).ready(function()
         });
         $(this).parent('.tab-button').addClass('act');
     });
+    $('body').on('click', ".additional_address_btn", function()
+    {
+        $(this).slideUp();
+        $(".additional-addresses").slideDown();
+    });
+    $('body').on('click', ".additional_address_hide_btn", function()
+    {
+        $(".additional_address_btn").slideDown();
+        $(".additional-addresses").slideUp();
+    });
 
 });
 var validate = function validate(form_id)

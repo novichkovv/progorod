@@ -12,11 +12,12 @@ $(document).ready(function()
     });
     $(body).on('input', ".street-input", function()
     {
+        var building_input = $(this).closest('.address-group').find(".building-input");
         if($(this).val() != '' )
-            $(".building-input").removeAttr('disabled');
+            $(building_input).removeAttr('disabled');
         else
-            $(".building-input").attr('disabled', 'disabled');
-        $(this).closest('.address-group').find('.building-input').val('');
+            $(building_input).attr('disabled', 'disabled');
+        $(building_input).val('');
     });
     $(body).on('submit','#firm_form', function()
     {
@@ -60,18 +61,23 @@ $(document).ready(function()
         var id = $(".address-group").length;
         var params = {
             'action' : 'add_address_group',
-            'id' : id,
+            'values' : {'id' : id},
             'callback': function(msg)
             {
-                $(button).closest('.address-group').after(msg);
+                $(button).closest('.address-group').closest('.panel').after(msg);
                 $(".phone").mask('+7(999)999-99-99');
-                $(button).remove();
+                if(!$('select[name="city"]').val())
+                {
+                    $(".street-input").last().attr('disabled', 'disabled');
+                }
+                $(button).parent().parent().remove();
+
             }
         };
         ajax(params);
 
     });
-    $('body').on('change', '.workdays_radio', function()
+    $(body).on('change', '.workdays_radio', function()
     {
         if($(this).prop('checked'))
         {
@@ -83,5 +89,17 @@ $(document).ready(function()
         }
     });
 
+    $(body).on('click', '.close-address-group', function()
+    {
+        $(this).closest('.panel').remove();
+        var group = $(".address-group");
+        $(group).last().append('' +
+            '<div class="row">' +
+            '   <div class="col-md-12">' +
+            '       <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>' +
+            ( $(group).length > 1 ? '       <button class="btn btn-sm btn-warning close-address-group" type="button">Отменить</button>' : '') +
+            '   </div> ' +
+            '</div> ');
+    });
 });
 

@@ -44,16 +44,18 @@ class divisions_model extends model
             d.title division_title,
             d.keywords division_keywords,
             d.description division_description,
-            d.position division_position
             s.id id_subdivision,
             s.id_division subdivision_division,
             s.name subdivision_name,
             s.id_route subdivision_route,
             s.title subdivision_title,
             s.keywords subdivision_keywords,
-            s.description subdivision_description,
-            s.position subdivision_position
-
+            s.description subdivision_description
+        FROM
+            divisions d
+        LEFT JOIN
+            subdivisions s
+            ON d.id = s.id_division
         ');
         $tmp = $this->get_all($stm);
         $divisions = array();
