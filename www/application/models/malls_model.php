@@ -29,7 +29,7 @@ class malls_model extends model
         FROM
             malls f
                 JOIN
-            address_groups ag ON ag.id_firm = f.id AND ag.type = 0
+            address_groups ag ON ag.id_firm = f.id AND ag.type = 1
                 JOIN
             streets s ON ag.id_street = s.id
                 JOIN
@@ -50,10 +50,10 @@ class malls_model extends model
                 $firm[$key] = $row;
             elseif(in_array($key,array('always','daily','weekday','work_from','work_to')))
             {
-                $firm['address'][$v['id_address']]['workdays'][$v['id_workday']][$key] = $row;
+                $firm['address']['workdays'][$v['id_workday']][$key] = $row;
             }
             else
-                $firm['address'][$v['id_address']][$key] = $row;
+                $firm['address'][$key] = $row;
         }
         return $firm;
     }

@@ -16,11 +16,7 @@ class malls_controller extends controller
     {
         $malls_model = new malls_model('malls', $this->system->city['alias']);
         $mall = $malls_model->getMall($_GET['id']);
-        foreach($mall['address'] as $k=>$v)
-        {
-            $mall['address'][$k]['workdays'] = $this->tools->parse_workdays($v['workdays']);
-
-        }
+        $mall['address']['workdays'] = $this->tools->parse_workdays($mall['address']['workdays']);
         $this->t->assign('mall',$mall);
     }
 }

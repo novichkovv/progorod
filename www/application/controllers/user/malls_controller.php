@@ -229,14 +229,21 @@ class malls_controller extends controller
                                     }
                                 }
                             }
-                            break;
+                        break;
                     }
-
                 }
-
-
-
             }
+            $cities_model = new cities_model('user_cities');
+            if($cities_model->checkUserCities($_POST['id_user'], $_POST['city'], '1') == 0)
+            {
+                $row = array();
+                $row['id_city'] = $_POST['city'];
+                $row['id_user'] = $_POST['id_user'];
+                $row['type'] = 1;
+                $row['cdate'] = $date;
+                $cities_model->insert($row);
+            }
+            $this->system->log[]  = print_r($row,1);
         }
     }
     public function ajax()
@@ -278,7 +285,7 @@ class malls_controller extends controller
     {
         $this->t->assign('weekdays', $this->tools->weekdays);
         $hours = array();
-        for($i = 0; $i < 23; $i ++)
+        for($i = 0; $i < 24; $i ++)
         {
             if($i < 10)
                 $hours[] = '0'. $i;
@@ -287,7 +294,7 @@ class malls_controller extends controller
         }
         $this->t->assign('hours', $hours);
         $minutes = array();
-        for($i = 0; $i < 59; $i ++)
+        for($i = 0; $i < 60; $i ++)
         {
             if($i < 10)
                 $minutes[] = '0'. $i;

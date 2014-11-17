@@ -23,7 +23,23 @@ class cities_model extends model
         $tmp = $this->get_all($stm, array('id_user' => $id_user));
         return $tmp;
     }
-
+    public function checkUserCities($id_user, $id_city,$type)
+    {
+        $stm = $this->pdo->prepare('
+        SELECT
+            COUNT(id) count
+        FROM
+            user_cities us
+        WHERE
+            us.id_user = :id_user
+        AND
+            us.id_city = :id_city
+        AND
+            us.type = :type
+        ');
+        $tmp = $this->get_all($stm, array('id_user' => $id_user, 'id_city' => $id_city, 'type' => $type));
+        return $tmp;
+    }
     public function getRegionsCities()
     {
         $stm = $this->pdo->prepare('
@@ -92,6 +108,32 @@ class cities_model extends model
             $tmp[$k] = $v['name'];
         }
         return $tmp;
+    }
+
+    public function mallSuggest($street_name, $building_name)
+    {
+        $stm = $this->pdo->prepare('
+        SELECT
+            m.id,
+            m.name,
+            m.short_description
+        FROM
+            malls m
+        JOIN
+            address_groups ag
+            ON ag.id_firm = m.id AND ag.type = 1
+        JOIN
+            streets s
+            ON ag.id_street = s.id
+        JOIN
+            buildings b
+            ON ag.id_building = b.id
+        WHERE
+            s.name = :street_name
+        AND
+            b.name = :building_name
+        ');
+        return $this->get_all($stm, array('street_name' => $street_name, 'building_name' => $building_name));
     }
 
     function getCityStreetsBuildings()

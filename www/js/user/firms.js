@@ -101,5 +101,42 @@ $(document).ready(function()
             '   </div> ' +
             '</div> ');
     });
+    suggested.callback = function(input)
+    {
+        if($(input).hasClass('building-input'))
+            mall_suggest(input);
+    };
+    $('.building-input').keyup(function()
+    {
+        mall_suggest($(this));
+    });
+
 });
+var mall_suggest = function(building_input)
+{
+    var group = $(building_input).closest('.address-group');
+    $(group).find('.mall_suggest').remove();
+    var street_input = $(group).find('.street-input');
+    var row = $(building_input).closest(".row");
+    var params = {
+        'action': 'mall_suggest',
+        'values': {'street' : $(street_input).val(), 'building': $(building_input).val(), city: $("select[name='city']").val()},
+        callback: function(msg)
+        {
+            var mall = JSON.parse(msg);
+            for(var i in mall)
+            {
+                $(row).append('' +
+                    '<div class="col-xs-12  mall_suggest">' +
+                    '   <div class="checkbox">' +
+                    '       <label>' +
+                    '           <input type="checkbox" name="address[' + $(group).attr('id').substr(13) + '][mall_suggest]" value="' + mall[i].id + '" checked>' + mall[i].short_description + ' ' + mall[i].name +
+                    '       </label>' +
+                    '   </div> ' +
+                    '</div> ');
+            }
+        }
+    };
+    ajax(params);
+};
 

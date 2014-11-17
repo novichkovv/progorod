@@ -93,7 +93,7 @@
                 {foreach from=$values.address key=i item=item}
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="form-group address-group">
+                        <div class="form-group address-group" id="address_group_{$i}">
                             <label>Адрес</label>
                             <div class="row">
                                 <div class="col-xs-8">
