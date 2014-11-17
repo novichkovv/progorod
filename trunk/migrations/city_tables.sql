@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS firms (
    id_net BIGINT NULL,
    name VARCHAR (255) NOT NULL,
    short_description VARCHAR (255) NOT NULL,
+   site VARCHAR (255) NOT NULL,
    description TEXT NOT NULL,
    rating FLOAT NOT NULL,
    votes INT NOT NULL,
@@ -52,4 +53,17 @@ CREATE TABLE IF NOT EXISTS workdays (
   weekday ENUM ("mon","tue","wed","thi","fri","sat","sun") NULL ,
   work_from TIME NULL,
   work_to TIME NULL
+)ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS malls (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR (255) NOT NULL,
+  short_description VARCHAR (255) NOT NULL,
+  site VARCHAR (255) NOT NULL,
+  description TEXT NOT NULL,
+  rating FLOAT NOT NULL,
+  votes INT NOT NULL,
+  range_num INT NOT NULL,
+  creator BIGINT NOT NULL,
+  cdate DATETIME NOT NULL
 )ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;

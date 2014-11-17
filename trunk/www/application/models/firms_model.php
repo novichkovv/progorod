@@ -30,7 +30,7 @@ class firms_model extends model
         FROM
             firms f
                 JOIN
-            address_groups ag ON ag.id_firm = f.id
+            address_groups ag ON ag.id_firm = f.id AND ag.type = 0
                 JOIN
             streets s ON ag.id_street = s.id
                 JOIN
