@@ -169,6 +169,47 @@ class tools_module
                         unset($arr[1]);
                     $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
                 }
+                elseif(count($v) == 2)
+                {
+                    if($v[0]['work_to'] < $v[1]['work_to'])
+                    {
+                        $arr = explode(':', $v[1]['work_from']);
+                        unset($arr[2]);
+                        if($arr[1] == '00')
+                            unset($arr[1]);
+                        $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
+                        $arr = explode(':', $v[1]['work_to']);
+                        unset($arr[2]);
+                        if($arr[1] == '00')
+                            unset($arr[1]);
+                        $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
+                        $arr = explode(':', $v[0]['work_to']);
+                        unset($arr[2]);
+                        if($arr[1] == '00')
+                            unset($arr[1]);
+                        $key = array_search($day,$this->simple_weekdays);
+                        $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['to'] = implode(':', $arr);
+                    }
+                    else
+                    {
+                        $arr = explode(':', $v[0]['work_from']);
+                        unset($arr[2]);
+                        if($arr[1] == '00')
+                            unset($arr[1]);
+                        $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
+                        $arr = explode(':', $v[0]['work_to']);
+                        unset($arr[2]);
+                        if($arr[1] == '00')
+                            unset($arr[1]);
+                        $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
+                        $arr = explode(':', $v[1]['work_to']);
+                        unset($arr[2]);
+                        if($arr[1] == '00')
+                            unset($arr[1]);
+                        $key = array_search($day,$this->simple_weekdays);
+                        $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['to'] = implode(':', $arr);
+                    }
+                }
                 $key = array_search($day,$this->simple_weekdays);
 //                echo $key;
 //                print_r($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]);

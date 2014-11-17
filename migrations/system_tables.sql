@@ -157,4 +157,7 @@ VALUES (
   'admin','subdivisions','divisions_controller.php', 'Разделы рубрик', 1, 12
 );
 
-
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
+VALUES (
+  'pro-gorod','torgovie_centri','malls_controller.php', 'Торговые центры', 0, 0
+);

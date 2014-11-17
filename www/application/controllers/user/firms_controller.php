@@ -108,16 +108,18 @@ class firms_controller extends controller
                 {
                     $row  = array();
                     $row['id_firm'] = $id_firm;
+                    //$row['id_mall'] = null;
                     $row['phone'] = $v['phone'];
-                    $row['type'] = 'firms';
+                    $row['type'] = 0;
                     $row['cdate'] = $date;
                     $xml = new SimpleXMLElement(file_get_contents('http://geocode-maps.yandex.ru/1.x/?geocode='.$city['name'].'+'.str_replace(' ', '+',$v['street']).'+'.str_replace(' ', '+',$v['building']).''));
-                    $address = $xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
+                    $address = @$xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
                     if($address)
                     {
+                        $f_building = $this->tools->filterBuildings($v['building']);
                         $arr = explode(', ',$address);
                         $street = trim(str_replace('улица', '', $arr[0]));
-                        $building = $arr[1];
+                        $building = is_numeric($f_building) && $arr[1] != $f_building ? $f_building : $arr[1];
                         $_POST['address'][$k]['street'] = $street;
                         $_POST['address'][$k]['building'] = $building;
                     }
@@ -186,35 +188,38 @@ class firms_controller extends controller
                         case 'schedule':
                             foreach($this->tools->simple_weekdays as $key => $eng)
                             {
-                                $from = $v['workdays'][$eng]['from']['hour'];
-                                $m_from = $v['workdays'][$eng]['from']['minute'];
-                                $to = $v['workdays'][$eng]['to']['hour'];
-                                $m_to = $v['workdays'][$eng]['to']['minute'];
-                                if($to < $from)
+                                if($v['workdays'][$eng]['checked'])
                                 {
-                                    $wd = array();
-                                    $wd['weekday'] = $eng;
-                                    $wd['work_from'] = $from . ':' . $m_from . ':00';
-                                    $wd['work_to'] = '23:59:59';
-                                    $id_workday = $workdays_model->insert($wd);
-                                    $workdays_groups_model->insert(array('id_workday' => $id_workday, 'id_address_group' => $id_address_group));
+                                    $from = $v['workdays'][$eng]['from']['hour'];
+                                    $m_from = $v['workdays'][$eng]['from']['minute'];
+                                    $to = $v['workdays'][$eng]['to']['hour'];
+                                    $m_to = $v['workdays'][$eng]['to']['minute'];
+                                    if($to < $from)
+                                    {
+                                        $wd = array();
+                                        $wd['weekday'] = $eng;
+                                        $wd['work_from'] = $from . ':' . $m_from . ':00';
+                                        $wd['work_to'] = '23:59:59';
+                                        $id_workday = $workdays_model->insert($wd);
+                                        $workdays_groups_model->insert(array('id_workday' => $id_workday, 'id_address_group' => $id_address_group));
 
-                                    $wd = array();
-                                    $next_day =  $this->tools->simple_weekdays[$key + 1] ? $this->tools->simple_weekdays[$key + 1] : 'mon';
-                                    $wd['weekday'] = $next_day;
-                                    $wd['work_from'] = '00:00:00';
-                                    $wd['work_to'] = $to . ':' . $m_to . ':';
-                                    $id_workday = $workdays_model->insert($wd);
-                                    $workdays_groups_model->insert(array('id_workday' => $id_workday, 'id_address_group' => $id_address_group));
-                                }
-                                else
-                                {
-                                    $wd = array();
-                                    $wd['weekday'] = $eng;
-                                    $wd['work_from'] = $from . ':' . $m_from . ':00';
-                                    $wd['work_to'] = $to . ':' . $m_to . ':';
-                                    $id_workday = $workdays_model->insert($wd);
-                                    $workdays_groups_model->insert(array('id_workday' => $id_workday, 'id_address_group' => $id_address_group));
+                                        $wd = array();
+                                        $next_day =  $this->tools->simple_weekdays[$key + 1] ? $this->tools->simple_weekdays[$key + 1] : 'mon';
+                                        $wd['weekday'] = $next_day;
+                                        $wd['work_from'] = '00:00:00';
+                                        $wd['work_to'] = $to . ':' . $m_to . ':';
+                                        $id_workday = $workdays_model->insert($wd);
+                                        $workdays_groups_model->insert(array('id_workday' => $id_workday, 'id_address_group' => $id_address_group));
+                                    }
+                                    else
+                                    {
+                                        $wd = array();
+                                        $wd['weekday'] = $eng;
+                                        $wd['work_from'] = $from . ':' . $m_from . ':00';
+                                        $wd['work_to'] = $to . ':' . $m_to . ':';
+                                        $id_workday = $workdays_model->insert($wd);
+                                        $workdays_groups_model->insert(array('id_workday' => $id_workday, 'id_address_group' => $id_address_group));
+                                    }
                                 }
                             }
                         break;
