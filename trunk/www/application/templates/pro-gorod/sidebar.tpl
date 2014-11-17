@@ -1,5 +1,5 @@
 <ul class="nav nav-list bs-docs-sidenav affix-top">
-    <li class=""><a href="#global"><i class="icon-chevron-right"></i>Торговые центры</a></li>
+    <li class=""><a href="{$smarty.const.SITE_DIR}{$system.city.alias}/torgovie_centri/"><i class="icon-chevron-right"></i>Торговые центры</a></li>
     <li class="active"><a href="#gridSystem"><i class="icon-chevron-right"></i>Магазины</a></li>
     <li><a href="#fluidGridSystem"><i class="icon-chevron-right"></i>Услуги</a></li>
     <li><a href="#layouts"><i class="icon-chevron-right"></i>Развлечения</a></li>

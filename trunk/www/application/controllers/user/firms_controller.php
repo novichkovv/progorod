@@ -226,9 +226,16 @@ class firms_controller extends controller
                     }
 
                 }
-
-
-
+            }
+            $cities_model = new cities_model('user_cities');
+            if(!$cities_model->checkUserCities($_POST['id_user'], $_POST['city'], '0'))
+            {
+                $row = array();
+                $row['id_city'] = $_POST['city'];
+                $row['id_user'] = $_POST['id_user'];
+                $row['type'] = 0;
+                $row['cdate'] = $date;
+                $cities_model->insert($row);
             }
         }
     }
@@ -295,6 +302,18 @@ class firms_controller extends controller
                 exit;
             break;
 
+            case 'mall_suggest':
+                if(!$street = $this->tools->filterStreets($_POST['street']))exit;
+                if(!$building = $this->tools->filterBuildings($_POST['building']))exit;
+                $cities_model = new default_model('cities');
+                $cities = $this->tools->idArray($cities_model->getAll());
+                $model = new cities_model('streets',$cities[$_POST['city']]['alias']);
+                if(!$mall = $model->mallSuggest($street, $building))
+                    exit;
+                echo json_encode($mall);
+                exit;
+            break;
+
             case "add_address_group":
                 $this->assignDays();
                 $this->t->assign('i', $_POST['id']);
@@ -307,7 +326,7 @@ class firms_controller extends controller
     {
         $this->t->assign('weekdays', $this->tools->weekdays);
         $hours = array();
-        for($i = 0; $i < 23; $i ++)
+        for($i = 0; $i < 24; $i ++)
         {
             if($i < 10)
                 $hours[] = '0'. $i;
@@ -316,7 +335,7 @@ class firms_controller extends controller
         }
         $this->t->assign('hours', $hours);
         $minutes = array();
-        for($i = 0; $i < 59; $i ++)
+        for($i = 0; $i < 60; $i ++)
         {
             if($i < 10)
                 $minutes[] = '0'. $i;

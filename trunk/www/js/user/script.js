@@ -161,6 +161,7 @@ var suggest = function suggest(params)
                 {
                     $(input).val($(this).html());
                     $(container).html('');
+                    suggested(input);
                 });
                 $('body:not(.suggest)').click(function()
                 {
@@ -171,6 +172,9 @@ var suggest = function suggest(params)
         };
         ajax(params);
     });
+};
+var suggested = function suggested(input){
+    if(suggested.callback)suggested.callback(input);
 };
 var group_select = function group_select(name, child_name)
 {
