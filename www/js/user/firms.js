@@ -8,15 +8,23 @@ $(document).ready(function()
         if($(this).val() != '')
             $(".street-input").removeAttr('disabled');
         else
-            $(".street-input").attr('disabled', 'disabled');
+        {
+            $(".street-input,.building-input").attr('disabled', 'disabled');
+        }
+        $(".street-input,.building-input").val("");
+        $(".mall_suggest").remove();
+
     });
-    $(body).on('input', ".street-input", function()
+    $(body).on('keyup', ".street-input", function()
     {
         var building_input = $(this).closest('.address-group').find(".building-input");
         if($(this).val() != '' )
             $(building_input).removeAttr('disabled');
         else
+        {
             $(building_input).attr('disabled', 'disabled');
+        }
+        $(this).closest('.address-group').find(".mall_suggest").remove();
         $(building_input).val('');
     });
     $(body).on('submit','#firm_form', function()
@@ -106,9 +114,17 @@ $(document).ready(function()
         if($(input).hasClass('building-input'))
             mall_suggest(input);
     };
-    $('.building-input').keyup(function()
+    $(body).on('keyup', '.building-input', function()
     {
         mall_suggest($(this));
+    });
+    $(body).on('change', '.mall-checkbox', function()
+    {
+        if($(this).prop('checked'))
+        {
+            $(this).closest('.address-group').find('.mall-checkbox').prop('checked', false);
+            $(this).prop('checked', true);
+        }
     });
 
 });
@@ -130,7 +146,7 @@ var mall_suggest = function(building_input)
                     '<div class="col-xs-12  mall_suggest">' +
                     '   <div class="checkbox">' +
                     '       <label>' +
-                    '           <input type="checkbox" name="address[' + $(group).attr('id').substr(13) + '][mall_suggest]" value="' + mall[i].id + '" checked>' + mall[i].short_description + ' ' + mall[i].name +
+                    '           <input class="mall-checkbox" type="checkbox" name="address[' + $(group).attr('id').substr(14) + '][id_mall]" value="' + mall[i].id + '"' + (i == 0 ? ' checked' : '') + '>' + mall[i].short_description + ' ' + mall[i].name +
                     '       </label>' +
                     '   </div> ' +
                     '</div> ');
@@ -139,4 +155,5 @@ var mall_suggest = function(building_input)
     };
     ajax(params);
 };
+
 

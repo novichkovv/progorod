@@ -1,4 +1,3 @@
-{*{$firm.address|@print_r}*}
 <div class="row firm_info">
     <div id="firm_logo">
         <div class="col-md-7">
@@ -20,8 +19,22 @@
                                 </td>
                                 <td>
                                     {$address.street}, {$address.building}
+                                    <div class="firms_mall_link">
+                                         <a href="{$smarty.const.SITE_DIR}{$system.city.alias}/torgovie_centri/?id={$address.id_mall}">
+                                             {$address.mall_short} {$address.mall_name}
+                                         </a>
+                                    </div>
                                 </td>
                             </tr>
+                            {*{if $address.id_mall}*}
+                                {*<tr class="firms_mall_link">*}
+                                    {*<td colspan="2">*}
+                                        {*<a href="{$smarty.const.SITE_DIR}{$system.city.alias}/torgovie_centri/?id={$address.id_mall}">*}
+                                            {*{$address.mall_short} {$address.mall_name}*}
+                                        {*</a>*}
+                                    {*</td>*}
+                                {*</tr>*}
+                            {*{/if}*}
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon glyphicon-phone text-primary"></span>

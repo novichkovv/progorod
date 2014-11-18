@@ -26,21 +26,26 @@ class firms_model extends model
             w.daily,
             w.weekday,
             w.work_from,
-            w.work_to
+            w.work_to,
+            m.id id_mall,
+            m.name mall_name,
+            m.short_description mall_short
         FROM
             firms f
-                JOIN
+        JOIN
             address_groups ag ON ag.id_firm = f.id AND ag.type = 0
-                JOIN
+        JOIN
             streets s ON ag.id_street = s.id
-                JOIN
+        JOIN
             buildings b ON b.id = ag.id_building
-                JOIN
+        JOIN
             workdays_groups wg ON wg.id_address_group = ag.id
-                JOIN
+        JOIN
             workdays w ON wg.id_workday = w.id
+        LEFT JOIN malls m ON ag.id_mall = m.id
         WHERE
             f.id = :id
+        ORDER by ag.id
         ');
         $tmp = $this->get_all($stm, array('id' => $id));
         $firm = array();

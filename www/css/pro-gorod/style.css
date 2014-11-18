@@ -132,6 +132,12 @@ body {
     font-size: 20px;
     margin-left: 40px;
 }
+.firms_mall_link td{
+    padding: 0 !important;
+}
+.firms_mall_link a{
+    font-size: 12px;
+}
 .additional-addresses {
     display: none;
 }

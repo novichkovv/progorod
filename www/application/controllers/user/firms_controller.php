@@ -108,7 +108,7 @@ class firms_controller extends controller
                 {
                     $row  = array();
                     $row['id_firm'] = $id_firm;
-                    //$row['id_mall'] = null;
+                    $row['id_mall'] = $v['id_mall'];
                     $row['phone'] = $v['phone'];
                     $row['type'] = 0;
                     $row['cdate'] = $date;
