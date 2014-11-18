@@ -101,7 +101,7 @@
                                     <div class="error-require">Неодбходимо ввести улицу</div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="text" placeholder="Здание" {if !$values.address[$i]}disabled="disabled"{/if}class="building-input form-control" name="address[{$i}][building]" value="{$values.address[$i]['building']}" autocomplete="OFF" data-require="1">
+                                    <input type="text" placeholder="Здание" {if !$values.address[$i]['building']}disabled="disabled" {/if}class="building-input form-control" name="address[{$i}][building]" value="{$values.address[$i]['building']}" autocomplete="OFF" data-require="1">
                                     <div class="error-require">Неодбходимо ввести здание</div>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                                     <li>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" value="1" name="address[{$i}][workdays][{$name}][checked]" {if $values.address[$i]['workdays'][$name]['checked']}checked="checked"{elseif !$values.address[$i].workdays && $name neq 'sat' && $name neq 'sun'}checked="checked" {/if}>
+                                                                <input type="checkbox" value="1" name="address[{$i}][workdays][{$name}][checked]" {if $values.address[$i]['workdays'][$name]['checked']}checked="checked" {elseif !$values.address[$i].workdays && $name neq 'sat' && $name neq 'sun'}checked="checked" {/if}>
                                                                 <span class="weekday_label">{$label}</span>
                                                                 {$values.address[$i]['workdays'][$name]['from']['hour']}
                                                             </label>

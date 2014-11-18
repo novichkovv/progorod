@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:55:46
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-18 19:15:46
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/ajax/address_group.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1987409887546a1a8224d408-97143278%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '57ce6c53c408364d5fb66b9aacb926cf11c3d0f8' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/ajax/address_group.tpl',
-      1 => 1416173180,
+      1 => 1416258502,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_546a1a8291ba25_94818413',
   'variables' => 
   array (
     'i' => 0,
@@ -28,12 +30,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'values' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a1a8291ba25_94818413',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_546a1a8291ba25_94818413')) {function content_546a1a8291ba25_94818413($_smarty_tpl) {?><div class="panel panel-default">
     <div class="panel-body">
-        <div class="form-group address-group">
+        <div class="form-group address-group" id="address_group_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+">
             <label>Адрес</label>
             <div class="row">
                 <div class="col-xs-8">

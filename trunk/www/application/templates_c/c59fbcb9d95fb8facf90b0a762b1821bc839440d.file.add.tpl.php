@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:14:12
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-18 18:34:44
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:361799792546a10c49010a8-79030192%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c59fbcb9d95fb8facf90b0a762b1821bc839440d' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl',
-      1 => 1416173180,
+      1 => 1416324883,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_546a10c64699d0_14906848',
   'variables' => 
   array (
     'regions' => 0,
@@ -40,8 +42,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'user' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10c64699d0_14906848',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_546a10c64699d0_14906848')) {function content_546a10c64699d0_14906848($_smarty_tpl) {?><form action="" method="post" id="firm_form">
     <div class="row">
@@ -188,7 +188,8 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 ?>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="form-group address-group">
+                        <div class="form-group address-group" id="address_group_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+">
                             <label>Адрес</label>
                             <div class="row">
                                 <div class="col-xs-8">
@@ -198,7 +199,7 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
                                     <div class="error-require">Неодбходимо ввести улицу</div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="text" placeholder="Здание" <?php if (!$_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]) {?>disabled="disabled"<?php }?>class="building-input form-control" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+                                    <input type="text" placeholder="Здание" <?php if (!$_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['building']) {?>disabled="disabled" <?php }?>class="building-input form-control" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
 ][building]" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['building'];?>
 " autocomplete="OFF" data-require="1">
                                     <div class="error-require">Неодбходимо ввести здание</div>
@@ -301,7 +302,7 @@ $_smarty_tpl->tpl_vars['label']->_loop = true;
                                                             <label>
                                                                 <input type="checkbox" value="1" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
 ][workdays][<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
-][checked]" <?php if ($_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays'][$_smarty_tpl->tpl_vars['name']->value]['checked']) {?>checked="checked"<?php } elseif (!$_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays']&&$_smarty_tpl->tpl_vars['name']->value!='sat'&&$_smarty_tpl->tpl_vars['name']->value!='sun') {?>checked="checked" <?php }?>>
+][checked]" <?php if ($_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays'][$_smarty_tpl->tpl_vars['name']->value]['checked']) {?>checked="checked" <?php } elseif (!$_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays']&&$_smarty_tpl->tpl_vars['name']->value!='sat'&&$_smarty_tpl->tpl_vars['name']->value!='sun') {?>checked="checked" <?php }?>>
                                                                 <span class="weekday_label"><?php echo $_smarty_tpl->tpl_vars['label']->value;?>
 </span>
                                                                 <?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays'][$_smarty_tpl->tpl_vars['name']->value]['from']['hour'];?>

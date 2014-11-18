@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:27:23
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-18 20:10:21
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/subdivisions/info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:968946904546a13db26c018-12514847%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bf5146a281f41764f1555f44ccb48ed4b612a9bb' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/pro-gorod/subdivisions/info.tpl',
-      1 => 1416173180,
+      1 => 1416330620,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_546a13db8492f9_92158681',
   'variables' => 
   array (
     'system' => 0,
@@ -23,11 +25,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'address' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a13db8492f9_92158681',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a13db8492f9_92158681')) {function content_546a13db8492f9_92158681($_smarty_tpl) {?>
-<div class="row firm_info">
+<?php if ($_valid && !is_callable('content_546a13db8492f9_92158681')) {function content_546a13db8492f9_92158681($_smarty_tpl) {?><div class="row firm_info">
     <div id="firm_logo">
         <div class="col-md-7">
             <p class="wow slideInLeft" >
@@ -57,8 +56,27 @@ $_smarty_tpl->tpl_vars['address']->_loop = true;
                                     <?php echo $_smarty_tpl->tpl_vars['address']->value['street'];?>
 , <?php echo $_smarty_tpl->tpl_vars['address']->value['building'];?>
 
+                                    <div class="firms_mall_link">
+                                         <a href="<?php echo @constant('SITE_DIR');?>
+<?php echo $_smarty_tpl->tpl_vars['system']->value['city']['alias'];?>
+/torgovie_centri/?id=<?php echo $_smarty_tpl->tpl_vars['address']->value['id_mall'];?>
+">
+                                             <?php echo $_smarty_tpl->tpl_vars['address']->value['mall_short'];?>
+ <?php echo $_smarty_tpl->tpl_vars['address']->value['mall_name'];?>
+
+                                         </a>
+                                    </div>
                                 </td>
                             </tr>
+                            
+                                
+                                    
+                                        
+                                            
+                                        
+                                    
+                                
+                            
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon glyphicon-phone text-primary"></span>
