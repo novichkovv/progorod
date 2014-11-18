@@ -27,7 +27,14 @@ class firms_controller extends controller
            else
                $this->city = $cities[0];
         }
-
+        if($this->city)
+        {
+            $firms_model = new firms_model('firms', $this->city['alias']);
+            $count_firms = $firms_model->countByField('creator', $this->user['id']);
+            $_GET['page'] ? $page = $_GET['page'] : $page = 1;
+            $firms = $firms_model->getUserFirms($this->user['id'], $page*10-10 . ',10');
+            $this->t->assign('firms', $firms);
+        }
         $this->t->assign('user_cities', $cities);
         $this->t->assign('city', $this->city);
         $this->add_firm();
@@ -228,7 +235,7 @@ class firms_controller extends controller
                 }
             }
             $cities_model = new cities_model('user_cities');
-            if(!$cities_model->checkUserCities($_POST['id_user'], $_POST['city'], '0'))
+            if($cities_model->checkUserCities($_POST['id_user'], $_POST['city'], '0') == 0)
             {
                 $row = array();
                 $row['id_city'] = $_POST['city'];

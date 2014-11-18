@@ -147,4 +147,12 @@ class model
             return false;
     }
 
+    public function countByField($field, $value)
+    {
+        $stm = $this->pdo->prepare('
+        SELECT COUNT(id) count FROM ' . $this->table . ' WHERE ' . $field . ' = :' .$field . '
+        ');
+        return $this->get_row($stm, array($field => $value))['count'];
+    }
+
 }
