@@ -17,13 +17,15 @@
                                 <td>
                                     <span class="glyphicon glyphicon glyphicon-globe text-danger"></span>
                                 </td>
-                                <td>
-                                    {$address.street}, {$address.building}
+                                <td {if $address.id_mall}class="address_with_mall" {/if}>
+                                    <span>{$address.street}, {$address.building}</span>
+                                    {if $address.id_mall}
                                     <div class="firms_mall_link">
                                          <a href="{$smarty.const.SITE_DIR}{$system.city.alias}/torgovie_centri/?id={$address.id_mall}">
                                              {$address.mall_short} {$address.mall_name}
                                          </a>
                                     </div>
+                                    {/if}
                                 </td>
                             </tr>
                             {*{if $address.id_mall}*}

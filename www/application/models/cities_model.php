@@ -37,8 +37,8 @@ class cities_model extends model
         AND
             us.type = :type
         ');
-        $tmp = $this->get_all($stm, array('id_user' => $id_user, 'id_city' => $id_city, 'type' => $type));
-        return $tmp;
+        $tmp = $this->get_row($stm, array('id_user' => $id_user, 'id_city' => $id_city, 'type' => $type));
+        return $tmp['count'];
     }
     public function getRegionsCities()
     {

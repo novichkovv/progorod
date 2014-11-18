@@ -63,4 +63,19 @@ class firms_model extends model
         }
         return $firm;
     }
+
+    public function getUserFirms($creator,$limit)
+    {
+        $stm = $this->pdo->prepare('
+        SELECT
+            *
+        FROM
+            firms
+        WHERE
+            creator = :creator
+        LIMIT '. $limit.'
+        ');
+        $tmp = $this->get_all($stm, array('creator' => $creator));
+        return $tmp;
+    }
 }
