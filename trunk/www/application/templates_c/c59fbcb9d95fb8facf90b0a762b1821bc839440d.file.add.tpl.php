@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-18 18:34:44
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-19 19:53:00
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:361799792546a10c49010a8-79030192%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c59fbcb9d95fb8facf90b0a762b1821bc839440d' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl',
-      1 => 1416324883,
+      1 => 1416415976,
       2 => 'file',
     ),
   ),
@@ -49,6 +49,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="row">
                 <div class="form-group select-group">
                     <label>Город</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Выберите область, а затем город, в котором находится ваша компания.
+                       Если Вы предсталяете сеть компаний, находящихся в разных городах, удобнее регистрировать и упралять ими в разделе 'Мои сети'"></i>
                     <div class="form-group">
                         <select name="region" class="form-control" data-require="1">
                             <option value="">Выберите область</option>
@@ -96,6 +99,8 @@ $_smarty_tpl->tpl_vars['city']->_loop = true;
                 <br>
                 <div class="form-group select-group">
                     <label>Рубрика</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Выберите рубрику, за затем раздел рубрики, описывающие сферу деятельности Вашей фирмы"></i>
                     <div class="form-group">
                         <select name="division" class="form-control" data-require="1">
                             <option value="">Выберите рубрику</option>
@@ -143,6 +148,10 @@ $_smarty_tpl->tpl_vars['subdivision']->_loop = true;
                 <hr>
                 <div class="form-group">
                     <label>Логотип</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Загрузите изображение с логотипом вашей компании. Лучше всего смотрятся логотипы в альбомной ориентации.
+                        Если логотипа нет,
+                       Вы можете использовать макет визитки или качественную фотографию вывески."></i>
                     <div class="row">
                         <div class="thumbnail">
                             <div class="preview">
@@ -150,13 +159,16 @@ $_smarty_tpl->tpl_vars['subdivision']->_loop = true;
                                     <img src="<?php echo @constant('SITE_DIR');?>
 uploads/temp/<?php echo $_POST['image'];?>
 " />
-                                    <input type="hidden" name="image" value="<?php echo $_POST['image'];?>
-" />
                                 <?php }?>
+                                <input type="hidden" name="image" value="<?php echo $_POST['image'];?>
+" data-require="1" />
                             </div>
                             <div class="caption">
                                 <button id="upload_logo" type="button" class="btn btn-default">Выбрать файл</button>
                                 <span class="status"></span>
+                            </div>
+                            <div class="error-require">
+                                Необходимо загрузить логотип
                             </div>
                         </div>
                     </div>
@@ -169,8 +181,12 @@ uploads/temp/<?php echo $_POST['image'];?>
                 </div>
                 <div class="form-group">
                     <label>Краткое описание</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Одно-Два-три слова, описывающих Вашу компанию. Краткое описание ставится
+                       рядом с названием фирмы для более точной идентификации. Пример: 'Супермаркет электроники' или просто 'Ресторан'"></i>
                     <input class="form-control" name="short_description" value="<?php echo $_POST['short_description'];?>
 "  data-require="1">
+                    <p class="help-block">Пример "Супермаркет электроники"</p>
                     <div class="error-require">Необходимо ввести краткое описание фирмы</div>
                 </div>
                 <div class="form-group">
@@ -191,6 +207,9 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
                         <div class="form-group address-group" id="address_group_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
 ">
                             <label>Адрес</label>
+                            <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                               data-content="Адрес, телефон и часы работы фирмы по данному адресу. Если в пределах города
+                               компания находится по нескольким адресам, введите их, нажав кнопку 'Добавить еще адрес'."></i>
                             <div class="row">
                                 <div class="col-xs-8">
                                     <input type="text" placeholder="Улица" <?php if (!$_smarty_tpl->tpl_vars['values']->value['city']) {?>disabled="disabled"<?php }?> class="street-input form-control" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
@@ -388,17 +407,21 @@ $_smarty_tpl->tpl_vars['minute']->_loop = true;
         <div class="col-sm-12 col-md-offset-2 col-md-8">
             <div class="form-group">
                 <label>Опишите компанию</label>
-                <textarea class="ckeditor" id="editor1" name="description"><?php echo $_smarty_tpl->tpl_vars['values']->value['description'];?>
+                <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                  data-content="Напишите небольшой текст (не более 3000 знаков), описывающий вашу компанию."></i>
+                <textarea class="ckeditor" id="editor1" name="description" data-require="1"><?php echo $_smarty_tpl->tpl_vars['values']->value['description'];?>
 </textarea>
+                <div class="error-require">Необходимо заполнить описание компании</div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-offset-3 col-sm-6">
+    <div class="row text-center">
+        
             <input type="hidden" name="id_user" value="<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 ">
+            <div class="error-form">Не все поля заполнены правильно</div>
             <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
-        </div>
+        
     </div>
     <br>
 </form>

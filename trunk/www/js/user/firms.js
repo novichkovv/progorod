@@ -29,7 +29,25 @@ $(document).ready(function()
     });
     $(body).on('submit','#firm_form', function()
     {
-        return validate('firm_form');
+
+        if(!validate('firm_form'))
+        {
+            $(".error-form").slideDown();
+            if(!$('input[name="image"]').val() || $('input[name="image"]').val() == '')
+            {
+                $('input[name="image"]').parent().parent().parent().parent().find('.error-require').slideDown();
+            }
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    });
+    $(body).on('focus', 'input, select, textarea', function()
+    {
+        $(".error-form").slideUp();
+        $(this).closest('.form-group').find('.error-require, .error-validate').slideUp();
     });
 
     image_upload({
@@ -126,7 +144,14 @@ $(document).ready(function()
             $(this).prop('checked', true);
         }
     });
-
+    $(".informer").mouseover(function()
+    {
+        $(this).popover('show');
+    });
+    $(".informer").mouseout(function()
+    {
+        $(this).popover('hide');
+    });
 });
 var mall_suggest = function(building_input)
 {

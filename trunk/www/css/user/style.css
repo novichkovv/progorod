@@ -227,7 +227,11 @@ body {
 }
 .error-validate,.error-require ,#error-captcha, #error-user_exists, #error-registration {
     display: none;
-    color: darkred;
+    color: indianred;
+}
+.error-form {
+    display: none;
+    color: indianred;
 }
 #update_captcha {
     cursor: pointer;

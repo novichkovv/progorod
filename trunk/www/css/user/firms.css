@@ -4,3 +4,10 @@
 .firms_list_logo {
     text-align: center;
 }
+.informer {
+    cursor: pointer;
+    color: #269abc;
+}
+.informer:hover, .informer:active {
+    color: #888;
+}
