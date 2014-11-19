@@ -39,6 +39,15 @@
 </div><!-- /.navbar -->
 <div class="jumbotron top">
 </div>
+{if $log}
+    <div class="log">
+    <pre>
+        {foreach from=$log item=item}
+            {$item}<hr>
+        {/foreach}
+    </pre>
+    </div>
+{/if}
 <div class="wow slideInLeft" >
     <ol class="breadcrumb">
         <li><a href="#">Магазины</a></li>

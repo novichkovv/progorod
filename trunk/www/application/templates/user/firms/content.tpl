@@ -37,20 +37,6 @@
                     <a href="#" class="list-group-item"><span class="badge">45</span>Цены</a>
                     <a href="#" class="list-group-item"><span class="badge">0</span>Новости</a>
                 </div>
-                {*<ul class="list-group">*}
-                    {*<li class="list-group-item">*}
-                        {*<span class="badge">8</span>*}
-                        {*Фотографии*}
-                    {*</li>*}
-                    {*<li class="list-group-item">*}
-                        {*<span class="badge">34</span>*}
-                        {*Цены*}
-                    {*</li>*}
-                    {*<li class="list-group-item">*}
-                        {*<span class="badge">0</span>*}
-                        {*Новости фирмы*}
-                    {*</li>*}
-                {*</ul>*}
             </div>
         </div>
         <div class="row">
