@@ -294,6 +294,16 @@ body {
 #update_captcha:hover {
     text-decoration: underline;
 }
+.subdivision_icon {
+    width: 40px;
+    height: 40px;
+}
+.subdivision_link {
+    font-size: 30px;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+
 
 
 

@@ -9,7 +9,9 @@ class common_controller extends controller
 {
     public function init()
     {
-        $this->t->assign('common_controller','common_controller');
+        $divisions_model = new divisions_model();
+        $divisions = $divisions_model->getFullDivisions();
+        $this->t->assign('divisions', $divisions);
     }
     public function after_auth()
     {

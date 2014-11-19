@@ -128,7 +128,7 @@ class crud_extension implements extensions
             $row['id'] = $_GET['id'];
         if(isset($_POST['id']))
             $row['id'] = $_POST['id'];
-        $this->model->insert($row);
+        $this->model->insert($row,1);
         header('Location: ?');
 
     }
