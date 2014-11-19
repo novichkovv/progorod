@@ -64,8 +64,19 @@ class firms_controller extends controller
         if(isset($_POST['add_firm_btn']))
         {
             if(!$_POST['id_user'] == $this->user['id'])header('Location: ?');
+
             $cities_model = new default_model('cities');
             $city = $cities_model->getById($_POST['city']);
+            $cities = $this->tools->idArray($cities_model->getAll());
+            $divisions_model = new default_model('subdivisions', $city['alias']);
+            $subdivisions = $this->tools->idArray($divisions_model->getAll());
+
+            $warning = false;
+            if(!isset($_POST['city']) || !array_key_exists($_POST['city'], $cities))
+                $warning = 'Вы не выбрали город';
+            elseif(!isset($_POST['subdivision']) || !array_key_exists($_POST['subdivision'], $subdivisions))
+                $warning = 'Вы не выбрали раздел рубрики';
+
             $date = date('Y-m-d H:i:s');
             $firms_model = new default_model('firms', $city['alias']);
             $row = array();

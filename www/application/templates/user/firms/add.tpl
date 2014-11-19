@@ -4,6 +4,9 @@
             <div class="row">
                 <div class="form-group select-group">
                     <label>Город</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Выберите область, а затем город, в котором находится ваша компания.
+                       Если Вы предсталяете сеть компаний, находящихся в разных городах, удобнее регистрировать и упралять ими в разделе 'Мои сети'"></i>
                     <div class="form-group">
                         <select name="region" class="form-control" data-require="1">
                             <option value="">Выберите область</option>
@@ -32,6 +35,8 @@
                 <br>
                 <div class="form-group select-group">
                     <label>Рубрика</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Выберите рубрику, за затем раздел рубрики, описывающие сферу деятельности Вашей фирмы"></i>
                     <div class="form-group">
                         <select name="division" class="form-control" data-require="1">
                             <option value="">Выберите рубрику</option>
@@ -60,17 +65,24 @@
                 <hr>
                 <div class="form-group">
                     <label>Логотип</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Загрузите изображение с логотипом вашей компании. Лучше всего смотрятся логотипы в альбомной ориентации.
+                        Если логотипа нет,
+                       Вы можете использовать макет визитки или качественную фотографию вывески."></i>
                     <div class="row">
                         <div class="thumbnail">
                             <div class="preview">
                                 {if $smarty.post.image}
                                     <img src="{$smarty.const.SITE_DIR}uploads/temp/{$smarty.post.image}" />
-                                    <input type="hidden" name="image" value="{$smarty.post.image}" />
                                 {/if}
+                                <input type="hidden" name="image" value="{$smarty.post.image}" data-require="1" />
                             </div>
                             <div class="caption">
                                 <button id="upload_logo" type="button" class="btn btn-default">Выбрать файл</button>
                                 <span class="status"></span>
+                            </div>
+                            <div class="error-require">
+                                Необходимо загрузить логотип
                             </div>
                         </div>
                     </div>
@@ -82,7 +94,11 @@
                 </div>
                 <div class="form-group">
                     <label>Краткое описание</label>
+                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                       data-content="Одно-Два-три слова, описывающих Вашу компанию. Краткое описание ставится
+                       рядом с названием фирмы для более точной идентификации. Пример: 'Супермаркет электроники' или просто 'Ресторан'"></i>
                     <input class="form-control" name="short_description" value="{$smarty.post.short_description}"  data-require="1">
+                    <p class="help-block">Пример "Супермаркет электроники"</p>
                     <div class="error-require">Необходимо ввести краткое описание фирмы</div>
                 </div>
                 <div class="form-group">
@@ -95,6 +111,9 @@
                     <div class="panel-body">
                         <div class="form-group address-group" id="address_group_{$i}">
                             <label>Адрес</label>
+                            <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                               data-content="Адрес, телефон и часы работы фирмы по данному адресу. Если в пределах города
+                               компания находится по нескольким адресам, введите их, нажав кнопку 'Добавить еще адрес'."></i>
                             <div class="row">
                                 <div class="col-xs-8">
                                     <input type="text" placeholder="Улица" {if !$values.city}disabled="disabled"{/if} class="street-input form-control" name="address[{$i}][street]" value="{$values.address[$i]['street']}" autocomplete="OFF" data-require="1">
@@ -213,15 +232,19 @@
         <div class="col-sm-12 col-md-offset-2 col-md-8">
             <div class="form-group">
                 <label>Опишите компанию</label>
-                <textarea class="ckeditor" id="editor1" name="description">{$values.description}</textarea>
+                <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                  data-content="Напишите небольшой текст (не более 3000 знаков), описывающий вашу компанию."></i>
+                <textarea class="ckeditor" id="editor1" name="description" data-require="1">{$values.description}</textarea>
+                <div class="error-require">Необходимо заполнить описание компании</div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-offset-3 col-sm-6">
+    <div class="row text-center">
+        {*<div class="col-sm-offset-3 col-sm-6">*}
             <input type="hidden" name="id_user" value="{$user['id']}">
+            <div class="error-form">Не все поля заполнены правильно</div>
             <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
-        </div>
+        {*</div>*}
     </div>
     <br>
 </form>
