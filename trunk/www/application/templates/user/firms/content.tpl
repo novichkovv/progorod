@@ -14,8 +14,13 @@
         Если Вы регистрируете сеть фирм под одним брендом, находящихся в двух или более городах,  перейдите в раздел <a href="{$smarty.const.SITE_DIR}{if $system.city.alias}{$system.city.alias}/{/if}nets/">"Мои сети"</a>
     </p>
 </div>
+    <div class="row text-center">
+        <div class="col-xs-offset-1 col-xs-12">
+            <a href="{$smarty.const.SITE_DIR}{if $system.city.alias}{$system.city.alias}/{/if}firms/?add=1" class="btn btn-lg btn-primary">Создать фирму</a>
+        </div>
+    </div>
 {else}
-    <div class="row">
+    <div class="row text-center">
         <div class="col-xs-offset-1 col-xs-12">
             <a href="{$smarty.const.SITE_DIR}{if $system.city.alias}{$system.city.alias}/{/if}firms/?add=1" class="btn btn-lg btn-primary">Создать фирму</a>
         </div>

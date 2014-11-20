@@ -72,7 +72,7 @@ var CKBUILDER_CONFIG = {
 		'pastetext' : 1,
 		'removeformat' : 1,
 		'resize' : 1,
-		'scayt' : 1,
+		'scayt' : 0,
 		'showborders' : 1,
 		'sourcearea' : 1,
 		'specialchar' : 1,

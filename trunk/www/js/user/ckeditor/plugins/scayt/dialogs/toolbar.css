@@ -2,7 +2,7 @@ a
 {
 	text-decoration:none;
 	padding: 2px 4px 4px 6px;
-	display : block;
+	display : none;
 	border-width: 1px;
 	border-style: solid;
 	margin : 0px;
@@ -26,6 +26,8 @@ a.cke_scayt_toogle {
 	color : #316ac5;
 	border-color: #fff;
 	margin : 0px;
+    display: none;
+
 }
 .scayt_disabled a.cke_scayt_item {
 	color : gray;
@@ -67,5 +69,6 @@ a.cke_scayt_toogle {
 }
 .scayt_enabled  .cke_scayt_set_off
 {
-	display: inline;
+	display: none;
+
 }

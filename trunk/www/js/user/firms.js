@@ -29,7 +29,6 @@ $(document).ready(function()
     });
     $(body).on('submit','#firm_form', function()
     {
-
         if(!validate('firm_form'))
         {
             $(".error-form").slideDown();
@@ -54,10 +53,10 @@ $(document).ready(function()
         'name': Math.round(Math.random()*10000000),
         'button': 'upload_logo'
     });
-    $.mask.definitions['Z'] = '[-_a-zA-Zа-яА-Я\/\.0-9&?=%]';
+    $.mask.definitions['Z'] = '[-_a-zA-Zа-яА-Я\/\.0-9&?=%+]';
     $.mask.placeholder = ' ';
     $("input[name='site']").mask('http://ZZZZZ?ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
-    $(".phone").mask('+7(999)999-99-99');
+    $(".phone").mask('+7(999)999-99-99? ZZZZZZZZZZZZZZZ');
     suggest({
         'action': 'street_suggest',
         'input': '.street-input',

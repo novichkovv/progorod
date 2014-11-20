@@ -54,11 +54,6 @@ class firms_controller extends controller
         $this->t->assign('values', $values);
     }
 
-    public function handle()
-    {
-
-    }
-
     private function add_firm()
     {
         if(isset($_POST['add_firm_btn']))
@@ -68,15 +63,38 @@ class firms_controller extends controller
             $cities_model = new default_model('cities');
             $city = $cities_model->getById($_POST['city']);
             $cities = $this->tools->idArray($cities_model->getAll());
-            $divisions_model = new default_model('subdivisions', $city['alias']);
+            $divisions_model = new default_model('subdivisions');
             $subdivisions = $this->tools->idArray($divisions_model->getAll());
 
             $warning = false;
             if(!isset($_POST['city']) || !array_key_exists($_POST['city'], $cities))
-                $warning = 'Вы не выбрали город';
+                $warning = 'необходимо выбрать город';
             elseif(!isset($_POST['subdivision']) || !array_key_exists($_POST['subdivision'], $subdivisions))
-                $warning = 'Вы не выбрали раздел рубрики';
+                $warning = 'Необходимо выбрать раздел рубрики';
+            elseif(!isset($_POST['image']) || $_POST['image'] == '')
+                $warning = 'Необходимо загрузить логотип';
+            elseif(!isset($_POST['name']) || $_POST['name'] == '')
+                $warning = 'Необходимо ввести название';
+            elseif(!isset($_POST['short_description']) || $_POST['short_description'] == '')
+                $warning = 'Необходимо ввести краткое описание';
+            elseif(!isset($_POST['description']) || $_POST['description'] == '')
+                $warning = 'Необходимо ввести описание';
+            elseif(!$warning)
+            {
+                foreach($_POST['address'] as $k => $v)
+                {
+                    if(!isset($v['street']) || $v['street'] == '')
+                    $warning = 'Необходимо ввести улицу в адресе № ' .($k + 1);
+                    elseif(!isset($v['building']) || $v['building'] == '')
+                        $warning = 'Необходимо ввести здание в адресе № ' . ($k + 1);
+                }
+            }
 
+            if($warning)
+            {
+                $this->t->assign('warning', $warning);
+                return;
+            }
             $date = date('Y-m-d H:i:s');
             $firms_model = new default_model('firms', $city['alias']);
             $row = array();
