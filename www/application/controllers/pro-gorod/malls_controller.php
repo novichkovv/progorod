@@ -18,5 +18,8 @@ class malls_controller extends controller
         $mall = $malls_model->getMall($_GET['id']);
         $mall['address']['workdays'] = $this->tools->parse_workdays($mall['address']['workdays']);
         $this->t->assign('mall',$mall);
+        $firms_model = new firms_model('firms', $this->system->city['alias']);
+        $firms = $firms_model->getAll();
+        $this->t->assign('firms', $firms);
     }
 }

@@ -114,7 +114,7 @@ body {
 }
 #firm_logo img{
     margin-top: 30px;
-    max-width: 500px;
+    max-width: 460px;
 }
 .firm_info ul {
      font-size: 20px;
@@ -302,6 +302,11 @@ body {
     font-size: 30px;
     margin-left: 20px;
     vertical-align: middle;
+}
+.subdivision_badges {
+    font-size: 30px;
+    margin-top: -5px;
+    /*vertical-align: middle;*/
 }
 
 
