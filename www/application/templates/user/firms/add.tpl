@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-md-offset-3 col-sm-6 col-sm-offset-3 col-sm-8 col-xs-10 col-xs-offset-1">
             <div class="row">
+                <div class="text-center text-danger"><h2>{$warning}</h2></div>
                 <div class="form-group select-group">
                     <label>Город</label>
                     <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
@@ -66,7 +67,7 @@
                 <div class="form-group">
                     <label>Логотип</label>
                     <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
-                       data-content="Загрузите изображение с логотипом вашей компании. Лучше всего смотрятся логотипы в альбомной ориентации.
+                       data-content="Загрузите изображение с логотипом вашей компании. Лучше всего вписываются логотипы в альбомной ориентации.
                         Если логотипа нет,
                        Вы можете использовать макет визитки или качественную фотографию вывески."></i>
                     <div class="row">
@@ -240,11 +241,9 @@
         </div>
     </div>
     <div class="row text-center">
-        {*<div class="col-sm-offset-3 col-sm-6">*}
-            <input type="hidden" name="id_user" value="{$user['id']}">
-            <div class="error-form">Не все поля заполнены правильно</div>
-            <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
-        {*</div>*}
+        <input type="hidden" name="id_user" value="{$user['id']}">
+        <div class="error-form">Не все поля заполнены правильно</div>
+        <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
     </div>
     <br>
 </form>

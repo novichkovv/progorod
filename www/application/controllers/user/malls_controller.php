@@ -27,7 +27,14 @@ class malls_controller extends controller
             else
                 $this->city = $cities[0];
         }
-
+        if($this->city)
+        {
+            $malls_model = new malls_model('malls', $this->city['alias']);
+            $count_malls = $malls_model->countByField('creator', $this->user['id']);
+            $_GET['page'] ? $page = $_GET['page'] : $page = 1;
+            $malls = $malls_model->getUserMalls($this->user['id'], $page*10-10 . ',10');
+            $this->t->assign('malls', $malls);
+        }
         $this->t->assign('user_cities', $cities);
         $this->t->assign('city', $this->city);
         $this->add_mall();
@@ -71,6 +78,34 @@ class malls_controller extends controller
             if(!$_POST['id_user'] == $this->user['id'])header('Location: ?');
             $cities_model = new default_model('cities');
             $city = $cities_model->getById($_POST['city']);
+            $cities = $this->tools->idArray($cities_model->getAll());
+            $warning = false;
+            if(!isset($_POST['city']) || !array_key_exists($_POST['city'], $cities))
+                $warning = 'необходимо выбрать город';
+            elseif(!isset($_POST['image']) || $_POST['image'] == '')
+                $warning = 'Необходимо загрузить логотип';
+            elseif(!isset($_POST['name']) || $_POST['name'] == '')
+                $warning = 'Необходимо ввести название';
+            elseif(!isset($_POST['short_description']) || $_POST['short_description'] == '')
+                $warning = 'Необходимо ввести краткое описание';
+            elseif(!isset($_POST['description']) || $_POST['description'] == '')
+                $warning = 'Необходимо ввести описание';
+            elseif(!$warning)
+            {
+                foreach($_POST['address'] as $k => $v)
+                {
+                    if(!isset($v['street']) || $v['street'] == '')
+                        $warning = 'Необходимо ввести улицу';
+                    elseif(!isset($v['building']) || $v['building'] == '')
+                        $warning = 'Необходимо ввести здание';
+                }
+            }
+
+            if($warning)
+            {
+                $this->t->assign('warning', $warning);
+                return;
+            }
             $date = date('Y-m-d H:i:s');
             $malls_model = new default_model('malls', $city['alias']);
             $row = array();

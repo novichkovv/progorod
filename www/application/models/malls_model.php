@@ -57,4 +57,19 @@ class malls_model extends model
         }
         return $firm;
     }
+
+    public function getUserMalls($creator,$limit)
+    {
+        $stm = $this->pdo->prepare('
+        SELECT
+            *
+        FROM
+            malls
+        WHERE
+            creator = :creator
+        LIMIT '. $limit.'
+        ');
+        $tmp = $this->get_all($stm, array('creator' => $creator));
+        return $tmp;
+    }
 }
