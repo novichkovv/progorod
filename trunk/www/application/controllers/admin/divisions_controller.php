@@ -101,8 +101,10 @@ class divisions_controller extends controller
              case "subdivisions":
                  if($_POST['add_button'])
                  {
-                     $system_routes_model = new default_model('system_routes');
+                     $system_routes_model = new system_model('system_routes');
                      $subdivisions_model = new default_model('subdivisions');
+                     $divisions_model = new divisions_model();
+                     $division = $divisions_model->getDivisionsWithRoute($_POST['id_division']);
                      $row = array();
                      if($_GET['id'])
                      {

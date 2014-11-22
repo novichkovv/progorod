@@ -25,7 +25,7 @@ class system_model extends model
             return false;
     }
 
-    public function getParent($id, array $parents = array())
+    private function getParent($id, array $parents = array())
     {
         $stm = $this->pdo->prepare('SELECT * FROM system_routes WHERE id = ?');
         $tmp = $this->get_row($stm, array($id));

@@ -11,7 +11,7 @@ class subdivisions_model extends model
     {
         $this->table = 'subdivisions';
     }
-    public function getSubdivisionsWithRoute($id = false)
+    public function getSubdivisionsWithRoute($id = false, $alias = false)
     {
         $stm = $this->pdo->prepare('
         SELECT
@@ -24,24 +24,12 @@ class subdivisions_model extends model
             system_routes sr
             ON d.id_route = sr.id
         ' . ( $id ? 'WHERE d.id = :id' : '') . '
+        ' . ( $alias ? 'WHERE sr.alias = :id' : '') . '
         ');
-        if($id)
+        if($id || $alias)
         {
-            $data = array('id' => $id);
+            $data = array('id' => $id ? $id : $alias);
             return $this->get_row($stm, $data);
-        }
-        else
-            return $this->get_all($stm);
-    }
-    public function countSubdivisionsFirms($id_subdivision = false)
-    {
-        $stm = $this->pdo->prepare('
-        select count(id) count from firms group by id_subdivision
-        ' . ( $id_subdivision ? 'WHERE id_subdivision = :id_subdivision' :'' ) . '
-        ');
-        if($id_subdivision)
-        {
-            return $this->get_row($stm, array('id_subdivision' => $id_subdivision))['count'];
         }
         else
             return $this->get_all($stm);
