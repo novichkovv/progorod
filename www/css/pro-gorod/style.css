@@ -302,13 +302,19 @@ body {
     font-size: 30px;
     margin-left: 20px;
     vertical-align: middle;
+    color: #999999;
+}
+a.subdivision_link {
+   color: #428bca;
 }
 .subdivision_badges {
     font-size: 30px;
     margin-top: -5px;
     /*vertical-align: middle;*/
 }
-
+.zero-badge {
+    background-color: #ccc;
+}
 
 
 

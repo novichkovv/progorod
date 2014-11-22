@@ -51,6 +51,7 @@ class router
         $controller->start();
         $controller->t->assign('template_dir', $controller->t->template_dir[0]);
         $smarty->assignSystem($this->system);
+        $controller->breadcrumbs();
         $controller->t->display(APP_DIR . 'templates' . DS . PROJECT . DS  . 'index.tpl');
 
     }

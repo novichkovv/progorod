@@ -50,9 +50,9 @@
 {/if}
 <div class="wow slideInLeft" >
     <ol class="breadcrumb">
-        <li><a href="#">Магазины</a></li>
-        <li><a href="#">Бытовая техника</a></li>
-        <li class="active">Эльдорадо</li>
+        {foreach from=$breadcrumbs item=crumb}
+            <li><a href="{$smarty.const.SITE_DIR}{if $system.city.alias}{$system.city.alias}/{/if}{$crumb.alias}/">{$crumb.title}</a></li>
+        {/foreach}
     </ol>
     {*<p class="pull-right visible-xs">*}
     {*<button type="button" class="btn" data-toggle="offcanvas">*}

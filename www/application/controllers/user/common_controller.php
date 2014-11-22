@@ -13,7 +13,6 @@ class common_controller extends controller
     }
     public function after_auth()
     {
-        $this->breadcrumbs();
         $system_model = new default_model('system_routes');
         $tmp = $system_model->getByField('project', 'user', true, 'parent, position');
         $sidebar = array();

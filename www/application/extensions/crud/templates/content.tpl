@@ -11,7 +11,7 @@
         {$params.header|default:$system.title}
      </div>
      <div class="panel-body">
-         <table class="table table-bordered">
+         <table class="table table-bordered" id="data_table">
              <thead>
                 <tr>
              {foreach from=$params.fields key=name item=field}
@@ -86,10 +86,13 @@
 {/if}
 {/if}
 {literal}
+<link rel="stylesheet" type="text/css" href="{/literal}{$smarty.const.SITE_DIR}{literal}css/admin/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="{/literal}{$smarty.const.SITE_DIR}{literal}js/admin/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $ = jQuery.noConflict();
         $(document).ready(function()
         {
+            $("#data_table").DataTable();
             $("a[data-toggle='modal']").click(function()
             {
                 $("input[name='item_id']").val($(this).data('id'));

@@ -15,6 +15,7 @@ class divisions_model extends model
     {
         $stm = $this->pdo->prepare('
         SELECT
+            sr.id id_route,
             sr.alias,
             sr.position,
             d.*
