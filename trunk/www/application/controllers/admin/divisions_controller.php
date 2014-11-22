@@ -128,7 +128,21 @@ class divisions_controller extends controller
                          $row['description'] = $_POST['description'];
                          $row['creator'] = $this->user['id'];
                          $row['cdate'] = date('Y-m-d H:i:s');
-                         $subdivisions_model->insert($row);
+                         $id = $subdivisions_model->insert($row);
+                         if($_FILES['icon'])
+                         {
+                             $image = new image_module();
+                             $image->load($_FILES['icon']['tmp_name']);
+                             $image->resize(30,30);
+                             $image->save(ROOT_DIR . 'uploads' . DS . 'icons' . DS . 'subdivisions' . DS . '30_'.$id.'.png', IMAGETYPE_PNG);
+                             $image->load($_FILES['icon']['tmp_name']);
+                             $image->resize(60,60);
+                             $image->save(ROOT_DIR . 'uploads' . DS . 'icons' . DS . 'subdivisions' . DS . '60_'.$id.'.png', IMAGETYPE_PNG);
+                             $image->load($_FILES['icon']['tmp_name']);
+                             $image->resize(15,15);
+                             $image->save(ROOT_DIR . 'uploads' . DS . 'icons' . DS . 'subdivisions' . DS . '15_'.$id.'.png', IMAGETYPE_PNG);
+                         }
+
                          header('Location: ' . SITE_DIR . 'subdivisions');
                      }
                  }
@@ -172,6 +186,21 @@ class divisions_controller extends controller
                      );
                      $params['fields']['position'] = array(
                          'label' => 'Позиция'
+                     );
+                     $params['fields']['icon'] = array(
+                         'ignore' => true,
+                         'type' => 'image',
+                         'label' => 'Иконка',
+                         'files' => array(
+                             array(
+                                 'id_name' => true,
+                                 'name' => 'subdivision_icon_30_'
+                             ),
+                             array(
+                                 'id_name' => true,
+                                 'name' => 'subdivision_icon_60_'
+                             )
+                         )
                      );
                      if(isset($_GET['id']))
                      {

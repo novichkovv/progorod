@@ -43,11 +43,12 @@ class router
         $controller = new $this->controller();
         $controller->system = $this->system;
         $controller->t = $smarty->smarty;
+        $controller->smarty = $smarty;
         $common_controller = new common_controller();
         $common_controller->system = $this->system;
         $common_controller->t = $smarty->smarty;
-        $controller->start();
         $common_controller->start();
+        $controller->start();
         $controller->t->assign('template_dir', $controller->t->template_dir[0]);
         $smarty->assignSystem($this->system);
         $controller->t->display(APP_DIR . 'templates' . DS . PROJECT . DS  . 'index.tpl');

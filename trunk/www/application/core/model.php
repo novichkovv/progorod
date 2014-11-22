@@ -155,4 +155,35 @@ class model
         return $this->get_row($stm, array($field => $value))['count'];
     }
 
+    public function memcached($lifetime, $method)
+    {
+        $arg_list = func_get_args();
+        unset($arg_list[0]);
+        unset($arg_list[1]);
+        if(MEMCACHED)
+        {
+            $str = get_class($this) . $method . ( $arg_list ? implode('', $arg_list) : '' );
+            $key = md5($str);
+
+            $memcache_obj = new Memcache;
+            $memcache_obj->connect('127.0.0.1', 11211) or die('Could not connect');
+            $var_key = @$memcache_obj->get($key);
+            if(!empty($var_key))
+            {
+                $result =  $var_key;
+            }
+            else
+            {
+                $result = call_user_func_array(array($this, $method),$arg_list);
+                $memcache_obj->set($key, $tmp, false, $lifetime);
+            }
+            $memcache_obj->close();
+        }
+        else
+            $result = call_user_func_array(array($this, $method),$arg_list);
+
+
+        return $result;
+    }
+
 }

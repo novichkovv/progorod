@@ -13,6 +13,8 @@ abstract class controller
     public $user;
     public $breadcrumbs = array();
     protected $log = array();
+    protected $memcache_lifetime;
+    public $smarty;
     abstract public  function init();
     public function ajax()
     {
@@ -42,11 +44,19 @@ abstract class controller
     {
 
     }
+    public function memcached()
+    {
+
+    }
     public function start()
     {
         $this->tools = new tools_module();
         $auth = new auth_module();
         $this->first();
+        if($this->memcache_lifetime && MEMCACHED)
+            $this->init_memcached_page();
+        else
+            $this->memcached();
         if(isset($_REQUEST['ajax']))
             $this->ajax();
         if(isset($_GET['add']))
@@ -106,5 +116,36 @@ abstract class controller
             }
         }
         $this->t->assign('breadcrumbs', $this->system->breadcrumbs);
+    }
+    public function init_memcached_page()
+    {
+        $memcache_obj = new Memcache;
+        $memcache_obj->connect('127.0.0.1', 11211) or die('Could not connect');
+        $key = md5($_SERVER['REQUEST_URI']);
+        $var_key = @$memcache_obj->get($key);
+        if(!empty($var_key))
+        {
+            echo $var_key;
+        }
+        else
+        {
+            $this->memcached();
+            $arr = array(
+                'alias' => $this->system->alias,
+                'parts' => $this->system->parts,
+                'template_folder' => $this->system->template_folder,
+                'template_file' => $this->system->template_file,
+                'controller' => $this->system->controller,
+                'city' => $this->system->city
+            );
+            $this->t->assign('system', $arr);
+            $this->t->assign('template_dir', $this->t->template_dir[0]);
+            $template = $this->t->fetch(APP_DIR . 'templates' . DS . PROJECT . DS  . 'index.tpl');
+            $memcache_obj->set($key, $template, false, $this->memcache_lifetime);
+
+            echo $template;
+        }
+        $memcache_obj->close();
+        exit;
     }
 }

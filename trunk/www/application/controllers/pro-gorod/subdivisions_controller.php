@@ -7,10 +7,21 @@
  */
 class subdivisions_controller extends controller
 {
+    public function first()
+    {
+        if($_GET['id']);
+        $this->memcache_lifetime = 5;
+    }
     public function init()
     {
+
+    }
+    public function memcached()
+    {
+
+        $this->system->log[] = print_r($_SERVER,1);
         $divisions_model = new divisions_model();
-        $divisions = $divisions_model->getFullDivisions();
+        $divisions = $divisions_model->memcached(5,'getFullDivisions');//->getFullDivisions();
         $firms_model = new firms_model('firms', $this->system->city['alias']);
         $firm = $firms_model->getFirm($_GET['id']);
         foreach($firm['address'] as $k=>$v)
@@ -19,7 +30,5 @@ class subdivisions_controller extends controller
 
         }
         $this->t->assign('firm',$firm);
-        //print_r($firm);
-
     }
 }

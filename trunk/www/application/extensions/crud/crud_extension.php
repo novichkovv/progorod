@@ -20,7 +20,7 @@ class crud_extension implements extensions
         $this->dir = EXT_DIR . 'crud' . DS;
         $this->controller = $controller;
         $this->t = $controller->t;
-        $this->t->assign('temp_dir', $this->dir . DS . 'templates' . DS);
+        $this->t->assign('temp_dir', $this->dir . 'templates' . DS);
     }
     public function params($params)
     {
@@ -211,5 +211,9 @@ class crud_extension implements extensions
         }
         $this->t->assign('tmp', $tmp);
         $this->t->assign('params', $this->params);
+    }
+    private function ajax()
+    {
+
     }
 }

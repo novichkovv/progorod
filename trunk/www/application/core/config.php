@@ -23,4 +23,5 @@ define('DEFAULT_DB', 'common');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 define ('SMARTY_DIR', ROOT_DIR . 'libs' . DS . 'Smarty' . DS . 'libs' . DS);
+define('MEMCACHED', true);
 
