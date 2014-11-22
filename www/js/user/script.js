@@ -88,7 +88,8 @@ var image_upload = function(params){
         data: {
             'name': params.name,
             'ajax': true,
-            'action': 'ajax_image_upload'
+            'action': 'ajax_image_upload',
+            'dir': params.dir
         },
         onSubmit: function(file, ext){
             extension = ext;

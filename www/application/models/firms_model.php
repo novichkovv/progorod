@@ -45,7 +45,7 @@ class firms_model extends model
         LEFT JOIN malls m ON ag.id_mall = m.id
         WHERE
             f.id = :id
-        ORDER by ag.id
+        ORDER by ag.id, w.id
         ');
         $tmp = $this->get_all($stm, array('id' => $id));
         $firm = array();

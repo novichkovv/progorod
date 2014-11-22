@@ -1,4 +1,8 @@
-<form method="post" action="" xmlns="http://www.w3.org/1999/html">
+<form method="post"
+        {foreach from=$params.fields item=value}
+            {if $value.type eq image}enctype="multipart/form-data" {/if}
+        {/foreach}
+      action="" xmlns="http://www.w3.org/1999/html">
     {foreach from=$params.fields key=field item=value}
         {if !$value.ngroup && !$params.ngroup && !$value.group_nopen !== false}
             <div class="form-group">
@@ -51,8 +55,24 @@
                     </div>
                 {/if}
             {/if}
-            {if $value.type eq 'hidden'}sgerhyjjhrt
+            {if $value.type eq 'hidden'}
                 <input type="hidden" value="{$row[$field]}" name="{$field}" />
+            {/if}
+            {if $value.type eq 'image'}
+                <input type="file" name="{$field}"class="form-control">
+                <input type="hidden" name="old_{$field} value={$row[$field ]}"
+                {*<div class="thumbnail">*}
+                    {*<div class="preview">*}
+                        {*{if $row[$field]}*}
+                            {*<img src="{$smarty.const.SITE_DIR}{$value.save_dir[0]}{$row[$field]}.{$value.ext}" />*}
+                        {*{/if}*}
+                        {*<input type="hidden" name="{$field}" value="{$row[$field]}.{$value.ext}" />*}
+                    {*</div>*}
+                    {*<div class="caption">*}
+                        {*<button id="upload_crud_image_{$field}" type="button" class="btn btn-default">Выбрать файл</button>*}
+                        {*<span class="status"></span>*}
+                    {*</div>*}
+                {*</div>*}
             {/if}
         </div>
 
@@ -86,3 +106,27 @@
         </div>
     {/if}
 </form>
+{literal}
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function()
+    {
+        {/literal}
+        {foreach from=$params.fields key=name item=value}
+        {if $value.type eq 'image'}
+        {literal}
+        image_upload({
+            'name': '{/literal}{$name}{literal}',
+            'button': 'upload_crud_image_{/literal}{$name}{literal}',
+            'dir': {/literal}{$value.dir}{literal}
+        });
+        {/literal}
+        {/if}
+        {/foreach}
+        {literal}
+
+    });
+</script>
+{/literal}
+    {*<script type="text/javascript" src="{$smarty.const.SITE_DIR}/application/extensions/crud/templates/script.js"></script>*}
+{*<script type="text/javascript" src="{$smarty.const.SITE_DIR}/application/extensions/crud/templates/ajaxupload.3.5.js"></script>*}
