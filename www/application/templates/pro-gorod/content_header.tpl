@@ -40,13 +40,14 @@
 <div class="jumbotron top">
 </div>
 {if $log}
-    <div class="log">
+    <div id="log">
     <pre>
         {foreach from=$log item=item}
             {$item}<hr>
         {/foreach}
     </pre>
     </div>
+    <div id="log-button"></div>
 {/if}
 <div class="wow slideInLeft" >
     <ol class="breadcrumb">

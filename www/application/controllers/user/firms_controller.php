@@ -138,6 +138,11 @@ class firms_controller extends controller
                 $image->resizeToWidth(250);
                 $image->resizeToHeight(100);
                 $image->save($mini_dir. $id_firm . '.jpg');
+
+                $image->load(ROOT_DIR . 'uploads' . DS . 'temp' . DS . $_POST['image']);
+                $image->resizeToWidth(250);
+                $image->resizeToHeight(100);
+                $image->save($mini_dir. $id_firm . '.jpg');
             }
 
                 foreach($_POST['address'] as $k => $v)

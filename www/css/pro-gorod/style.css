@@ -315,6 +315,27 @@ a.subdivision_link {
 .zero-badge {
     background-color: #ccc;
 }
+#log {
+    display: none;
+}
+#log-button {
+    height: 10px;
+    cursor: pointer;
+}
+.firms_list_img {
+    max-width: 300px;
+    max-height: 140px;
+    margin: 0 auto;
+}
+.firms_list_img_container {
+    height: 140px !important;
+    width: 300px !important;
+}
+.firms_list_img_container .mask {
+    height: 140px !important;
+}
+@media screen and (max-width: 1200px) {
 
+}
 
 

@@ -51,5 +51,13 @@ $(document).ready(function()
     {
         $("#captcha").attr("src", 'http://'+window.location.host+'/libs/captcha/captcha.php?rnd='+Math.round(Math.random(0)*1000));
     });
+    $("#log-button").click(function()
+    {
+        $("#log").slideDown();
+    });
+    $("#log").click(function()
+    {
+        $(this).slideUp();
+    });
 
 });
