@@ -7,7 +7,8 @@
                 </p>
             </div>
             <div class="col-md-5">
-                <div class="wow bounceInDown" data-wow-delay="0.3s" data-wow-offset="3">
+                {*<div class="wow bounceInDown" data-wow-delay="0.3s" data-wow-offset="3">*}
+                <div class="animate_down">
                     <div>
                         <br><br>
                         {assign var="i" value=0}
@@ -84,7 +85,7 @@
     </div>
     <div class="bs-callout bs-callout-warning">
         <div class="page-header">
-            <h1 class="wow slideInLeft" ><span style="color: #31b0d5">{$firm.name}</span>  <small class="wow slideInRight" data-wow-delay="0.3s">{$firm.short_description}</small></h1>
+            <h1  ><span class="wow slideInLeft" style="color: #31b0d5">{$firm.name}</span>  <small class="animate_fade">{$firm.short_description}</small></h1>
         </div>
     </div>
 {else}

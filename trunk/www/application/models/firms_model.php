@@ -117,19 +117,50 @@ class firms_model extends model
         }
         $stm = $this->pdo->prepare('
         SELECT
-          *
-        ' . ( $params['distance'] ? ', geodist(' . $params['distance']['lat'] . ',' . $params['distance']['lon'] . ',ag.latitude,ag.longitude) dist' : '' ) . '
+            f.id id_firm,
+            f.name,
+            f.short_description,
+            f.site,
+            ag.id id_address,
+            ag.phone,
+            s.name street,
+            b.name building,
+            w.id id_workday,
+            w.always,
+            w.daily,
+            w.weekday,
+            w.work_from,
+            w.work_to,
+            w2.id id_workday,
+            w2.always,
+            w2.daily,
+            w2.weekday,
+            w2.work_from,
+            w2.work_to,
+            m.id id_mall,
+            m.name mall_name,
+            m.short_description mall_short
+        ' . ( $params['location'] ? ', geodist(' . $params['location']['latitude'] . ',' . $params['location']['longitude'] . ',ag.latitude,ag.longitude) dist' : '' ) . '
         FROM
             (SELECT * FROM firms WHERE id_subdivision = :id_subdivision  LIMIT ' . $params['limit'] . ') f
         JOIN
             address_groups ag
             ON f.id = ag.id_firm AND ag.type = 0
         JOIN
+            streets s
+            ON s.id = ag.id_street
+        JOIN
+            buildings b
+            ON b.id = ag.id_building
+        JOIN
             workdays_groups wg
             ON wg.id_address_group = ag.id
         JOIN
             workdays w
             ON w.id = wg.id_workday
+        LEFT JOIN
+            malls m
+            ON m.id = ag.id_mall
         ' . ($params['workdays']['work_to'] <= 9 ?
         'JOIN
             workdays_groups wg2
@@ -138,7 +169,7 @@ class firms_model extends model
             workdays w2
             ON w2.id = wg2.id_workday' : '' ) . '
         ' . ($params['workdays'] ? 'WHERE ' . $term : '') . '
-        ORDER BY ' . ( $params['distance'] ? ',dist,' : '' ) . ' rating
+        ORDER BY ' . ( $params['location'] ? 'dist,' : '' ) . ' f.rating, w.id, w2.id
                 ');
         $data['id_subdivision'] = $params['id_subdivision'];
         return $this->get_all($stm, $data);
