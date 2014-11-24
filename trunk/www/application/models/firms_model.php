@@ -52,7 +52,7 @@ class firms_model extends model
         foreach($tmp as $k => $v)
         {
             foreach($v as $key => $row)
-            if(in_array($key, array('id','name','subivision','short_description','description','site')))
+            if(in_array($key, array('id','name','id_subdivision','short_description','description','site')))
                 $firm[$key] = $row;
             elseif(in_array($key,array('always','daily','weekday','work_from','work_to')))
             {

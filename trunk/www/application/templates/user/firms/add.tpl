@@ -75,8 +75,10 @@
                             <div class="preview">
                                 {if $smarty.post.image}
                                     <img src="{$smarty.const.SITE_DIR}uploads/temp/{$smarty.post.image}" />
+                                {elseif $smarty.get.id}
+                                    <img src="{$smarty.const.SITE_DIR}uploads/images/{$city.alias}/firms/logo/normal/{$values.id}.jpg" />
                                 {/if}
-                                <input type="hidden" name="image" value="{$smarty.post.image}" data-require="1" />
+                                <input type="hidden" name="image" value="{$values.image}" data-require="1" />
                             </div>
                             <div class="caption">
                                 <button id="upload_logo" type="button" class="btn btn-default">Выбрать файл</button>
@@ -90,7 +92,7 @@
                 </div>
                 <div class="form-group">
                     <label>Название</label>
-                    <input class="form-control" name="name" value="{$smarty.post.name}" data-require="1">
+                    <input class="form-control" name="name" value="{$values.name}" data-require="1">
                     <div class="error-require">Необходимо ввести название фирмы</div>
                 </div>
                 <div class="form-group">
@@ -98,13 +100,13 @@
                     <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
                        data-content="Одно-Два-три слова, описывающих Вашу компанию. Краткое описание ставится
                        рядом с названием фирмы для более точной идентификации. Пример: 'Супермаркет электроники' или просто 'Ресторан'"></i>
-                    <input class="form-control" name="short_description" value="{$smarty.post.short_description}"  data-require="1">
+                    <input class="form-control" name="short_description" value="{$values.short_description}"  data-require="1">
                     <p class="help-block">Пример "Супермаркет электроники"</p>
                     <div class="error-require">Необходимо ввести краткое описание фирмы</div>
                 </div>
                 <div class="form-group">
                     <label>Web-сайт</label>
-                    <input class="form-control" name="site" value="{$smarty.post.site}">
+                    <input class="form-control" name="site" value="{$values.site}">
                 </div>
                 <hr>
                 {foreach from=$values.address key=i item=item}

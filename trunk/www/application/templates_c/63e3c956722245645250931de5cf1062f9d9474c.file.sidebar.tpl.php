@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:14:00
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-20 20:20:13
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/sidebar.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:10846047546a10b8e8a839-76512214%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:96982121546e22cd8bc7b4-38733970%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '10846047546a10b8e8a839-76512214',
+  'nocache_hash' => '96982121546e22cd8bc7b4-38733970',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10b91e7280_06420760',
+  'unifunc' => 'content_546e22cdae87d9_37010428',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a10b91e7280_06420760')) {function content_546a10b91e7280_06420760($_smarty_tpl) {?><ul class="nav nav-list bs-docs-sidenav affix-top">
+<?php if ($_valid && !is_callable('content_546e22cdae87d9_37010428')) {function content_546e22cdae87d9_37010428($_smarty_tpl) {?><ul class="nav nav-list bs-docs-sidenav affix-top">
     <li  <?php if (!$_smarty_tpl->tpl_vars['system']->value['parts'][0]) {?> class="active"<?php }?>><a href="<?php echo @constant('SITE_DIR');?>
 <?php if ($_smarty_tpl->tpl_vars['system']->value['city']['alias']) {?><?php echo $_smarty_tpl->tpl_vars['system']->value['city']['alias'];?>
 /<?php }?>">Кабинет</a></li>

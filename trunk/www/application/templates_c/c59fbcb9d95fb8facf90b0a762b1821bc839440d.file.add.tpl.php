@@ -1,24 +1,25 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-19 19:53:00
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-24 19:35:18
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:361799792546a10c49010a8-79030192%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1350643065546e22cdaf5ba2-19823019%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c59fbcb9d95fb8facf90b0a762b1821bc839440d' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl',
-      1 => 1416415976,
+      1 => 1416846917,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '361799792546a10c49010a8-79030192',
+  'nocache_hash' => '1350643065546e22cdaf5ba2-19823019',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10c64699d0_14906848',
+  'unifunc' => 'content_546e22cf4ae834_07344497',
   'variables' => 
   array (
+    'warning' => 0,
     'regions' => 0,
     'region' => 0,
     'values' => 0,
@@ -43,10 +44,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a10c64699d0_14906848')) {function content_546a10c64699d0_14906848($_smarty_tpl) {?><form action="" method="post" id="firm_form">
+<?php if ($_valid && !is_callable('content_546e22cf4ae834_07344497')) {function content_546e22cf4ae834_07344497($_smarty_tpl) {?><form action="" method="post" id="firm_form">
     <div class="row">
         <div class="col-md-offset-3 col-sm-6 col-sm-offset-3 col-sm-8 col-xs-10 col-xs-offset-1">
             <div class="row">
+                <div class="text-center text-danger"><h2><?php echo $_smarty_tpl->tpl_vars['warning']->value;?>
+</h2></div>
                 <div class="form-group select-group">
                     <label>Город</label>
                     <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
@@ -149,7 +152,7 @@ $_smarty_tpl->tpl_vars['subdivision']->_loop = true;
                 <div class="form-group">
                     <label>Логотип</label>
                     <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
-                       data-content="Загрузите изображение с логотипом вашей компании. Лучше всего смотрятся логотипы в альбомной ориентации.
+                       data-content="Загрузите изображение с логотипом вашей компании. Лучше всего вписываются логотипы в альбомной ориентации.
                         Если логотипа нет,
                        Вы можете использовать макет визитки или качественную фотографию вывески."></i>
                     <div class="row">
@@ -159,8 +162,13 @@ $_smarty_tpl->tpl_vars['subdivision']->_loop = true;
                                     <img src="<?php echo @constant('SITE_DIR');?>
 uploads/temp/<?php echo $_POST['image'];?>
 " />
+                                <?php } elseif ($_GET['id']) {?>
+                                    <img src="<?php echo @constant('SITE_DIR');?>
+uploads/images/<?php echo $_smarty_tpl->tpl_vars['city']->value['alias'];?>
+/firms/logo/normal/<?php echo $_smarty_tpl->tpl_vars['values']->value['id'];?>
+.jpg" />
                                 <?php }?>
-                                <input type="hidden" name="image" value="<?php echo $_POST['image'];?>
+                                <input type="hidden" name="image" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['image'];?>
 " data-require="1" />
                             </div>
                             <div class="caption">
@@ -175,7 +183,7 @@ uploads/temp/<?php echo $_POST['image'];?>
                 </div>
                 <div class="form-group">
                     <label>Название</label>
-                    <input class="form-control" name="name" value="<?php echo $_POST['name'];?>
+                    <input class="form-control" name="name" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['name'];?>
 " data-require="1">
                     <div class="error-require">Необходимо ввести название фирмы</div>
                 </div>
@@ -184,14 +192,14 @@ uploads/temp/<?php echo $_POST['image'];?>
                     <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
                        data-content="Одно-Два-три слова, описывающих Вашу компанию. Краткое описание ставится
                        рядом с названием фирмы для более точной идентификации. Пример: 'Супермаркет электроники' или просто 'Ресторан'"></i>
-                    <input class="form-control" name="short_description" value="<?php echo $_POST['short_description'];?>
+                    <input class="form-control" name="short_description" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['short_description'];?>
 "  data-require="1">
                     <p class="help-block">Пример "Супермаркет электроники"</p>
                     <div class="error-require">Необходимо ввести краткое описание фирмы</div>
                 </div>
                 <div class="form-group">
                     <label>Web-сайт</label>
-                    <input class="form-control" name="site" value="<?php echo $_POST['site'];?>
+                    <input class="form-control" name="site" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['site'];?>
 ">
                 </div>
                 <hr>
@@ -416,12 +424,10 @@ $_smarty_tpl->tpl_vars['minute']->_loop = true;
         </div>
     </div>
     <div class="row text-center">
-        
-            <input type="hidden" name="id_user" value="<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
+        <input type="hidden" name="id_user" value="<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 ">
-            <div class="error-form">Не все поля заполнены правильно</div>
-            <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
-        
+        <div class="error-form">Не все поля заполнены правильно</div>
+        <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
     </div>
     <br>
 </form>

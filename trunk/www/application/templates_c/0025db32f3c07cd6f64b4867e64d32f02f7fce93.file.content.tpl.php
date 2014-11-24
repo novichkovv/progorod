@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:20:25
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-21 17:44:29
          compiled from "/var/www/pro-gorod.loc/www/application/extensions/crud/templates/content.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2132094969546a123903bb30-10365400%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0025db32f3c07cd6f64b4867e64d32f02f7fce93' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/extensions/crud/templates/content.tpl',
-      1 => 1415960596,
+      1 => 1416581067,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_546a12396c7398_89192095',
   'variables' => 
   array (
     'temp_dir' => 0,
@@ -26,8 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'item' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a12396c7398_89192095',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_546a12396c7398_89192095')) {function content_546a12396c7398_89192095($_smarty_tpl) {?><?php if ($_GET['add']) {?>
     <?php echo $_smarty_tpl->getSubTemplate (($_smarty_tpl->tpl_vars['temp_dir']->value).('add.tpl'), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
