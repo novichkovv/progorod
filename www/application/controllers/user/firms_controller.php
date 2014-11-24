@@ -8,6 +8,8 @@
 class firms_controller extends controller
 {
     private $city;
+    private $subdivisions;
+    private $divisions;
     public function init()
     {
         $this->system->script = array('firms', 'ajax-upload/ajaxupload.3.5', 'mask/jquery.maskedinput', 'ckeditor/ckeditor');
@@ -46,10 +48,55 @@ class firms_controller extends controller
         }
         else
         {
+            if($_GET['id'])
+            {
+                $firm = $firms_model->getFirm($_GET['id']);
+                $values = $firm;
+                $this->system->log[] =print_r($firm['address'],1);
+                $values['subdivision'] = $values['id_subdivision'];
+                $values['division'] = $this->divisions[$this->subdivisions[$values['id_subdivision']]['id']]['id'];
+                $i = 0;
+                foreach($values['address'] as $k => $v)
+                {
+                    $values['address'][$i] = $v;
+                    foreach($v['workdays'] as $key => $workdays)
+                    if($workdays['always'] == 1)
+                    {
+                        $values['address'][$i]['workdays']['radio'] = '24';
+                    }
+                    elseif($workdays['daily'] == 1)
+                    {
+                        $values['address'][$i]['workdays']['radio'] = 'daily';
+                        if(count($v['workdays']) == 2)
+                        {
+                            if($v['workdays'][$key]['work_to'] == '23:59:59')
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        $values['address'][$i]['workdays']['radio'] = 'schedule';
+                    }
+                    $i ++;
+                    unset($values['address'][$k]);
+                }
+
+            }
             $values['region'] = $this->system->city['id_region'];
             $values['city'] = $this->system->city['id'];
             if(count($values['address']) < 1)
                 $values['address'] = array(1);
+
         }
         $this->t->assign('values', $values);
     }
@@ -294,12 +341,14 @@ class firms_controller extends controller
         foreach($tmp as $v)
             $cities[$v['id_region']][] = $v;
         $divisions_model = new default_model('divisions');
-        $divisions = $divisions_model->getAll();
+        $divisions = $this->tools->idArray($divisions_model->getAll());
         $subdivisions_model  = new default_model('subdivisions');
         $tmp = $subdivisions_model->getAll();
         $subdivisions = array();
+        $this->subdivisions = $this->tools->idArray($tmp);
         foreach($tmp as $v)
             $subdivisions[$v['id_division']][] = $v;
+        $this->divisions = $divisions;
 
 
         $this->assignDays();
@@ -307,6 +356,23 @@ class firms_controller extends controller
         $this->t->assign('cities', $cities);
         $this->t->assign('divisions', $divisions);
         $this->t->assign('subdivisions', $subdivisions);
+    }
+
+    public function id()
+    {
+        $divisions_model = new divisions_model();
+        $firms_model = new firms_model('firms', $this->system->city['alias']);
+        $firm = $firms_model->getFirm($_GET['id']);
+        foreach($firm['address'] as $k=>$v)
+        {
+            $firm['address'][$k]['workdays'] = $this->tools->parse_workdays($v['workdays']);
+
+        }
+        $this->t->assign('firm',$firm);
+        $this->system->breadcrumbs = array(array(
+            'title' => $firm['name'],
+            'alias' => $this->system->parts[0] . '/?id=' . $firm['id']
+        ));
     }
 
     public function ajax()

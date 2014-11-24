@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:13:49
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-24 00:40:28
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/content_header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:598665136546a10ad4a1cf9-36158690%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '16f639cf7345f067e3c69f4482dfb915e72f9804' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/pro-gorod/content_header.tpl',
-      1 => 1415960596,
+      1 => 1416778784,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_546a10ad80b167_48928405',
   'variables' => 
   array (
     'user' => 0,
+    'log' => 0,
+    'item' => 0,
+    'breadcrumbs' => 0,
     'system' => 0,
+    'crumb' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10ad80b167_48928405',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_546a10ad80b167_48928405')) {function content_546a10ad80b167_48928405($_smarty_tpl) {?><body>
 <div class="navbar navbar-static-top navbar-inverse" role="navigation">
@@ -67,11 +71,34 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </div><!-- /.navbar -->
 <div class="jumbotron top">
 </div>
+<?php if ($_smarty_tpl->tpl_vars['log']->value) {?>
+    <div id="log">
+    <pre>
+        <?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['log']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars['item']->value) {
+$_smarty_tpl->tpl_vars['item']->_loop = true;
+?>
+            <?php echo $_smarty_tpl->tpl_vars['item']->value;?>
+<hr>
+        <?php } ?>
+    </pre>
+    </div>
+    <div id="log-button"></div>
+<?php }?>
 <div class="wow slideInLeft" >
     <ol class="breadcrumb">
-        <li><a href="#">Магазины</a></li>
-        <li><a href="#">Бытовая техника</a></li>
-        <li class="active">Эльдорадо</li>
+        <?php  $_smarty_tpl->tpl_vars['crumb'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['crumb']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['breadcrumbs']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['crumb']->key => $_smarty_tpl->tpl_vars['crumb']->value) {
+$_smarty_tpl->tpl_vars['crumb']->_loop = true;
+?>
+            <li><a href="<?php echo @constant('SITE_DIR');?>
+<?php if ($_smarty_tpl->tpl_vars['system']->value['city']['alias']) {?><?php echo $_smarty_tpl->tpl_vars['system']->value['city']['alias'];?>
+/<?php }?><?php echo $_smarty_tpl->tpl_vars['crumb']->value['alias'];?>
+/"><?php echo $_smarty_tpl->tpl_vars['crumb']->value['title'];?>
+</a></li>
+        <?php } ?>
     </ol>
     
     

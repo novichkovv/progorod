@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:20:25
-         compiled from "/var/www/pro-gorod.loc/www/application/extensions/crud//templates/add.tpl" */ ?>
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-21 18:21:20
+         compiled from "/var/www/pro-gorod.loc/www/application/extensions/crud/templates/add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1591052299546a12396dcbb3-13099569%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'f781a5d775abed96ed3a803e62298d0d9ff47505' => 
     array (
-      0 => '/var/www/pro-gorod.loc/www/application/extensions/crud//templates/add.tpl',
-      1 => 1415960596,
+      0 => '/var/www/pro-gorod.loc/www/application/extensions/crud/templates/add.tpl',
+      1 => 1416583255,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_546a123b8d77a0_61575030',
   'variables' => 
   array (
     'params' => 0,
@@ -25,12 +27,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'row' => 0,
     'v' => 0,
     'button' => 0,
+    'name' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a123b8d77a0_61575030',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a123b8d77a0_61575030')) {function content_546a123b8d77a0_61575030($_smarty_tpl) {?><form method="post" action="" xmlns="http://www.w3.org/1999/html">
+<?php if ($_valid && !is_callable('content_546a123b8d77a0_61575030')) {function content_546a123b8d77a0_61575030($_smarty_tpl) {?><form method="post"
+        <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['params']->value['fields']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_vars['value']->value) {
+$_smarty_tpl->tpl_vars['value']->_loop = true;
+?>
+            <?php if ($_smarty_tpl->tpl_vars['value']->value['type']=='image') {?>enctype="multipart/form-data" <?php }?>
+        <?php } ?>
+      action="" xmlns="http://www.w3.org/1999/html">
     <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
  $_smarty_tpl->tpl_vars['field'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['params']->value['fields']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -226,10 +235,29 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
                     </div>
                 <?php }?>
             <?php }?>
-            <?php if ($_smarty_tpl->tpl_vars['value']->value['type']=='hidden') {?>sgerhyjjhrt
+            <?php if ($_smarty_tpl->tpl_vars['value']->value['type']=='hidden') {?>
                 <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['field']->value];?>
 " name="<?php echo $_smarty_tpl->tpl_vars['field']->value;?>
 " />
+            <?php }?>
+            <?php if ($_smarty_tpl->tpl_vars['value']->value['type']=='image') {?>
+                <input type="file" name="<?php echo $_smarty_tpl->tpl_vars['field']->value;?>
+"class="form-control">
+                <input type="hidden" name="old_<?php echo $_smarty_tpl->tpl_vars['field']->value;?>
+ value=<?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['field']->value];?>
+"
+                
+                    
+                        
+                            
+                        
+                        
+                    
+                    
+                        
+                        
+                    
+                
             <?php }?>
         </div>
 
@@ -332,4 +360,38 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
     <?php if (!$_smarty_tpl->tpl_vars['button']->value['nrow']&&!$_smarty_tpl->tpl_vars['params']->value['nrow']&&!$_smarty_tpl->tpl_vars['button']->value['row_nclose']) {?>
         </div>
     <?php }?>
-</form><?php }} ?>
+</form>
+
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function()
+    {
+        
+        <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
+ $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['params']->value['fields']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_vars['value']->value) {
+$_smarty_tpl->tpl_vars['value']->_loop = true;
+ $_smarty_tpl->tpl_vars['name']->value = $_smarty_tpl->tpl_vars['value']->key;
+?>
+        <?php if ($_smarty_tpl->tpl_vars['value']->value['type']=='image') {?>
+        
+        image_upload({
+            'name': '<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+',
+            'button': 'upload_crud_image_<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+',
+            'dir': <?php echo $_smarty_tpl->tpl_vars['value']->value['dir'];?>
+
+        });
+        
+        <?php }?>
+        <?php } ?>
+        
+
+    });
+</script>
+
+    
+
+<?php }} ?>

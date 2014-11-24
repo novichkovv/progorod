@@ -259,4 +259,91 @@ body {
 .suggest {
     cursor: pointer;
 }
+.firms_list_img {
+    max-width: 250px;
+    max-height: 100px;
+    margin: 0 auto;
+}
+.firms_list_img_container {
+    height: 100px !important;
+    width: 250px;
+}
+.firms_list_img_container .mask {
+    height: 100px !important;
+}
+@media screen and (max-width: 1200px) {
+    #firm_logo img{
+        margin-top: 30px;
+        max-width: 400px !important;
+    }
+}
+@media screen and (max-width: 507px) {
+    #firm_logo img{
+        margin-top: 30px;
+        max-width: 250px !important;
+    }
+}
+#firm_logo img{
+    margin-top: 30px;
+    max-width: 460px;
+}
+.firm_info ul {
+    font-size: 20px;
+    margin:  -10px 15px;
+}
+.firm_info ul span{
+    font-size: 20px;
+    margin: 1px;
+}
+.firm_info ul li{
+    margin: 17px;
+    font-size: 20px;
+}
+.address-table{
+    font-size: 20px;
+    margin-left: 40px;
+}
+.firms_mall_link td{
+    padding: 0 !important;
+}
+.firms_mall_link a{
+    font-size: 12px;
+}
+.additional-addresses {
+    display: none;
+}
+.address_with_mall {
+    line-height: 1;
+}
+.additional_address_btn, .additional_address_hide_btn {
+    margin-left: 50px;
+    padding: 2px 10px !important;
+    border: 1px solid #cccccc;
+    min-width: 20px;
+}
+.additional_address_hide_btn {
+    margin-left: 80px;
+}
+.address-table td {
+    vertical-align: middle;
+    padding: 7px 4px;
+}
+.workdays_table {
+    display: inline-table;
+    text-align: center;
+}
+.workdays_table td {
+    padding: 0 2px;
+}
+.workdays_time {
+    font-size: 13px;
+}
+.workdays_weekdays {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+}
+.workdays_weekdays.weekend {
+    color: darkred;
+}
 

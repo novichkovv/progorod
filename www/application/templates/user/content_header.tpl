@@ -54,7 +54,7 @@
         <div class="col-sm-2 bs-docs-sidebar sidebar-offcanvas" id="sidebar" role="navigation">
             {include file=$smarty.const.TEMPLATE_DIR|cat:'sidebar.tpl'}
         </div>
-        <div class="col-xs-12 col-sm-8 main-content">
+        <div class="col-xs-12 col-sm-10 main-content">
             <div class="log">
                 {foreach from=$log item=item}
                     <pre>{$item}</pre><hr>
