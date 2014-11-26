@@ -38,7 +38,7 @@ class firms_controller extends controller
             $this->t->assign('firms', $firms);
         }
         $this->t->assign('user_cities', $cities);
-        $this->t->assign('city', $this->city);
+        $this->t->assign('user_city', $this->city);
         $this->add_firm();
         if($_POST)
         {
@@ -52,9 +52,10 @@ class firms_controller extends controller
             {
                 $firm = $firms_model->getFirm($_GET['id']);
                 $values = $firm;
-                $this->system->log[] =print_r($firm['address'],1);
+                $values['image'] = 1;
                 $values['subdivision'] = $values['id_subdivision'];
-                $values['division'] = $this->divisions[$this->subdivisions[$values['id_subdivision']]['id']]['id'];
+                $this->system->log[] = print_r($this->divisions,1);
+                $values['division'] = $this->divisions[$this->subdivisions[$values['subdivision']]['id_division']]['id'];
                 $i = 0;
                 foreach($values['address'] as $k => $v)
                 {
@@ -102,32 +103,39 @@ class firms_controller extends controller
                         {
                             $workdays[$val['weekday']][] = $val;
                         }
-                        $this->system->log[] = print_r($workdays,1);
                         foreach($workdays as $day => $val)
                         {
-                            $prev_weekday = $day != 'mon'? $this->tools->simple_weekdays[array_keys($this->tools->simple_weekdays, $day)[0] -1] : 'sun';
                             $next_weekday = $day != 'sun'? $this->tools->simple_weekdays[array_keys($this->tools->simple_weekdays, $day)[0] + 1] : 'mon';
                             if(count($workdays[$next_weekday]) == 2)
                             {
-
-                                if($val[0]['work_to'] == '23:59:59')
+                                if(count($val) == 1)
                                 {
                                     $from = explode(':', $val[0]['work_from']);
-                                    $to = $workdays[$prev_weekday][0]['work_to'] == '23:59:59' ? explode(':', $workdays[$prev_weekday][1]['work_to']) : explode(':', $workdays[$prev_weekday][0]['work_to']);
+                                }
+                                else
+                                {
+                                    $from = $val[0]['work_from'] == '00:00:00' ? explode(':', $val[1]['work_from']) : explode(':', $val[0]['work_from']);
+                                }
+                                $to = $workdays[$next_weekday][0]['work_to'] == '23:59:59' ? explode(':', $workdays[$next_weekday][1]['work_to']) : explode(':', $workdays[$next_weekday][0]['work_to']);
+                            }
+                            else
+                            {
+                                if(count($val) == 1)
+                                {
+                                    $from = explode(':', $val[0]['work_from']);
+                                    $to = explode(':', $val[0]['work_to']);
 
                                 }
                                 else
                                 {
-                                    $from = $workdays[$prev_weekday][0]['work_from'] == '00:00:00' ? explode(':', $workdays[$prev_weekday][1]['work_from']) : explode(':', $workdays[$prev_weekday][0]['work_from']);
-                                    $to = explode(':', $val[1]['work_to']);
+                                    if($val[0]['work_from'] == '00:00:00')
+                                    {
+                                        $from = explode(':', $val[1]['work_from']);
+                                        $to = explode(':', $val[1]['work_to']);
+                                    }
                                 }
-
                             }
-                            else
-                            {
-                                $from = explode(':', $val[0]['work_from']);
-                                $to = explode(':', $val[0]['work_to']);
-                            }
+                            $values['address'][$i]['workdays'][$day]['checked'] = true;
                             $values['address'][$i]['workdays'][$day]['from']['hour'] = $from[0];
                             $values['address'][$i]['workdays'][$day]['from']['minute'] = $from[1];
                             $values['address'][$i]['workdays'][$day]['to']['hour'] = $to[0];
@@ -138,13 +146,13 @@ class firms_controller extends controller
                     unset($values['address'][$k]);
                 }
             }
-            $this->system->log[] =print_r($values,1);
-            $values['region'] = $this->system->city['id_region'];
-            $values['city'] = $this->system->city['id'];
+            $values['region'] = $this->city['id_region'];
+            $values['city'] = $this->city['id'];
             if(count($values['address']) < 1)
                 $values['address'] = array(1);
 
         }
+        $this->system->log[] = print_r($values,1);
         $this->t->assign('values', $values);
     }
 
@@ -191,7 +199,13 @@ class firms_controller extends controller
             }
             $date = date('Y-m-d H:i:s');
             $firms_model = new default_model('firms', $city['alias']);
+            $address_groups_model = new address_groups_model('address_groups',$city['alias']);
             $row = array();
+            if($_POST['id_firm'])
+            {
+                $row['id'] = $_POST['id_firm'];
+                $address_groups_model->deleteFirmAddresses($_POST['id_firm']);
+            }
             $row['id_subdivision'] = $_POST['subdivision'];
             $row['id_net'] = $_POST['id_net'];
             $row['name'] = $_POST['name'];
@@ -200,8 +214,6 @@ class firms_controller extends controller
             $row['site'] = $_POST['site'];
             $row['creator'] = $_POST['id_user'];
             $row['cdate'] = $date;
-            if(isset($_POST['id']))
-                $row['id'] = $_POST['id'];
             if($id_firm = $firms_model->insert($row))
             {
 
@@ -212,10 +224,9 @@ class firms_controller extends controller
                 $str_model = new default_model('streets',$city['alias']);
                 $workdays_groups_model = new default_model('workdays_groups',$city['alias']);
                 $workdays_model = new default_model('workdays',$city['alias']);
-                $address_groups_model = new default_model('address_groups',$city['alias']);
 
             $logo = ROOT_DIR . 'uploads' . DS . 'temp' . DS . $_POST['image'];
-            if(file_exists($logo))
+            if(file_exists($logo) && $_POST['image'] != 1 )
             {
                 $normal_dir = ROOT_DIR . 'uploads' . DS . 'images' . DS . $city['alias'] . DS . 'firms' . DS . 'logo' . DS . 'normal' . DS;
                 if(!file_exists($normal_dir))mkdir($normal_dir,777,true);
@@ -372,6 +383,8 @@ class firms_controller extends controller
                 $row['cdate'] = $date;
                 $cities_model->insert($row);
             }
+            header('Location: ' . SITE_DIR . $city['alias'] . 'firms/?id=' . $id_firm);
+            exit;
         }
     }
     public function add()

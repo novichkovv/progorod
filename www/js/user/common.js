@@ -45,5 +45,13 @@ $(document).ready(function()
         });
         $(this).parent('.tab-button').addClass('act');
     });
+    $("#log-button").click(function()
+    {
+        $("#log").slideDown();
+    });
+    $("#log").click(function()
+    {
+        $(this).slideUp();
+    });
 
 });

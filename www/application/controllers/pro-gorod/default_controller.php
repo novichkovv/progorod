@@ -9,6 +9,9 @@ class default_controller extends controller
 {
     public function init()
     {
-        $this->t->assign('default_controller','default_controller');
+        $this->system->breadcrumbs = array(array(
+            'title' => 'Главная',
+            'alias' => $this->system->city
+        ));
     }
 }

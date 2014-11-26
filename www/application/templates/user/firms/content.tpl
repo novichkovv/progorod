@@ -16,26 +16,26 @@
 </div>
     <div class="row text-center">
         <div class="col-xs-offset-1 col-xs-12">
-            <a href="{$smarty.const.SITE_DIR}{if $system.city.alias}{$system.city.alias}/{/if}firms/?add=1" class="btn btn-lg btn-primary">Создать фирму</a>
+            <a href="{$smarty.const.SITE_DIR}{if $user_city.alias}{$system.city.alias}/{/if}firms/?add=1" class="btn btn-lg btn-primary">Создать фирму</a>
         </div>
     </div>
 {else}
     <div class="row text-center">
         <div class="col-xs-offset-1 col-xs-12">
-            <a href="{$smarty.const.SITE_DIR}{if $system.city.alias}{$system.city.alias}/{/if}firms/?add=1" class="btn btn-lg btn-primary">Создать фирму</a>
+            <a href="{$smarty.const.SITE_DIR}{if $user_city.alias}{$user_city.alias}/{/if}firms/?add=1" class="btn btn-lg btn-primary">Создать фирму</a>
         </div>
     </div>
 <div class="col-xs-offset-1">
     {foreach from=$firms item=firm}
         <div class="row">
-            <h3><a href="{$smarty.const.SITE_DIR}{$city.alias}/firms/?id={$firm.id}">{$firm.name} <small>{$firm.short_description}</small></a></h3>
+            <h3><a href="{$smarty.const.SITE_DIR}{$user_city.alias}/firms/?id={$firm.id}">{$firm.name} <small>{$firm.short_description}</small></a></h3>
         </div>
         <div class="row">
             <div class="col-xs-11 col-sm-6 firms_list_logo">
                 <div class="view view-first firms_list_img_container">
-                    <img  class="firms_list_img" src="{$smarty.const.SITE_DIR}uploads/images/{$city.alias}/firms/logo/mini/{$firm.id}.jpg" alt="{$firm.name}" title="{$firm.name}" /></a>
+                    <img  class="firms_list_img" src="{$smarty.const.SITE_DIR}uploads/images/{$user_city.alias}/firms/logo/mini/{$firm.id}.jpg" alt="{$firm.name}" title="{$firm.name}" /></a>
                     <div class="mask">
-                        <a  class="info" href="{$smarty.const.SITE_DIR}{$city.alias}/firms/?id={$firm.id}">Перейти</a>
+                        <a  class="info" href="{$smarty.const.SITE_DIR}{$user_city.alias}/firms/?id={$firm.id}">Перейти</a>
                     </div>
                 </div>
             </div>
