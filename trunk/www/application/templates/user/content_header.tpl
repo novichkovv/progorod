@@ -55,9 +55,14 @@
             {include file=$smarty.const.TEMPLATE_DIR|cat:'sidebar.tpl'}
         </div>
         <div class="col-xs-12 col-sm-10 main-content">
-            <div class="log">
-                {foreach from=$log item=item}
-                    <pre>{$item}</pre><hr>
-                {/foreach}
-            </div>
+            {if $log}
+                <div id="log">
+                    <pre>
+                        {foreach from=$log item=item}
+                            {$item}<hr>
+                        {/foreach}
+                    </pre>
+                </div>
+                <div id="log-button"></div>
+            {/if}
 
