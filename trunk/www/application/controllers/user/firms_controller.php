@@ -67,31 +67,78 @@ class firms_controller extends controller
                     elseif($workdays['daily'] == 1)
                     {
                         $values['address'][$i]['workdays']['radio'] = 'daily';
+                        $keys = array_keys($v['workdays']);
                         if(count($v['workdays']) == 2)
                         {
-                            if($v['workdays'][$key]['work_to'] == '23:59:59')
+
+                            if($v['workdays'][$keys[0]]['work_to'] == '23:59:59')
                             {
+                                $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
+                                $to = explode(':', $v['workdays'][$keys[1]]['work_to']);
 
                             }
                             else
                             {
-
+                                $from = explode(':', $v['workdays'][$keys[1]]['work_from']);
+                                $to = explode(':', $v['workdays'][$keys[0]]['work_to']);
                             }
+
                         }
                         else
                         {
-                            
+                            $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
+                            $to = explode(':', $v['workdays'][$keys[0]]['work_to']);
                         }
+                        $values['address'][$i]['workdays']['daily']['from']['hour'] = $from[0];
+                        $values['address'][$i]['workdays']['daily']['from']['minute'] = $from[1];
+                        $values['address'][$i]['workdays']['daily']['to']['hour'] = $to[0];
+                        $values['address'][$i]['workdays']['daily']['to']['minute'] = $to[1];
                     }
                     else
                     {
                         $values['address'][$i]['workdays']['radio'] = 'schedule';
+                        $workdays = array();
+                        foreach($v['workdays'] as $val)
+                        {
+                            $workdays[$val['weekday']][] = $val;
+                        }
+                        $this->system->log[] = print_r($workdays,1);
+                        foreach($workdays as $day => $val)
+                        {
+                            $prev_weekday = $day != 'mon'? $this->tools->simple_weekdays[array_keys($this->tools->simple_weekdays, $day)[0] -1] : 'sun';
+                            $next_weekday = $day != 'sun'? $this->tools->simple_weekdays[array_keys($this->tools->simple_weekdays, $day)[0] + 1] : 'mon';
+                            if(count($workdays[$next_weekday]) == 2)
+                            {
+
+                                if($val[0]['work_to'] == '23:59:59')
+                                {
+                                    $from = explode(':', $val[0]['work_from']);
+                                    $to = $workdays[$prev_weekday][0]['work_to'] == '23:59:59' ? explode(':', $workdays[$prev_weekday][1]['work_to']) : explode(':', $workdays[$prev_weekday][0]['work_to']);
+
+                                }
+                                else
+                                {
+                                    $from = $workdays[$prev_weekday][0]['work_from'] == '00:00:00' ? explode(':', $workdays[$prev_weekday][1]['work_from']) : explode(':', $workdays[$prev_weekday][0]['work_from']);
+                                    $to = explode(':', $val[1]['work_to']);
+                                }
+
+                            }
+                            else
+                            {
+                                $from = explode(':', $val[0]['work_from']);
+                                $to = explode(':', $val[0]['work_to']);
+                            }
+                            $values['address'][$i]['workdays'][$day]['from']['hour'] = $from[0];
+                            $values['address'][$i]['workdays'][$day]['from']['minute'] = $from[1];
+                            $values['address'][$i]['workdays'][$day]['to']['hour'] = $to[0];
+                            $values['address'][$i]['workdays'][$day]['to']['minute'] = $to[1];
+                        }
                     }
                     $i ++;
                     unset($values['address'][$k]);
                 }
-
             }
+            $this->system->log[] =print_r($values,1);
             $values['region'] = $this->system->city['id_region'];
             $values['city'] = $this->system->city['id'];
             if(count($values['address']) < 1)
