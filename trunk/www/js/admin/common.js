@@ -1,0 +1,11 @@
+$(document).ready(function()
+{
+    $("#log-button").click(function()
+    {
+        $("#log").slideDown();
+    });
+    $("#log").click(function()
+    {
+        $(this).slideUp();
+    });
+});

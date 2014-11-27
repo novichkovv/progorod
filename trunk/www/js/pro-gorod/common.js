@@ -47,6 +47,10 @@ $(document).ready(function()
         return false;
     });
 
+    $('body').on('submit','#comments_form', function()
+    {
+        return validate('comments_form');
+    });
     $("#update_captcha").click(function()
     {
         $("#captcha").attr("src", 'http://'+window.location.host+'/libs/captcha/captcha.php?rnd='+Math.round(Math.random(0)*1000));

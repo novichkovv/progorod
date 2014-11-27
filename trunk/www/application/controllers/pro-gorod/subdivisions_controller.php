@@ -9,6 +9,7 @@ class subdivisions_controller extends controller
 {
     public function init()
     {
+        if($_GET['id'])return;
         if($_SESSION['client']['location'])$this->checkLocationData();
         $this->t->assign('location',$_SESSION['client']['location']);
         $this->system->script = array('subdivisions');
@@ -67,10 +68,49 @@ class subdivisions_controller extends controller
 
         }
         $this->t->assign('firm',$firm);
+        $comments_model = new default_model('firm_comments', $this->system->city['alias']);
+        $tmp = $comments_model->getByField('id_firm', $firm['id'], true, 3);
+        $comments = array();
+        foreach($tmp as $k => $v)
+        {
+            $comments[$k]['name'] = $v['name'];
+            $comments[$k]['text'] = mb_substr($v['text'], 0, 300, 'utf-8') . ( mb_strlen($v['text']) > 300 ? ' &rarr;' : '');
+            $comments[$k]['date'] = date('d M, y H:i', strtotime($v['cdate']));
+        }
+        $this->t->assign('comments', $comments);
         $this->system->breadcrumbs = array(array(
             'title' => $firm['name'],
             'alias' => $this->system->parts[0] . '/?id=' . $firm['id']
         ));
+    }
+
+    public function handler()
+    {
+        if(isset($_POST['add_comment_btn']))
+        {
+            $warning = false;
+            if(!$_POST['comment_text'])
+                $warning = 'Введите отзыв';
+            elseif(!$_POST['name'] || $_POST['name'] == '')
+                $warning = 'Введите имя';
+            if($warning)
+            {
+                $this->t->assign('warning', $warning);
+            }
+            else
+            {
+                $row = array();
+                $row['creator'] = $_POST['creator'];
+                $row['cdate'] = date('Y-m-d H:i:s');
+                $row['name'] = $_POST['name'];
+                $row['text'] = $_POST['comment_text'];
+                $row['id_firm'] = $_POST['id_firm'];
+                $model = new default_model('firm_comments', $this->system->city['alias']);
+                $model->insert($row);
+                $_SESSION['client']['name'] = $_POST['name'];
+                header('Location: ' . SITE_DIR . $_SERVER['REQUEST_URI']);
+            }
+        }
     }
 
     public function ajax()
@@ -112,5 +152,6 @@ class subdivisions_controller extends controller
         }
 
     }
+
 
 }

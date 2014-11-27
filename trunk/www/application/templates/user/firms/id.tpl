@@ -2,7 +2,7 @@
     <div id="firm_logo">
         <div class="col-md-7">
             <p class="wow slideInLeft" >
-                <img src="{$smarty.const.SITE_DIR}uploads/images/{$system.city.alias}/firms/logo/normal/{$firm.id}.jpg" />
+                <img src="{$smarty.const.SITE_DIR}uploads/images/{$system.city.alias}/firms/logo/normal/{$firm.id}.jpg?{math equation=rand()}" />
             </p>
         </div>
         <div class="col-md-5">
