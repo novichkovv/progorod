@@ -185,7 +185,6 @@
                                                             <label>
                                                                 <input type="checkbox" value="1" name="address[{$i}][workdays][{$name}][checked]" {if $values.address[$i]['workdays'][$name]['checked']}checked="checked" {elseif !$values.address[$i].workdays && $name neq 'sat' && $name neq 'sun'}checked="checked" {/if}>
                                                                 <span class="weekday_label">{$label}</span>
-                                                                {$values.address[$i]['workdays'][$name]['from']['hour']}
                                                             </label>
                                                             <label>С</label>
                                                             <select name="address[{$i}][workdays][{$name}][from][hour]">
@@ -217,13 +216,14 @@
                                     </ul>
                                 </div>
                             </div>
-                            {if $values.address|@count eq ($i + 1)}
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
-                                    </div>
-                                </div>
-                            {/if}
+                            <div class="row text-center">
+                                {if $values.address|@count eq ($i + 1)}
+                                    <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
+                                {/if}
+                                {if $smarty.get.id}
+                                    <a href="#delete_address_modal" class="btn btn-sm btn-warning delete-address-group" data-toggle="modal" role="button">Удалить адрес</a>
+                                {/if}
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -252,4 +252,21 @@
     </div>
     <br>
 </form>
+<div class="modal fade"  id="delete_address_modal">
+    <div class="modal-dialog  modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Удаление адреса</h4>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить адрес?</p>
+            </div>
+            <div class="modal-footer">
+                <button data-address="" type="button" id="delete_address_btn" class="btn btn-primary" data-dismiss="modal">Да</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Нет</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 

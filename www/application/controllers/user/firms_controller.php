@@ -54,7 +54,6 @@ class firms_controller extends controller
                 $values = $firm;
                 $values['image'] = 1;
                 $values['subdivision'] = $values['id_subdivision'];
-                $this->system->log[] = print_r($this->divisions,1);
                 $values['division'] = $this->divisions[$this->subdivisions[$values['subdivision']]['id_division']]['id'];
                 $i = 0;
                 foreach($values['address'] as $k => $v)
@@ -116,7 +115,7 @@ class firms_controller extends controller
                                 {
                                     $from = $val[0]['work_from'] == '00:00:00' ? explode(':', $val[1]['work_from']) : explode(':', $val[0]['work_from']);
                                 }
-                                $to = $workdays[$next_weekday][0]['work_to'] == '23:59:59' ? explode(':', $workdays[$next_weekday][1]['work_to']) : explode(':', $workdays[$next_weekday][0]['work_to']);
+                                $to = $workdays[$next_weekday][0]['work_from'] == '00:00:00' ? explode(':', $workdays[$next_weekday][0]['work_to']) : explode(':', $workdays[$next_weekday][1]['work_to']);
                             }
                             else
                             {
@@ -132,6 +131,11 @@ class firms_controller extends controller
                                     {
                                         $from = explode(':', $val[1]['work_from']);
                                         $to = explode(':', $val[1]['work_to']);
+                                    }
+                                    else
+                                    {
+                                        $from = explode(':', $val[0]['work_from']);
+                                        $to = explode(':', $val[0]['work_to']);
                                     }
                                 }
                             }
@@ -152,7 +156,6 @@ class firms_controller extends controller
                 $values['address'] = array(1);
 
         }
-        $this->system->log[] = print_r($values,1);
         $this->t->assign('values', $values);
     }
 
@@ -258,8 +261,8 @@ class firms_controller extends controller
                     $row['phone'] = $v['phone'];
                     $row['type'] = 0;
                     $row['cdate'] = $date;
-                    $xml = new SimpleXMLElement(file_get_contents('http://geocode-maps.yandex.ru/1.x/?geocode='.$city['name'].'+'.str_replace(' ', '+',$v['street']).'+'.str_replace(' ', '+',$v['building']).''));
-                    $address = @$xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
+                    $xml = new SimpleXMLElement(@file_get_contents('http://geocode-maps.yandex.ru/1.x/?geocode='.$city['name'].'+'.str_replace(' ', '+',$v['street']).'+'.str_replace(' ', '+',$v['building']).''));
+                    $address = $xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
                     if($address)
                     {
                         $f_building = $this->tools->filterBuildings($v['building']);
@@ -383,7 +386,7 @@ class firms_controller extends controller
                 $row['cdate'] = $date;
                 $cities_model->insert($row);
             }
-            header('Location: ' . SITE_DIR . $city['alias'] . 'firms/?id=' . $id_firm);
+            header('Location: ' . SITE_DIR . $city['alias'] . '/firms/?id=' . $id_firm);
             exit;
         }
     }

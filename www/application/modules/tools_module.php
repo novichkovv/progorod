@@ -150,69 +150,119 @@ class tools_module
         }
         else
         {
-            foreach($workdays as $k => $v)
+            $wd= $workdays;
+            $workdays = array();
+            foreach($wd as $v)
             {
                 $workdays[$v['weekday']][] = $v;
             }
+
             foreach($workdays as $day => $v)
             {
-                if(count($v) == 1)
+                $next_weekday = $day != 'sun'? $this->simple_weekdays[array_keys($this->simple_weekdays, $day)[0] + 1] : 'mon';
+                if(count($workdays[$next_weekday]) == 2)
                 {
-                    $arr = explode(':', $v[0]['work_from']);
-                    unset($arr[2]);
-                    if($arr[1] == '00')
-                        unset($arr[1]);
-                    $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
-                    $arr = explode(':', $v[0]['work_to']);
-                    unset($arr[2]);
-                    if($arr[1] == '00')
-                        unset($arr[1]);
-                    $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
-                }
-                elseif(count($v) == 2)
-                {
-                    if($v[0]['work_to'] < $v[1]['work_to'])
+                    if(count($v) == 1)
                     {
-                        $arr = explode(':', $v[1]['work_from']);
-                        unset($arr[2]);
-                        if($arr[1] == '00')
-                            unset($arr[1]);
-                        $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
-                        $arr = explode(':', $v[1]['work_to']);
-                        unset($arr[2]);
-                        if($arr[1] == '00')
-                            unset($arr[1]);
-                        $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
-                        $arr = explode(':', $v[0]['work_to']);
-                        unset($arr[2]);
-                        if($arr[1] == '00')
-                            unset($arr[1]);
-                        $key = array_search($day,$this->simple_weekdays);
-                        $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['to'] = implode(':', $arr);
+                        $from = explode(':', $v[0]['work_from']);
                     }
                     else
                     {
-                        $arr = explode(':', $v[0]['work_from']);
-                        unset($arr[2]);
-                        if($arr[1] == '00')
-                            unset($arr[1]);
-                        $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
-                        $arr = explode(':', $v[0]['work_to']);
-                        unset($arr[2]);
-                        if($arr[1] == '00')
-                            unset($arr[1]);
-                        $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
-                        $arr = explode(':', $v[1]['work_to']);
-                        unset($arr[2]);
-                        if($arr[1] == '00')
-                            unset($arr[1]);
-                        $key = array_search($day,$this->simple_weekdays);
-                        $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['to'] = implode(':', $arr);
+                        $from = $v[0]['work_from'] == '00:00:00' ? explode(':', $v[1]['work_from']) : explode(':', $v[0]['work_from']);
+                    }
+                    $to = $workdays[$next_weekday][0]['work_from'] == '00:00:00' ? explode(':', $workdays[$next_weekday][0]['work_to']) : explode(':', $workdays[$next_weekday][1]['work_to']);
+                }
+                elseif(count($workdays[$next_weekday]) == 1)
+                {
+                    if(count($v) == 1)
+                    {
+                        $from = explode(':', $v[0]['work_from']);
+                        $to = explode(':', $v[0]['work_to']);
+
+                    }
+                    else
+                    {
+                        if($v[0]['work_from'] == '00:00:00')
+                        {
+                                $from = explode(':', $v[1]['work_from']);
+                                $to = explode(':', $v[1]['work_to']);
+                        }
+                        else
+                        {
+                            $from = explode(':', $v[0]['work_from']);
+                            $to = explode(':', $v[0]['work_to']);
+                        }
                     }
                 }
+                $res['schedule'][$this->weekdays[$day]]['from'] = $from[0];//.($from[1] == '00' ? "" : ":" . $from[1]);
+                $res['schedule'][$this->weekdays[$day]]['to'] = $to[0];//.($to[1] == '00' ? "" : ":" . $to[1]);
+//                $prev_weekday = $day != 'mon'? $this->weekdays[$this->simple_weekdays[array_keys($this->simple_weekdays, $day)[0] - 1]] : 'Вс';
+//                $next_weekday = $day != 'sun'? $this->simple_weekdays[array_keys($this->simple_weekdays, $day)[0] + 1] : 'mon';
+//                if(count($v) == 1)
+//                {
+//                    $arr = explode(':', $v[0]['work_from']);
+//                    unset($arr[2]);
+//                    if($arr[1] == '00')
+//                        unset($arr[1]);
+//                    $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
+//                    $arr = explode(':', $v[0]['work_to']);
+//                    unset($arr[2]);
+//                    if($arr[1] == '00')
+//                        unset($arr[1]);
+//                    $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
+//                }
+//                elseif(count($v) == 2)
+//                {
+//                    print_r($v);
+//                    if($v[0]['work_to'] < $v[1]['work_to'])
+//                    {
+//                        $arr = explode(':', $v[1]['work_from']);
+//                        unset($arr[2]);
+//                        if($arr[1] == '00')
+//                            unset($arr[1]);
+//                        $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
+//                        if($v[1]['work_to'] != '23:59:59')
+//                        {
+//                            $arr = explode(':', $v[1]['work_to']);
+//                            unset($arr[2]);
+//                            if($arr[1] == '00')
+//                                unset($arr[1]);
+//                            $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
+//                            $arr = explode(':', $v[0]['work_to']);
+//                            unset($arr[2]);
+//                            if($arr[1] == '00')
+//                                unset($arr[1]);
+//                            //$key = array_search($day,$this->simple_weekdays);
+//                            $res['schedule'][$prev_weekday]['to'] = implode(':', $arr);
+//                        }
+//
+//                    }
+//                    else
+//                    {
+//                        $arr = explode(':', $v[0]['work_from']);
+//                        unset($arr[2]);
+//                        if($arr[1] == '00')
+//                            unset($arr[1]);
+//                        $res['schedule'][$this->weekdays[$day]]['from'] = implode(':', $arr);
+//                        if($v[0]['work_to'] != '23:59:59')
+//                        {
+//                            $arr = explode(':', $v[0]['work_to']);
+//                            unset($arr[2]);
+//                            if($arr[1] == '00')
+//                                unset($arr[1]);
+//                            $res['schedule'][$this->weekdays[$day]]['to'] = implode(':', $arr);
+//                            $arr = explode(':', $v[1]['work_to']);
+//                            unset($arr[2]);
+//                            if($arr[1] == '00')
+//                                unset($arr[1]);
+//                            //$key = array_search($day,$this->simple_weekdays);
+//                            $res['schedule'][$prev_weekday]['to'] = implode(':', $arr);
+//                        }
+//                    }
+//                }
                 $key = array_search($day,$this->simple_weekdays);
-//                echo $key;
-//                print_r($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]);
+//                //print_r($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]);
+//                ///echo $prev_weekday;
                 if($key > 1)
                 {
                     if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['from'] == $res['schedule'][$this->weekdays[$day]]['from']
@@ -236,14 +286,14 @@ class tools_module
                             $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]]['last'] = 1;
                         }
                     }
-//                    if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]] == array() || $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]] == 1)
-//                    {
-//                        if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]] == $res['schedule'][$this->weekdays[$day]])
-//                        {
-//                            $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]] = 1;
-//                        }
-//                    }
-                }
+////                    if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]] == array() || $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 2]]] == 1)
+////                    {
+////                        if($res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]] == $res['schedule'][$this->weekdays[$day]])
+////                        {
+////                            $res['schedule'][$this->weekdays[$this->simple_weekdays[$key - 1]]] = 1;
+////                        }
+////                    }
+               }
             }
         }
 

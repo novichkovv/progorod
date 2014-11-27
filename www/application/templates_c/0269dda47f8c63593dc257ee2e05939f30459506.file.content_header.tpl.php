@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-24 19:05:04
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-27 18:11:11
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/content_header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2125948458546e22cd593500-15835423%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0269dda47f8c63593dc257ee2e05939f30459506' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/content_header.tpl',
-      1 => 1416845047,
+      1 => 1417036501,
       2 => 'file',
     ),
   ),
@@ -100,15 +100,20 @@ $_smarty_tpl->tpl_vars['crumb']->_loop = true;
 
         </div>
         <div class="col-xs-12 col-sm-10 main-content">
-            <div class="log">
-                <?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
+            <?php if ($_smarty_tpl->tpl_vars['log']->value) {?>
+                <div id="log">
+                    <pre>
+                        <?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['log']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars['item']->value) {
 $_smarty_tpl->tpl_vars['item']->_loop = true;
 ?>
-                    <pre><?php echo $_smarty_tpl->tpl_vars['item']->value;?>
-</pre><hr>
-                <?php } ?>
-            </div>
+                            <?php echo $_smarty_tpl->tpl_vars['item']->value;?>
+<hr>
+                        <?php } ?>
+                    </pre>
+                </div>
+                <div id="log-button"></div>
+            <?php }?>
 
 <?php }} ?>

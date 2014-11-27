@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-24 19:35:18
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-27 20:23:29
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1350643065546e22cdaf5ba2-19823019%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c59fbcb9d95fb8facf90b0a762b1821bc839440d' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl',
-      1 => 1416846917,
+      1 => 1417109006,
       2 => 'file',
     ),
   ),
@@ -32,6 +32,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'subdivisions' => 0,
     'id_division' => 0,
     'subdivision' => 0,
+    'user_city' => 0,
     'i' => 0,
     'hours' => 0,
     'hour' => 0,
@@ -164,7 +165,7 @@ uploads/temp/<?php echo $_POST['image'];?>
 " />
                                 <?php } elseif ($_GET['id']) {?>
                                     <img src="<?php echo @constant('SITE_DIR');?>
-uploads/images/<?php echo $_smarty_tpl->tpl_vars['city']->value['alias'];?>
+uploads/images/<?php echo $_smarty_tpl->tpl_vars['user_city']->value['alias'];?>
 /firms/logo/normal/<?php echo $_smarty_tpl->tpl_vars['values']->value['id'];?>
 .jpg" />
                                 <?php }?>
@@ -332,8 +333,6 @@ $_smarty_tpl->tpl_vars['label']->_loop = true;
 ][checked]" <?php if ($_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays'][$_smarty_tpl->tpl_vars['name']->value]['checked']) {?>checked="checked" <?php } elseif (!$_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays']&&$_smarty_tpl->tpl_vars['name']->value!='sat'&&$_smarty_tpl->tpl_vars['name']->value!='sun') {?>checked="checked" <?php }?>>
                                                                 <span class="weekday_label"><?php echo $_smarty_tpl->tpl_vars['label']->value;?>
 </span>
-                                                                <?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['workdays'][$_smarty_tpl->tpl_vars['name']->value]['from']['hour'];?>
-
                                                             </label>
                                                             <label>С</label>
                                                             <select name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
@@ -397,13 +396,14 @@ $_smarty_tpl->tpl_vars['minute']->_loop = true;
                                     </ul>
                                 </div>
                             </div>
-                            <?php if (count($_smarty_tpl->tpl_vars['values']->value['address'])==($_smarty_tpl->tpl_vars['i']->value+1)) {?>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
-                                    </div>
-                                </div>
-                            <?php }?>
+                            <div class="row text-center">
+                                <?php if (count($_smarty_tpl->tpl_vars['values']->value['address'])==($_smarty_tpl->tpl_vars['i']->value+1)) {?>
+                                    <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
+                                <?php }?>
+                                <?php if ($_GET['id']) {?>
+                                    <a href="#delete_address_modal" class="btn btn-sm btn-warning delete-address-group" data-toggle="modal" role="button">Удалить адрес</a>
+                                <?php }?>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -426,10 +426,31 @@ $_smarty_tpl->tpl_vars['minute']->_loop = true;
     <div class="row text-center">
         <input type="hidden" name="id_user" value="<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 ">
+        <?php if ($_GET['id']) {?>
+            <input type="hidden" name="id_firm" value="<?php echo $_GET['id'];?>
+">
+        <?php }?>
         <div class="error-form">Не все поля заполнены правильно</div>
         <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">
     </div>
     <br>
 </form>
+<div class="modal fade"  id="delete_address_modal">
+    <div class="modal-dialog  modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Удаление адреса</h4>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить адрес?</p>
+            </div>
+            <div class="modal-footer">
+                <button data-address="" type="button" id="delete_address_btn" class="btn btn-primary" data-dismiss="modal">Да</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Нет</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <?php }} ?>
