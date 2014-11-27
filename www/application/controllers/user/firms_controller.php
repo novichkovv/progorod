@@ -229,6 +229,8 @@ class firms_controller extends controller
                 $workdays_model = new default_model('workdays',$city['alias']);
 
             $logo = ROOT_DIR . 'uploads' . DS . 'temp' . DS . $_POST['image'];
+                $this->system->log[] = $_POST['image'];
+
             if(file_exists($logo) && $_POST['image'] != 1 )
             {
                 $normal_dir = ROOT_DIR . 'uploads' . DS . 'images' . DS . $city['alias'] . DS . 'firms' . DS . 'logo' . DS . 'normal' . DS;
