@@ -126,6 +126,18 @@ $(document).ready(function()
             '   </div> ' +
             '</div> ');
     });
+    $(body).on('click',".delete-address-group", function()
+    {
+        var id = $(this).closest('.address-group').attr('id');
+        $("#delete_address_btn").attr('data-address', id);
+    });
+    $(body).on('click', '#delete_address_btn', function()
+    {
+        $("#" + $(this).data('address')).html('');
+        $("#" + $(this).data('address')).parent().hide();
+        if($(".delete-address-group").length == 1)
+            $(".delete-address-group").remove();
+    });
     suggested.callback = function(input)
     {
         if($(input).hasClass('building-input'))
