@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-18 19:15:46
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-28 19:04:05
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/ajax/address_group.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1987409887546a1a8224d408-97143278%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '57ce6c53c408364d5fb66b9aacb926cf11c3d0f8' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/ajax/address_group.tpl',
-      1 => 1416258502,
+      1 => 1417190617,
       2 => 'file',
     ),
   ),
@@ -214,11 +214,9 @@ $_smarty_tpl->tpl_vars['minute']->_loop = true;
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
-                    <button class="btn btn-sm btn-warning close-address-group" type="button">Отменить</button>
-                </div>
+            <div class="row text-center">
+                <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
+                <button class="btn btn-sm btn-warning close-address-group" type="button">Отменить</button>
             </div>
         </div>
     </div>

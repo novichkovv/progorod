@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-27 20:23:29
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-28 21:11:58
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1350643065546e22cdaf5ba2-19823019%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c59fbcb9d95fb8facf90b0a762b1821bc839440d' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/add.tpl',
-      1 => 1417109006,
+      1 => 1417198318,
       2 => 'file',
     ),
   ),
@@ -34,6 +34,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'subdivision' => 0,
     'user_city' => 0,
     'i' => 0,
+    'mall' => 0,
     'hours' => 0,
     'hour' => 0,
     'minutes' => 0,
@@ -232,6 +233,38 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 " autocomplete="OFF" data-require="1">
                                     <div class="error-require">Неодбходимо ввести здание</div>
                                 </div>
+                                <?php if ($_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['id_mall']) {?>
+                                    <div class="col-xs-12 mall_suggest">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input class="mall-checkbox" type="checkbox" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+][id_mall]" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['id_mall'];?>
+" checked><?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['mall_short'];?>
+ <?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['mall_name'];?>
+
+                                            </label>
+                                        </div>
+                                    </div>
+                                <?php }?>
+                                <?php if ($_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['malls']) {?>
+                                    <?php  $_smarty_tpl->tpl_vars['mall'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['mall']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['malls']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['mall']->key => $_smarty_tpl->tpl_vars['mall']->value) {
+$_smarty_tpl->tpl_vars['mall']->_loop = true;
+?>
+                                        <div class="col-xs-12 mall_suggest">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input class="mall-checkbox" type="checkbox" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+][id_mall]" value="<?php echo $_smarty_tpl->tpl_vars['mall']->value['ex_id_mall'];?>
+"><?php echo $_smarty_tpl->tpl_vars['mall']->value['ex_mall_short'];?>
+ <?php echo $_smarty_tpl->tpl_vars['mall']->value['ex_mall_name'];?>
+
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                <?php }?>
                             </div>
                             <div class="form-group">
                                 <label>Телефон</label>

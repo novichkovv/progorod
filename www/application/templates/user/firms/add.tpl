@@ -126,6 +126,26 @@
                                     <input type="text" placeholder="Здание" {if !$values.address[$i]['building']}disabled="disabled" {/if}class="building-input form-control" name="address[{$i}][building]" value="{$values.address[$i]['building']}" autocomplete="OFF" data-require="1">
                                     <div class="error-require">Неодбходимо ввести здание</div>
                                 </div>
+                                {if $values.address[$i]['id_mall']}
+                                    <div class="col-xs-12 mall_suggest">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input class="mall-checkbox" type="checkbox" name="address[{$i}][id_mall]" value="{$values.address[$i].id_mall}" checked>{$values.address[$i].mall_short} {$values.address[$i].mall_name}
+                                            </label>
+                                        </div>
+                                    </div>
+                                {/if}
+                                {if $values.address[$i]['malls']}
+                                    {foreach from=$values.address[$i]['malls'] item=mall}
+                                        <div class="col-xs-12 mall_suggest">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input class="mall-checkbox" type="checkbox" name="address[{$i}][id_mall]" value="{$mall.ex_id_mall}">{$mall.ex_mall_short} {$mall.ex_mall_name}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {/foreach}
+                                {/if}
                             </div>
                             <div class="form-group">
                                 <label>Телефон</label>
