@@ -131,9 +131,9 @@ class malls_controller extends controller
                 if(file_exists($logo))
                 {
                     $normal_dir = ROOT_DIR . 'uploads' . DS . 'images' . DS . $city['alias'] . DS . 'malls' . DS . 'logo' . DS . 'normal' . DS;
-                    if(!file_exists($normal_dir))mkdir($normal_dir,777,true);
+                    if(!file_exists($normal_dir))mkdir($normal_dir,0777,true);
                     $mini_dir = ROOT_DIR . 'uploads' . DS . 'images' . DS . $city['alias'] . DS . 'malls' . DS . 'logo' . DS . 'mini' . DS;
-                    if(!file_exists($mini_dir))mkdir($mini_dir,777,true);
+                    if(!file_exists($mini_dir))mkdir($mini_dir,0777,true);
 
                     $image = new image_module();
                     $image->load(ROOT_DIR . 'uploads' . DS . 'temp' . DS . $_POST['image']);
@@ -278,7 +278,6 @@ class malls_controller extends controller
                 $row['cdate'] = $date;
                 $cities_model->insert($row);
             }
-            $this->system->log[]  = print_r($row,1);
         }
     }
     public function ajax()

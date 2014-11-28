@@ -104,11 +104,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
-                    <button class="btn btn-sm btn-warning close-address-group" type="button">Отменить</button>
-                </div>
+            <div class="row text-center">
+                <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>
+                <button class="btn btn-sm btn-warning close-address-group" type="button">Отменить</button>
             </div>
         </div>
     </div>

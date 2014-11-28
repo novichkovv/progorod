@@ -34,7 +34,7 @@ class firms_controller extends controller
             $firms_model = new firms_model('firms', $this->city['alias']);
             $count_firms = $firms_model->countByField('creator', $this->user['id']);
             $_GET['page'] ? $page = $_GET['page'] : $page = 1;
-            $firms = $firms_model->getUserFirms($this->user['id'], $page*10-10 . ',10');
+            $firms = $firms_model->getUserFirms($this->user['id'], $page * 10 - 10 . ',10');
             $this->t->assign('firms', $firms);
         }
         $this->t->assign('user_cities', $cities);
@@ -50,7 +50,7 @@ class firms_controller extends controller
         {
             if($_GET['id'])
             {
-                $firm = $firms_model->getFirm($_GET['id']);
+                $firm = $firms_model->getFirmForEdition($_GET['id']);
                 $values = $firm;
                 $values['image'] = 1;
                 $values['subdivision'] = $values['id_subdivision'];
@@ -59,93 +59,96 @@ class firms_controller extends controller
                 foreach($values['address'] as $k => $v)
                 {
                     $values['address'][$i] = $v;
-                    foreach($v['workdays'] as $key => $workdays)
-                    if($workdays['always'] == 1)
+                    foreach($v['workdays'] as $workdays)
                     {
-                        $values['address'][$i]['workdays']['radio'] = '24';
-                    }
-                    elseif($workdays['daily'] == 1)
-                    {
-                        $values['address'][$i]['workdays']['radio'] = 'daily';
-                        $keys = array_keys($v['workdays']);
-                        if(count($v['workdays']) == 2)
+                        if($workdays['always'] == 1)
                         {
-
-                            if($v['workdays'][$keys[0]]['work_to'] == '23:59:59')
+                            $values['address'][$i]['workdays']['radio'] = '24';
+                        }
+                        elseif($workdays['daily'] == 1)
+                        {
+                            $values['address'][$i]['workdays']['radio'] = 'daily';
+                            $keys = array_keys($v['workdays']);
+                            if(count($v['workdays']) == 2)
                             {
-                                $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
-                                $to = explode(':', $v['workdays'][$keys[1]]['work_to']);
+
+                                if($v['workdays'][$keys[0]]['work_to'] == '23:59:59')
+                                {
+                                    $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
+                                    $to = explode(':', $v['workdays'][$keys[1]]['work_to']);
+
+                                }
+                                else
+                                {
+                                    $from = explode(':', $v['workdays'][$keys[1]]['work_from']);
+                                    $to = explode(':', $v['workdays'][$keys[0]]['work_to']);
+                                }
 
                             }
                             else
                             {
-                                $from = explode(':', $v['workdays'][$keys[1]]['work_from']);
+                                $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
                                 $to = explode(':', $v['workdays'][$keys[0]]['work_to']);
                             }
-
+                            $values['address'][$i]['workdays']['daily']['from']['hour'] = $from[0];
+                            $values['address'][$i]['workdays']['daily']['from']['minute'] = $from[1];
+                            $values['address'][$i]['workdays']['daily']['to']['hour'] = $to[0];
+                            $values['address'][$i]['workdays']['daily']['to']['minute'] = $to[1];
                         }
                         else
                         {
-                            $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
-                            $to = explode(':', $v['workdays'][$keys[0]]['work_to']);
-                        }
-                        $values['address'][$i]['workdays']['daily']['from']['hour'] = $from[0];
-                        $values['address'][$i]['workdays']['daily']['from']['minute'] = $from[1];
-                        $values['address'][$i]['workdays']['daily']['to']['hour'] = $to[0];
-                        $values['address'][$i]['workdays']['daily']['to']['minute'] = $to[1];
-                    }
-                    else
-                    {
-                        $values['address'][$i]['workdays']['radio'] = 'schedule';
-                        $workdays = array();
-                        foreach($v['workdays'] as $val)
-                        {
-                            $workdays[$val['weekday']][] = $val;
-                        }
-                        foreach($workdays as $day => $val)
-                        {
-                            $next_weekday = $day != 'sun'? $this->tools->simple_weekdays[array_keys($this->tools->simple_weekdays, $day)[0] + 1] : 'mon';
-                            if(count($workdays[$next_weekday]) == 2)
+                            $values['address'][$i]['workdays']['radio'] = 'schedule';
+                            $workdays = array();
+                            foreach($v['workdays'] as $val)
                             {
-                                if(count($val) == 1)
-                                {
-                                    $from = explode(':', $val[0]['work_from']);
-                                }
-                                else
-                                {
-                                    $from = $val[0]['work_from'] == '00:00:00' ? explode(':', $val[1]['work_from']) : explode(':', $val[0]['work_from']);
-                                }
-                                $to = $workdays[$next_weekday][0]['work_from'] == '00:00:00' ? explode(':', $workdays[$next_weekday][0]['work_to']) : explode(':', $workdays[$next_weekday][1]['work_to']);
+                                $workdays[$val['weekday']][] = $val;
                             }
-                            else
+                            foreach($workdays as $day => $val)
                             {
-                                if(count($val) == 1)
+                                $next_weekday = $day != 'sun'? $this->tools->simple_weekdays[array_keys($this->tools->simple_weekdays, $day)[0] + 1] : 'mon';
+                                if(count($workdays[$next_weekday]) == 2)
                                 {
-                                    $from = explode(':', $val[0]['work_from']);
-                                    $to = explode(':', $val[0]['work_to']);
-
-                                }
-                                else
-                                {
-                                    if($val[0]['work_from'] == '00:00:00')
+                                    if(count($val) == 1)
                                     {
-                                        $from = explode(':', $val[1]['work_from']);
-                                        $to = explode(':', $val[1]['work_to']);
+                                        $from = explode(':', $val[0]['work_from']);
                                     }
                                     else
                                     {
+                                        $from = $val[0]['work_from'] == '00:00:00' ? explode(':', $val[1]['work_from']) : explode(':', $val[0]['work_from']);
+                                    }
+                                    $to = $workdays[$next_weekday][0]['work_from'] == '00:00:00' ? explode(':', $workdays[$next_weekday][0]['work_to']) : explode(':', $workdays[$next_weekday][1]['work_to']);
+                                }
+                                else
+                                {
+                                    if(count($val) == 1)
+                                    {
                                         $from = explode(':', $val[0]['work_from']);
                                         $to = explode(':', $val[0]['work_to']);
+
+                                    }
+                                    else
+                                    {
+                                        if($val[0]['work_from'] == '00:00:00')
+                                        {
+                                            $from = explode(':', $val[1]['work_from']);
+                                            $to = explode(':', $val[1]['work_to']);
+                                        }
+                                        else
+                                        {
+                                            $from = explode(':', $val[0]['work_from']);
+                                            $to = explode(':', $val[0]['work_to']);
+                                        }
                                     }
                                 }
+                                $values['address'][$i]['workdays'][$day]['checked'] = true;
+                                $values['address'][$i]['workdays'][$day]['from']['hour'] = $from[0];
+                                $values['address'][$i]['workdays'][$day]['from']['minute'] = $from[1];
+                                $values['address'][$i]['workdays'][$day]['to']['hour'] = $to[0];
+                                $values['address'][$i]['workdays'][$day]['to']['minute'] = $to[1];
                             }
-                            $values['address'][$i]['workdays'][$day]['checked'] = true;
-                            $values['address'][$i]['workdays'][$day]['from']['hour'] = $from[0];
-                            $values['address'][$i]['workdays'][$day]['from']['minute'] = $from[1];
-                            $values['address'][$i]['workdays'][$day]['to']['hour'] = $to[0];
-                            $values['address'][$i]['workdays'][$day]['to']['minute'] = $to[1];
                         }
                     }
+
                     $i ++;
                     unset($values['address'][$k]);
                 }
@@ -219,9 +222,8 @@ class firms_controller extends controller
             $row['cdate'] = $date;
             if($id_firm = $firms_model->insert($row))
             {
-
-
                 $streets_model = new cities_model('',$city['alias']);
+                //////// Если большие таблицы улиц и домов - оптимизировать (дергает полностью две таблицы и через цикл пропускает)
                 $streets_buildings = $streets_model->getCityStreetsBuildings();
                 $building_model = new default_model('buildings',$city['alias']);
                 $str_model = new default_model('streets',$city['alias']);
@@ -229,14 +231,13 @@ class firms_controller extends controller
                 $workdays_model = new default_model('workdays',$city['alias']);
 
             $logo = ROOT_DIR . 'uploads' . DS . 'temp' . DS . $_POST['image'];
-                $this->system->log[] = $_POST['image'];
 
             if(file_exists($logo) && $_POST['image'] != 1 )
             {
                 $normal_dir = ROOT_DIR . 'uploads' . DS . 'images' . DS . $city['alias'] . DS . 'firms' . DS . 'logo' . DS . 'normal' . DS;
-                if(!file_exists($normal_dir))mkdir($normal_dir,777,true);
+                if(!file_exists($normal_dir))mkdir($normal_dir,0777,true);
                 $mini_dir = ROOT_DIR . 'uploads' . DS . 'images' . DS . $city['alias'] . DS . 'firms' . DS . 'logo' . DS . 'mini' . DS;
-                if(!file_exists($mini_dir))mkdir($mini_dir,777,true);
+                if(!file_exists($mini_dir))mkdir($mini_dir,0777,true);
 
                 $image = new image_module();
                 $image->load(ROOT_DIR . 'uploads' . DS . 'temp' . DS . $_POST['image']);
@@ -263,36 +264,40 @@ class firms_controller extends controller
                     $row['phone'] = $v['phone'];
                     $row['type'] = 0;
                     $row['cdate'] = $date;
-                    $xml = new SimpleXMLElement(@file_get_contents('http://geocode-maps.yandex.ru/1.x/?geocode='.$city['name'].'+'.str_replace(' ', '+',$v['street']).'+'.str_replace(' ', '+',$v['building']).''));
-                    $address = $xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
-                    if($address)
+                    $geocode = file_get_contents('http://geocode-maps.yandex.ru/1.x/?geocode='.$city['name'].'+'.str_replace(' ', '+',$v['street']).'+'.str_replace(' ', '+',$v['building']).'');
+                    if($geocode)
                     {
-                        $f_building = $this->tools->filterBuildings($v['building']);
-                        $arr = explode(', ',$address);
-                        $street = trim(str_replace('улица', '', $arr[0]));
-                        $building = is_numeric($f_building) && $arr[1] != $f_building ? $f_building : $arr[1];
-                        $_POST['address'][$k]['street'] = $street;
-                        $_POST['address'][$k]['building'] = $building;
+                        $xml = new SimpleXMLElement($geocode);
+                        $address = $xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
+                        if($address)
+                        {
+                            $f_building = $this->tools->filterBuildings($v['building']);
+                            $arr = explode(', ',$address);
+                            $street = trim(str_replace('улица', '', $arr[0]));
+                            $building = is_numeric($f_building) && $arr[1] != $f_building ? $f_building : $arr[1];
+                            $_POST['address'][$k]['street'] = $street;
+                            $_POST['address'][$k]['building'] = $building;
+                        }
+                        $pos = $xml->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+                        if($pos)
+                        {
+                            $arr = explode(' ', $pos);
+                            $row['longitude'] = $arr[0];
+                            $row['latitude'] = $arr[1];
+                        }
                     }
-                    $pos = $xml->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
-                    if($pos)
+                    if($streets_buildings[$_POST['address'][$k]['street']])
                     {
-                        $arr = explode(' ', $pos);
-                        $row['longitude'] = $arr[0];
-                        $row['latitude'] = $arr[1];
-                    }
-                    if($streets_buildings[$street])
-                    {
-                        $row['id_street'] = $streets_buildings[$street]['id'];
-                        if($streets_buildings[$street]['buildings'][$building])
-                            $row['id_building'] = $streets_buildings[$street]['buildings'][$building]['id_building'];
+                        $row['id_street'] = $streets_buildings[$_POST['address'][$k]['street']]['id'];
+                        if($streets_buildings[$_POST['address'][$k]['street']]['buildings'][$_POST['address'][$k]['building']])
+                            $row['id_building'] = $streets_buildings[$_POST['address'][$k]['street']]['buildings'][$_POST['address'][$k]['building']]['id_building'];
                         else
-                            $row['id_building'] = $building_model->insert(array('name' => $building, 'id_street' => $row['id_street'], 'cdate' => $date));
+                            $row['id_building'] = $building_model->insert(array('name' => $_POST['address'][$k]['building'], 'id_street' => $row['id_street'], 'cdate' => $date));
                     }
                     else
                     {
-                        $row['id_street'] = $str_model->insert(array('name' => $street, 'cdate' => $date));
-                        $row['id_building'] = $building_model->insert(array('name' => $building, 'id_street' => $row['id_street'], 'cdate' => $date));
+                        $row['id_street'] = $str_model->insert(array('name' => $_POST['address'][$k]['street'], 'cdate' => $date));
+                        $row['id_building'] = $building_model->insert(array('name' => $_POST['address'][$k]['building'], 'id_street' => $row['id_street'], 'cdate' => $date));
                     }
                     $id_address_group = $address_groups_model->insert($row);
                     $wd = array();

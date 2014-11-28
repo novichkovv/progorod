@@ -64,6 +64,78 @@ class firms_model extends model
         return $firm;
     }
 
+    public function getFirmForEdition($id)
+    {
+        $stm = $this->pdo->prepare('
+        SELECT
+            f.id,
+            f.name,
+            f.id_subdivision,
+            f.short_description,
+            f.site,
+            f.description,
+            ag.id id_address,
+            ag.phone,
+            s.name street,
+            s.id id_street,
+            b.name building,
+            b.id id_building,
+            w.id id_workday,
+            w.always,
+            w.daily,
+            w.weekday,
+            w.work_from,
+            w.work_to,
+            m.id id_mall,
+            m.name mall_name,
+            m.short_description mall_short,
+            m2.id ex_id_mall,
+            m2.name ex_mall_name,
+            m2.short_description ex_mall_short
+
+        FROM
+            firms f
+        JOIN
+            address_groups ag ON ag.id_firm = f.id AND ag.type = 0
+        JOIN
+            streets s ON ag.id_street = s.id
+        JOIN
+            buildings b ON b.id = ag.id_building
+        JOIN
+            workdays_groups wg ON wg.id_address_group = ag.id
+        JOIN
+            workdays w ON wg.id_workday = w.id
+        LEFT JOIN
+            malls m ON ag.id_mall = m.id
+        LEFT JOIN
+            address_groups ag2 ON ag2.id_street = s.id AND ag2.id_building = b.id AND ag2.type = 1 AND ag2.id_firm != ag.id_mall
+        LEFT JOIN
+            malls m2 ON m2.id = ag2.id_firm
+        WHERE
+            f.id = :id
+        ORDER by ag.id, w.weekday
+        ');
+        $tmp = $this->get_all($stm, array('id' => $id));
+        $firm = array();
+        foreach($tmp as $k => $v)
+        {
+            foreach($v as $key => $row)
+                if(in_array($key, array('id','name','id_subdivision','short_description','description','site')))
+                    $firm[$key] = $row;
+                elseif(in_array($key,array('always','daily','weekday','work_from','work_to')))
+                {
+                    $firm['address'][$v['id_address']]['workdays'][$v['id_workday']][$key] = $row;
+                }
+                elseif(in_array($key, array('ex_id_mall', 'ex_mall_name', 'ex_mall_short')) && $row)
+                {
+                    $firm['address'][$v['id_address']]['malls'][$v['id_mall2']][$key] = $row;
+                }
+                else
+                    $firm['address'][$v['id_address']][$key] = $row;
+        }
+        return $firm;
+    }
+
     public function getUserFirms($creator,$limit)
     {
         $stm = $this->pdo->prepare('

@@ -95,7 +95,7 @@ $(document).ready(function()
                 {
                     $(".street-input").last().attr('disabled', 'disabled');
                 }
-                $(button).parent().parent().remove();
+                $(button).parent().remove();
 
             }
         };
@@ -119,11 +119,9 @@ $(document).ready(function()
         $(this).closest('.panel').remove();
         var group = $(".address-group");
         $(group).last().append('' +
-            '<div class="row">' +
-            '   <div class="col-md-12">' +
-            '       <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>' +
-            ( $(group).length > 1 ? '       <button class="btn btn-sm btn-warning close-address-group" type="button">Отменить</button>' : '') +
-            '   </div> ' +
+            '<div class="row text-center">' +
+            '     <button class="btn btn-sm btn-success add-address-group" type="button">Добавить еще адрес</button>' +
+            ( $(group).length > 1 ? ' <button class="btn btn-sm btn-warning close-address-group" type="button">Отменить</button>' : '') +
             '</div> ');
     });
     $(body).on('click',".delete-address-group", function()
@@ -134,9 +132,15 @@ $(document).ready(function()
     $(body).on('click', '#delete_address_btn', function()
     {
         $("#" + $(this).data('address')).html('');
-        $("#" + $(this).data('address')).parent().hide();
+        $("#" + $(this).data('address')).parent().parent().hide();
         if($(".delete-address-group").length == 1)
+        {
             $(".delete-address-group").remove();
+        }
+        if($(".close-address-group").length == 1)
+        {
+            $(".close-address-group").remove();
+        }
     });
     suggested.callback = function(input)
     {
