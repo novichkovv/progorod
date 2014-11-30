@@ -39,6 +39,18 @@ class common_controller extends controller
                 }
             }
         }
-        $this->t->assign('sidebar', $sidebar);
+        $this->system->sidebar = $sidebar;
+        if($this->system->city)
+        {
+            $comments_model = new comments_model('firm_comments', $this->system->city['alias']);
+            $comments = $comments_model->getNewComments();
+            $params = array(
+                array(
+                    'key' => 'badge',
+                    'value' => count($comments)
+                )
+            );
+            $this->editSidebar('comments', $params);
+        }
     }
 }

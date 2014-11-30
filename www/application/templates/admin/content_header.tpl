@@ -30,13 +30,19 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 {foreach from=$sidebar item=bar}
-                    <li>
-                        <a href="{if !$bar.children}{$smarty.const.SITE_DIR}{$bar.alias}{else}#{/if}">{$bar.title}</a>
+                    <li {if $bar.alias eq $system.alias}class="active"{/if}>
+                        <a href="{if !$bar.children}{$smarty.const.SITE_DIR}{if $system.city}{$system.city.alias}/{/if}{$bar.alias}{else}#{/if}">
+                            {if $bar.badge}<span class="badge">{$bar.badge}</span> {/if}
+                            {$bar.title}
+                        </a>
                         {if $bar.children}
                             <ul class="nav nav-sidebar sidebar-second closed">
                                 {foreach from=$bar.children item=child}
                                     <li>
-                                        <a href="{$smarty.const.SITE_DIR}{$child.alias}">{$child.title}</a>
+                                        <a href="{$smarty.const.SITE_DIR}{if $system.city}{$system.city.alias}/{/if}{$child.alias}">
+                                            {if $child.badge}<span class="badge">{$child.badge}</span> {/if}
+                                            {$child.title}
+                                        </a>
                                     </li>
                                 {/foreach}
                             </ul>

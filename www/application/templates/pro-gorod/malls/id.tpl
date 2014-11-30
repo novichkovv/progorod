@@ -22,172 +22,81 @@
             <div class="tab-pane fade active in" id="firms">
                 <div class="container">
                     <div class="row">
-                        {foreach from=$firms item=firm}
-                            <div class="col-sm-3">
-                                <img src="{$smarty.const.SITE_DIR}uploads/images/{$system.city.alias}/firms/logo/mini/{$firm.id}.jpg" />
-                            </div>
-                        {/foreach}
-                    </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
-                            <div class="form-group">
-                                <textarea id="comment_textarea" class="form-control" rows="4" placeholder="Напишите свой отзыв"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-                            <input type="text" class="form-control" placeholder="Имя" />
-                            <br>
-                            <button class="btn btn-info">Сохранить</button>
-                        </div>
+                        {*{foreach from=$firms item=firm}*}
+                            {*<div class="col-sm-3">*}
+                                {*<img src="{$smarty.const.SITE_DIR}uploads/images/{$system.city.alias}/firms/logo/mini/{$firm.id}.jpg" />*}
+                            {*</div>*}
+                        {*{/foreach}*}
                     </div>
                 </div>
-                </div>
-            </div>
-
-            <div class="row">
-
             </div>
             <div class="tab-pane fade" id="profile">
-                <p></p></div>
+
+            </div><!--profile tab -->
             <div class="tab-pane fade" id="comments">
                 <div class="container">
-
                     <div class="row">
-                        <div class="comments">
-                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="comment">
-                                    <div class="comment-container">
-                                        <img src="{$smarty.const.SITE_DIR}images/delimiter-gray.png"><br>
-                                        У нас в Ставрополе 3 Эльдорадо, и в один из них я ходила недавно как тайный покупатель с целью проверить продавцов данного магазина на качество обслуживания. Мне нужно &rarr;
-                                    </div>
-                                    <div class="comment-stripe"></div>
-                                <span class="comment-signature">
-                                    29 апрель, 2014 13:23</span>
-                                </div>
+                        {if !$comments}
+                            <div class="col-xs-offset-2">
+                                <h3>Отзывов нет. <small>Оставьте первый отзыв.</small></h3>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="comment">
-                                    <div class="comment-container">
-                                        <img src="{$smarty.const.SITE_DIR}images/delimiter-gray.png"><br>
-                                        Очень часто убеждаюсь, что обслуживание покупателей у нас далеко не на высоте. Несколько раз посещал магазины торговой сети "Эльдорадо" в Архангельске у городского рынка. Прекрасные большие торговые площади. Стою у понравившегося <a href="">&rarr;</a>
+                        {else}
+                            {foreach from=$comments item="comment"}
+                                <div class="col-sm-12 col-md-11 col-lg-10">
+                                    <div class="comment">
+                                        <div class="comment-container">
+                                            <div class="hidden-xs col-sm-3 col-md-2">
+                                                <img src="{$smarty.const.SITE_DIR}images/images1.jpg"  style="max-height: 120px;"/><br>
+                                                <div class="text-center comment-name">{$comment.name}</div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-9 col-md-10">
+                                                <img src="{$smarty.const.SITE_DIR}images/delimiter-gray.png"><br>
+                                                {$comment.text}
+                                            </div>
+                                        </div>
+                                        <div class="comment-stripe">
+                                        </div>
+                                    <span class="comment-signature">
+                                        {$comment.date}
+                                    </span>
                                     </div>
-                                    <div class="comment-stripe"></div>
-                                <span class="comment-signature">
-                                    29 апрель, 2014 13:23</span>
                                 </div>
-                            </div>
-                            {*</div><div class="col-md-4 col-sm-6 col-xs-12">*}
-                            {*<div class="comment">*}
-                            {*<div class="comment-container">*}
-                            {*<img src="{$smarty.const.SITE_DIR}images/delimiter-gray.png"><br>*}
-                            {*Мое знакомство с «Эльдорадо» началось более семи лет назад, когда недалеко от станции метро «Бибирево» в большом торговом центре открылся филиал этого магазина.*}
-                            {*<div class="text-right text-muted"><i>Евгений</i></div>*}
-                            {*</div>*}
-                            {*<div class="comment-stripe"></div>*}
-                            {*<span class="comment-signature">*}
-                            {*29 апрель, 2014 13:23</span>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*<div class="col-md-4 col-sm-6 col-xs-12">*}
-                            {*<div class="comment">*}
-                            {*<img src="{$smarty.const.SITE_DIR}images/comment.png" />*}
-                            {*<div class="comment-container">*}
-                            {*<div class="comment-stripe">*}
-                            {*</div>*}
-                            {*<div class="comment-content">*}
-                            {*<div class="comment-header text-muted">*}
-                            {*<span class="glyphicon glyphicon-comment"></span> <i><b>  15 апреля, 2014</b></i>*}
-                            {*</div>*}
-                            {*<div class="comment-body">*}
-                            {*У нас в Ставрополе 3 Эльдорадо, и в один из них я ходила недавно как тайный покупатель с целью проверить продавцов данного магазина на качество обслуживания. Мне нужно &rarr;</div>*}
-                            {*<div class="comment-footer">*}
-                            {*Евгений*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*<div class="col-md-4 col-sm-6 col-xs-12">*}
-                            {*<div class="comment">*}
-                            {*<img src="{$smarty.const.SITE_DIR}images/comment.png" />*}
-                            {*<div class="comment-container">*}
-                            {*<div class="comment-stripe">*}
-                            {*</div>*}
-                            {*<div class="comment-content">*}
-                            {*<div class="comment-header text-muted">*}
-                            {*<span class="glyphicon glyphicon-comment"></span> <i><b>  15 апреля, 2014</b></i>*}
-                            {*</div>*}
-                            {*<div class="comment-body">*}
-                            {*У нас в Ставрополе 3 Эльдорадо, и в один из них я ходила недавно как тайный покупатель с целью проверить продавцов данного магазина на качество обслуживания. Мне нужно &rarr;</div>*}
-                            {*<div class="comment-footer">*}
-                            {*Евгений*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*<div class="col-md-4 col-sm-6 col-xs-12">*}
-                            {*<div class="comment">*}
-                            {*<div class="comment-container">*}
-                            {*<div class="comment-stripe">*}
-                            {*</div>*}
-                            {*<div class="comment-content">*}
-                            {*<div class="comment-header text-muted">*}
-                            {*<span class="glyphicon glyphicon-comment"></span> <i><b>  15 апреля, 2014</b></i>*}
-                            {*</div>*}
-                            {*<div class="comment-body">*}
-                            {*У нас в Ставрополе 3 Эльдорадо, и в один из них я ходила недавно как тайный покупатель с целью проверить продавцов данного магазина на качество обслуживания. Мне нужно &rarr;</div>*}
-                            {*<div class="comment-footer">*}
-                            {*Евгений*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*<div class="col-md-4 col-sm-6 col-xs-12">*}
-                            {*<div class="comment">*}
-                            {*<div class="comment-container">*}
-                            {*<div class="comment-stripe">*}
-                            {*</div>*}
-                            {*<div class="comment-content">*}
-                            {*<div class="comment-header text-muted">*}
-                            {*<span class="glyphicon glyphicon-comment"></span> <i><b>  15 апреля, 2014</b></i>*}
-                            {*</div>*}
-                            {*<div class="comment-body">*}
-                            {*У нас в Ставрополе 3 Эльдорадо, и в один из них я ходила недавно как тайный покупатель с целью проверить продавцов данного магазина на качество обслуживания. Мне нужно &rarr;</div>*}
-                            {*<div class="comment-footer">*}
-                            {*Евгений*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                            {*</div>*}
-                        </div>
-
+                            {/foreach}
+                        {/if}
                     </div>
-
                     <div class="row">
-                        <div class="form-group">
-                            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
-                                <div class="form-group">
-                                    <textarea id="comment_textarea" class="form-control" rows="4" placeholder="Напишите свой отзыв"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-                                <input type="text" class="form-control" placeholder="Имя" />
-                                <br>
-                                <button class="btn btn-info">Сохранить</button>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <form method="post" name="comments_form" id="comments_form" action="">
+                                    <div class="text-danger col-sm-offset-3"><h3>{$warning}</h3></div>
+                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                                        <div class="form-group">
+                                            <textarea id="comment_textarea" name="comment_text" class="form-control" rows="4" placeholder="{if $smarty.session.client.name}{$smarty.session.client.name}, н{else}Н{/if}апишите свой отзыв" data-require="1">{$smarty.post.comment_text}</textarea>
+                                            <div class="error-require">Необходимо ввести текст отзыва</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-8">
+                                        {if $smarty.session.client.name}
+                                            <input type="hidden" name="name" value="{$smarty.session.client.name}">
+                                            {*<h4>{$smarty.session.client.name}</h4>*}
+                                        {else}
+                                            <input type="text" name="name" value="{$smarty.post.name}" class="form-control" placeholder="Имя" data-require="1" />
+                                            <div class="error-require">Введите Ваше имя</div>
+                                        {/if}
+                                        <br>
+                                        <input type="hidden" name="id_mall" value="{$mall.id}">
+                                        {if $user.id}
+                                            <input type="hidden" name="creator" value="{$user.id}">
+                                        {/if}
+                                        <button class="btn btn-info" type="submit" name="add_comment_btn" id="comment_btn">Сохранить</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-
-            </div>
-            <div class="tab-pane fade" id="dropdown2">
+                </div><!--container -->
+            </div><!--comments_tab -->
+            <div class="tab-pane fade" id="news">
                 <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
                 <p></p>
             </div>

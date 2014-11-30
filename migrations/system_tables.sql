@@ -161,3 +161,10 @@ INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `positio
 VALUES (
   'pro-gorod','torgovie_centri','malls_controller.php', 'Торговые центры', 0, 0
 );
+
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
+VALUES (
+  'admin','comments','comments_controller.php','Комментарии', 6, 0
+);
+
+ALTER TABLE cities ADD name_prepositional VARCHAR (255) NOT NULL AFTER name_genitive;

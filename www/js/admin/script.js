@@ -29,4 +29,32 @@ $(document).ready(function()
             $(this).find('ul').addClass('closed');
         }
     });
+
 });
+
+var ajax = function ajax(params)
+{
+    if(!params.values)params.values = new Object;
+    params.values.ajax = true;
+    params.values.action = params.action;
+    if(params.get_from_form)
+    {
+        $("#" + params.get_from_form + " input, #" + params.get_from_form + " textarea").each(function()
+        {
+            params.values[$(this).attr('name')] = $(this).val();
+        });
+    }
+    $.ajax(
+        {
+
+            url: params.ulr ? params.url : '',
+            type: 'post',
+            data: params.values,
+            success: function(result)
+            {
+                params.callback(result);
+                params = null;
+            }
+        }
+    )
+};
