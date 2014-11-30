@@ -14,6 +14,16 @@ $(document).ready(function()
             $("#hand_coords").slideDown();
         }
     });
+    var body = $('body');
+    $(body).on('click', '.comment-container', function()
+    {
+        $(this).find('.comment_arr').fadeToggle(1);
+        $(this).find('.comment_hidden').fadeToggle();
+    });
+    $(body).on('click', '.more_comments', function()
+    {
+
+    });
 });
 
 function getPosition(position)
@@ -40,3 +50,4 @@ function errorPosition()
 {
 
 }
+

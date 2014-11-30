@@ -129,7 +129,26 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="delete_firm_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Удаление фирмы</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы уверены, что хотите удалить фирму? Все данные можно будет восстановить</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post" action="">
+                            <input type="hidden" name="id_firm" value="{$firm.id}">
+                            <button type="submit" class="btn btn-primary" name="delete_firm_btn">Да</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Нет</button>
+                        </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <div class="row">
 
         </div>

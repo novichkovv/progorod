@@ -43,6 +43,9 @@ class cities_controller extends controller
                     'name_genitive' => array(
                         'label' => 'Название в родительном падеже',
                     ),
+                    'name_prepositional' => array(
+                        'label' => 'Название в предложном падеже падеже',
+                    ),
                     'keywords' => array(
                         'type' => 'textarea',
                         'label' => 'Ключевые слова',

@@ -7,24 +7,10 @@
  */
 class tools_module
 {
-    public $weekdays = array(
-        'mon' => 'Пн',
-        'tue' => 'Вт',
-        'wed' => 'Ср',
-        'thi' => 'Чт',
-        'fri' => 'Пт',
-        'sat' => 'Сб',
-        'sun' => 'Вс'
-    );
-    public $simple_weekdays = array(
-        'mon',
-        'tue',
-        'wed',
-        'thi',
-        'fri',
-        'sat',
-        'sun'
-    );
+    public $weekdays = array('mon' => 'Пн','tue' => 'Вт','wed' => 'Ср','thi' => 'Чт','fri' => 'Пт','sat' => 'Сб','sun' => 'Вс');
+    public $simple_weekdays = array('mon','tue','wed','thi','fri','sat','sun');
+    public $months_rus = array('01' => "Январь",'02' => "Февраль",'03' => "Март",'04' => "Аперль",'05' => "Май",'06' => "Июнь",'07' => "Июль",'08' => "Август",'09' => "Сентябрь",'10' => "Октябрь",'11' => "Ноябрь",'12' => "Декабрь");
+    public $months_rus_genitive = array('01' => "Января",'02' => "Февраля",'03' => "Марта",'04' => "Аперля",'05' => "Мая",'06' => "Июня",'07' => "Июля",'08' => "Августа",'09' => "Сентября",'10' => "Октября",'11' => "Ноября",'12' => "Декабря");
     public function idArray($result = array())
     {
         $res = array();

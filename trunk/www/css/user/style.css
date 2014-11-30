@@ -266,10 +266,11 @@ body {
 }
 .firms_list_img_container {
     height: 100px !important;
-    width: 250px;
+    width: 250px !important;
 }
 .firms_list_img_container .mask {
     height: 100px !important;
+    max-width: 250px;
 }
 @media screen and (max-width: 1200px) {
     #firm_logo img{

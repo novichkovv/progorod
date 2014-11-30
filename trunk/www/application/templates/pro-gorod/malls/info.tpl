@@ -1,4 +1,5 @@
 {*{$firm.address|@print_r}*}
+{if $smarty.get.id}
 <div class="row firm_info">
     <div id="firm_logo">
         <div class="col-md-7">
@@ -59,3 +60,6 @@
         <h1 class="wow slideInLeft" ><span style="color: #31b0d5">{$mall.name}</span>  <small class="wow slideInRight" data-wow-delay="0.3s">{$mall.short_description}</small></h1>
     </div>
 </div>
+{else}
+    {include $smarty.const.TEMPLATE_DIR|cat:$system.template_folder|cat:"list.tpl"}
+{/if}

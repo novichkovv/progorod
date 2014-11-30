@@ -45,6 +45,8 @@ class firms_model extends model
         LEFT JOIN malls m ON ag.id_mall = m.id
         WHERE
             f.id = :id
+        AND
+            f.hidden = 0
         ORDER by ag.id, w.weekday
         ');
         $tmp = $this->get_all($stm, array('id' => $id));
@@ -145,6 +147,8 @@ class firms_model extends model
             firms
         WHERE
             creator = :creator
+        AND
+            hidden = 0
         LIMIT '. $limit.'
         ');
         $tmp = $this->get_all($stm, array('creator' => $creator));
@@ -154,8 +158,8 @@ class firms_model extends model
     public function countSubdivisionsFirms($id_subdivision = false)
     {
         $stm = $this->pdo->prepare('
-        select count(id) count, id_subdivision from firms group by id_subdivision
-        ' . ( $id_subdivision ? 'WHERE id_subdivision = :id_subdivision' :'' ) . '
+        select count(id) count, id_subdivision from firms WHERE hidden = 0
+        ' . ( $id_subdivision ? 'AND  id_subdivision = :id_subdivision' :'' ) . ' group by id_subdivision
         ');
         if($id_subdivision)
         {
@@ -240,10 +244,54 @@ class firms_model extends model
         JOIN
             workdays w2
             ON w2.id = wg2.id_workday' : '' ) . '
-        ' . ($params['workdays'] ? 'WHERE ' . $term : '') . '
+        WHERE
+            f.hidden = 0
+        ' . ($params['workdays'] ? 'AND ' . $term : '') . '
         ORDER BY ' . ( $params['location'] ? 'dist,' : '' ) . ' f.rating, w.id, w2.id
                 ');
         $data['id_subdivision'] = $params['id_subdivision'];
         return $this->get_all($stm, $data);
+    }
+
+    public function deleteFirmAddresses($id_firm)
+    {
+        if(!$id_firm)return;
+        $address_groups = $this->get_all($this->pdo->prepare('SELECT id FROM address_groups WHERE id_firm = :id_firm AND type = "0"'), array('id_firm' => $id_firm));
+        if($address_groups)
+        {
+            $arr = [];
+            $wd = [];
+            $prep = null;
+            foreach($address_groups as $v)
+            {
+                $arr[] = '?';
+                $wd[] = $v['id'];
+            }
+            if($arr)$prep = implode(',',$arr);
+            $workdays = $this->get_all($this->pdo->prepare('SELECT id_workday FROM workdays_groups WHERE id_address_group IN (' . $prep . ')'), $wd);
+            if($workdays)
+            {
+                $arr = [];
+                $wd = [];
+                $prep = null;
+                foreach($workdays as $v)
+                {
+                    $arr[] = '?';
+                    $wd[] = $v['id'];
+                }
+                if($arr)$prep = implode(',',$arr);
+                $stm = $this->pdo->prepare('DELETE FROM workdays WHERE id IN(' . $prep . ')');
+                $stm->execute($wd);
+                $stm = $this->pdo->prepare('DELETE FROM workdays_groups WHERE id_workday IN(' . $prep . ')');
+                $stm->execute($wd);
+                $stm = $this->pdo->prepare('DELETE FROM address_groups WHERE id_firm = :id_firm AND type = "0"');
+                $stm->execute(array('id_firm' => $id_firm));
+            }
+        }
+    }
+
+    public function deleteFirm()
+    {
+
     }
 }

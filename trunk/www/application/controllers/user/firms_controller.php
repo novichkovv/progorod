@@ -24,7 +24,7 @@ class firms_controller extends controller
         elseif(count($cities) == 1)$this->city = $cities[0];
         else
         {
-           if(in_array($this->city, $cities))
+           if(in_array($this->system->city, $cities))
                $this->city = $this->system->city;
            else
                $this->city = $cities[0];
@@ -36,7 +36,21 @@ class firms_controller extends controller
             $_GET['page'] ? $page = $_GET['page'] : $page = 1;
             $firms = $firms_model->getUserFirms($this->user['id'], $page * 10 - 10 . ',10');
             $this->t->assign('firms', $firms);
+            if(isset($_POST['delete_firm_btn']))
+            {
+                if($firms_model->getById($_POST['id_firm'])['creator'] == $this->user['id'])
+                {
+                    $row = array();
+                    $row['id'] = $_POST['id_firm'];
+                    $row['mdate'] = date('Y-m-d H:i:s');
+                    $row['hidden'] = 1;
+                    $firms_model->insert($row);
+                    header('Location: ?');
+                    exit;
+                }
+            }
         }
+
         $this->t->assign('user_cities', $cities);
         $this->t->assign('user_city', $this->city);
         $this->add_firm();
@@ -173,7 +187,7 @@ class firms_controller extends controller
             $cities = $this->tools->idArray($cities_model->getAll());
             $divisions_model = new default_model('subdivisions');
             $subdivisions = $this->tools->idArray($divisions_model->getAll());
-
+            $address_groups_model = new address_groups_model('address_groups',$city['alias']);
             $warning = false;
             if(!isset($_POST['city']) || !array_key_exists($_POST['city'], $cities))
                 $warning = 'необходимо выбрать город';
@@ -204,13 +218,12 @@ class firms_controller extends controller
                 return;
             }
             $date = date('Y-m-d H:i:s');
-            $firms_model = new default_model('firms', $city['alias']);
-            $address_groups_model = new address_groups_model('address_groups',$city['alias']);
+            $firms_model = new firms_model('firms', $city['alias']);
             $row = array();
             if($_POST['id_firm'])
             {
                 $row['id'] = $_POST['id_firm'];
-                $address_groups_model->deleteFirmAddresses($_POST['id_firm']);
+                $firms_model->deleteFirmAddresses($_POST['id_firm']);
             }
             $row['id_subdivision'] = $_POST['subdivision'];
             $row['id_net'] = $_POST['id_net'];
@@ -218,8 +231,14 @@ class firms_controller extends controller
             $row['short_description'] = $_POST['short_description'];
             $row['description'] = $_POST['description'];
             $row['site'] = $_POST['site'];
-            $row['creator'] = $_POST['id_user'];
-            $row['cdate'] = $date;
+            if(!$_POST['id_firm'])
+            {
+                $row['creator'] = $_POST['id_user'];
+                $row['cdate'] = $date;
+            }
+            else
+                $row['mdate'] = $date;
+
             if($id_firm = $firms_model->insert($row))
             {
                 $streets_model = new cities_model('',$city['alias']);

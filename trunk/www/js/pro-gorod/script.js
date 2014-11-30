@@ -1,6 +1,7 @@
 $ = jQuery.noConflict();
 $(document).ready(function()
 {
+    var body = $("body");
     $('[data-toggle=offcanvas]').click(function () {
         $('.row-offcanvas').toggleClass('active')
     });
@@ -17,15 +18,39 @@ $(document).ready(function()
         });
         $(this).parent('.tab-button').addClass('act');
     });
-    $('body').on('click', ".additional_address_btn", function()
+    $(body).on('click', ".additional_address_btn", function()
     {
         $(this).slideUp();
         $(".additional-addresses").slideDown();
     });
-    $('body').on('click', ".additional_address_hide_btn", function()
+    $(body).on('click', ".additional_address_hide_btn", function()
     {
         $(".additional_address_btn").slideDown();
         $(".additional-addresses").slideUp();
+    });
+    $(body).on("click", ".more_entities", function()
+    {
+        var container = $(this).closest(".entity_container");
+        var limit = $(this).attr('data-limit');
+        var action = $(this).attr('data-action');
+        var button = $(this).parent();
+        $(button).html('<img src="http://' + location.hostname + '/images/main/preloader28.GIF" />');
+        var start = $(container).find(".entity").length;
+        var params = {
+            'action': action,
+            'values': {
+                start: start,
+                limit: limit
+            },
+            callback: function(msg)
+            {
+                $(button).html('');
+                $(container).append(msg);
+                var content = $(".entity_content");
+                $(content).slideDown();
+            }
+        };
+        ajax(params);
     });
 
 });
@@ -66,6 +91,7 @@ var validate = function validate(form_id)
         }
     });
     return(validate);
+
 };
 var ajax = function ajax(params)
 {

@@ -18,6 +18,7 @@ class system_module
     public $log = array();
     public $script = array();
     public $style = array();
+    public $sidebar;
     function __construct()
     {
         $route = isset($_REQUEST['route']) ? trim($_REQUEST['route'], "/") : '';

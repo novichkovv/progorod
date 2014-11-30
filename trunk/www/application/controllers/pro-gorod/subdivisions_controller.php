@@ -9,10 +9,10 @@ class subdivisions_controller extends controller
 {
     public function init()
     {
+        $this->system->script = array('subdivisions');
         if($_GET['id'])return;
         if($_SESSION['client']['location'])$this->checkLocationData();
         $this->t->assign('location',$_SESSION['client']['location']);
-        $this->system->script = array('subdivisions');
         if($_GET['id'])return;
         $subdivisions_model = new subdivisions_model();
         $subdivision = $subdivisions_model->getSubdivisionsWithRoute(false, $this->system->parts[0]);
@@ -57,7 +57,6 @@ class subdivisions_controller extends controller
     }
     public function id()
     {
-
         $divisions_model = new divisions_model();
         $divisions = $divisions_model->getFullDivisions();
         $firms_model = new firms_model('firms', $this->system->city['alias']);
@@ -69,14 +68,17 @@ class subdivisions_controller extends controller
         }
         $this->t->assign('firm',$firm);
         $comments_model = new default_model('firm_comments', $this->system->city['alias']);
-        $tmp = $comments_model->getByField('id_firm', $firm['id'], true, 3);
+        $tmp = $comments_model->getByField('id_firm', $firm['id'], true, 'cdate DESC','1');
+        $comments_count = $comments_model->countByField('id_firm', $firm['id']);
         $comments = array();
         foreach($tmp as $k => $v)
         {
             $comments[$k]['name'] = $v['name'];
-            $comments[$k]['text'] = mb_substr($v['text'], 0, 300, 'utf-8') . ( mb_strlen($v['text']) > 300 ? ' &rarr;' : '');
-            $comments[$k]['date'] = date('d M, y H:i', strtotime($v['cdate']));
+            $comments[$k]['text'] = mb_strlen($v['text']) > 400 ? mb_substr($v['text'], 0, 300, 'utf-8') . ( mb_strlen($v['text']) > 400 ? '<span class="comment_arr"> &rarr;</span><span class="comment_hidden">' .mb_substr($v['text'], 300, null, 'utf-8'). '</span> ' : '') : $v['text'];
+            $str_date = strtotime($v['cdate']);
+            $comments[$k]['date'] = date('d ', $str_date). $this->tools->months_rus_genitive[date('m',$str_date)]. ',' . date(' Y H:i', strtotime($v['cdate']));
         }
+        $this->t->assign('comments_count', $comments_count);
         $this->t->assign('comments', $comments);
         $this->system->breadcrumbs = array(array(
             'title' => $firm['name'],
@@ -86,6 +88,7 @@ class subdivisions_controller extends controller
 
     public function handler()
     {
+        session_destroy();
         if(isset($_POST['add_comment_btn']))
         {
             $warning = false;
@@ -108,7 +111,7 @@ class subdivisions_controller extends controller
                 $model = new default_model('firm_comments', $this->system->city['alias']);
                 $model->insert($row);
                 $_SESSION['client']['name'] = $_POST['name'];
-                header('Location: ' . SITE_DIR . $_SERVER['REQUEST_URI']);
+                header('Location: ' . SITE_DIR . substr($_SERVER['REQUEST_URI'],1));
             }
         }
     }
@@ -125,6 +128,25 @@ class subdivisions_controller extends controller
                     'accuracy' => $_POST['accuracy'],
                     'timestamp' => $_POST['timestamp']
                 );
+                exit;
+            break;
+
+            case "more_comments":
+                $comments_model = new default_model('firm_comments', $this->system->city['alias']);
+                $tmp = $comments_model->getByField('id_firm', $_GET['id'], true, 'cdate DESC',$_POST['start'] . ',' . $_POST['limit']);
+                $comments_count = $comments_model->countByField('id_firm', $_GET['id']);
+                $comments = array();
+                foreach($tmp as $k => $v)
+                {
+                    $comments[$k]['name'] = $v['name'];
+                    $comments[$k]['text'] = mb_strlen($v['text']) > 400 ? mb_substr($v['text'], 0, 300, 'utf-8') . ( mb_strlen($v['text']) > 400 ? '<span class="comment_arr"> &rarr;</span><span class="comment_hidden">' .mb_substr($v['text'], 300, null, 'utf-8'). '</span> ' : '') : $v['text'];
+                    $str_date = strtotime($v['cdate']);
+                    $comments[$k]['date'] = date('d ', $str_date). $this->tools->months_rus_genitive[date('m',$str_date)]. ',' . date(' Y H:i', strtotime($v['cdate']));
+                }
+                $this->t->assign('comments_left', $comments_count - $_POST['start'] - $_POST['limit']);
+                $this->t->assign('comments', $comments);
+                $this->t->display(TEMPLATE_DIR . 'subdivisions/ajax/more_comments.tpl');
+                exit;
             break;
         }
     }

@@ -85,6 +85,10 @@ abstract class controller
             $style[] = SITE_DIR . 'css/' . PROJECT . '/' . $v . '.css';
         }
         $this->t->assign('style', $style);
+        if(get_class($this) != 'common_controller')
+        {
+            $this->t->assign('sidebar', $this->system->sidebar);
+        }
         $this->t->assign('log', $this->system->log);
 
     }
@@ -147,5 +151,33 @@ abstract class controller
         }
         $memcache_obj->close();
         exit;
+    }
+
+    protected function editSidebar($alias, array $params)
+    {
+        foreach($this->system->sidebar as $id => $v)
+        {
+            if($v['alias'] == $alias)
+            {
+                foreach($params as $param)
+                {
+                    $this->system->sidebar[$id][$param['key']] = $param['value'];
+                }
+                break;
+            }
+            elseif($v['children'])
+            {
+                foreach($v['children'] as $id_child => $child)
+                {
+                    if($child['alias'] == $alias)
+                    {
+                        foreach($params as $param)
+                        {
+                            $this->system->sidebar[$id]['children'][$id_child][$param['key']] = $param['value'];
+                        }
+                    }
+                }
+            }
+        }
     }
 }
