@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-24 00:40:26
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:08:17
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/system_header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:928930582546a10ad1ddc71-38466353%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1578530666547ca081169d52-52761200%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '928930582546a10ad1ddc71-38466353',
+  'nocache_hash' => '1578530666547ca081169d52-52761200',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10ad496d72_33122722',
   'variables' => 
   array (
     'system' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'src' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_547ca0815030b6_41456663',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a10ad496d72_33122722')) {function content_546a10ad496d72_33122722($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_547ca0815030b6_41456663')) {function content_547ca0815030b6_41456663($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 <head>
     <title><?php echo $_smarty_tpl->tpl_vars['system']->value['title'];?>

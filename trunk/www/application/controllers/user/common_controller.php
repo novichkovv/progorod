@@ -24,7 +24,8 @@ class common_controller extends controller
                 $sidebar[$v['parent']]['children'][$v['id']] = $v;
 
         }
-        $this->t->assign('sidebar', $sidebar);
+        $this->system->sidebar = $sidebar;
+        $this->t->assign('sidebar', $this->system->sidebar);
     }
     public function last()
     {

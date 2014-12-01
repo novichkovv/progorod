@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-24 18:39:08
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:07:37
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/workdays.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:13149771435473511c6b3762-30813097%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:764608765547ca0595fb1d5-58084625%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '13149771435473511c6b3762-30813097',
+  'nocache_hash' => '764608765547ca0595fb1d5-58084625',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_5473511cb5e140_61295396',
+  'unifunc' => 'content_547ca05993b3e0_78862474',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5473511cb5e140_61295396')) {function content_5473511cb5e140_61295396($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_547ca05993b3e0_78862474')) {function content_547ca05993b3e0_78862474($_smarty_tpl) {?>
 <?php if ($_smarty_tpl->tpl_vars['workdays']->value['always']) {?>Круглосуточно
 <?php } elseif ($_smarty_tpl->tpl_vars['workdays']->value['daily']) {?>
     Ежедневно <?php echo $_smarty_tpl->tpl_vars['workdays']->value['daily']['from'];?>

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-27 18:27:17
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:08:31
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/content.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1115247315546e2ae76a6e21-20618700%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1298874888547ca08f4894c4-72601533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1115247315546e2ae76a6e21-20618700',
+  'nocache_hash' => '1298874888547ca08f4894c4-72601533',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546e2ae7a3e8b3_29307645',
   'variables' => 
   array (
     'user_cities' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'firm' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_547ca08f923f37_05974111',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546e2ae7a3e8b3_29307645')) {function content_546e2ae7a3e8b3_29307645($_smarty_tpl) {?><?php if (!$_smarty_tpl->tpl_vars['user_cities']->value) {?>
+<?php if ($_valid && !is_callable('content_547ca08f923f37_05974111')) {function content_547ca08f923f37_05974111($_smarty_tpl) {?><?php if (!$_smarty_tpl->tpl_vars['user_cities']->value) {?>
 <div class="alert alert-info alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h3 class="text-info">

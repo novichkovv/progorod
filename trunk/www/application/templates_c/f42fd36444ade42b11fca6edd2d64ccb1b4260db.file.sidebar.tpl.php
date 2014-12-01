@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-21 00:42:44
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:08:18
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/sidebar.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2138739589546a10ad86e305-95730788%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:339587676547ca0823f3fa5-12221151%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2138739589546a10ad86e305-95730788',
+  'nocache_hash' => '339587676547ca0823f3fa5-12221151',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10ad88a759_63330816',
   'variables' => 
   array (
     'system' => 0,
@@ -24,8 +22,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'division' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_547ca0825e3fc9_00923836',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a10ad88a759_63330816')) {function content_546a10ad88a759_63330816($_smarty_tpl) {?><ul class="nav nav-list bs-docs-sidenav affix-top">
+<?php if ($_valid && !is_callable('content_547ca0825e3fc9_00923836')) {function content_547ca0825e3fc9_00923836($_smarty_tpl) {?><ul class="nav nav-list bs-docs-sidenav affix-top">
     <li class=""><a href="<?php echo @constant('SITE_DIR');?>
 <?php echo $_smarty_tpl->tpl_vars['system']->value['city']['alias'];?>
 /torgovie_centri/"><i class="icon-chevron-right"></i>Торговые центры</a></li>

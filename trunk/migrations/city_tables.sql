@@ -24,14 +24,11 @@ CREATE TABLE IF NOT EXISTS firms (
    rating FLOAT NOT NULL,
    votes INT NOT NULL,
    range_num INT NOT NULL,
+   hidden TINYINT NOT NULL,
+   mdate DATETIME NOT NULL,
    creator BIGINT NOT NULL,
    cdate DATETIME NOT NULL
 )ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-ALTER TABLE firms ADD `hidden` TINYINT NOT NULL AFTER `range_num`;
-ALTER TABLE firms ADD `mdate` DATETIME NOT NULL AFTER `hidden`;
-ALTER TABLE malls ADD `hidden` TINYINT NOT NULL AFTER `range_num`;
-ALTER TABLE malls ADD `mdate` DATETIME NOT NULL AFTER `hidden`;
 
 CREATE TABLE IF NOT EXISTS address_groups (
    id SERIAL PRIMARY KEY,
@@ -69,6 +66,8 @@ CREATE TABLE IF NOT EXISTS malls (
   rating FLOAT NOT NULL,
   votes INT NOT NULL,
   range_num INT NOT NULL,
+  hidden TINYINT NOT NULL,
+  mdate DATETIME NOT NULL,
   creator BIGINT NOT NULL,
   cdate DATETIME NOT NULL
 )ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -95,12 +94,12 @@ CREATE TABLE IF NOT EXISTS firm_comments (
   id_firm BIGINT UNSIGNED NOT NULL,
   name VARCHAR (255) NOT NULL,
   text TEXT NOT NULL,
+  status TINYINT NOT NULL,
   parent BIGINT NOT NULL,
   creator BIGINT NULL,
   cdate DATETIME NOT NULL
 )ENGINE=MyISAM,CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-ALTER TABLE firm_comments ADD status TINYINT NOT NULL AFTER text;
 
 CREATE TABLE IF NOT EXISTS mall_comments (
 id SERIAL PRIMARY KEY,
