@@ -62,7 +62,7 @@ class firms_controller extends controller
         }
         else
         {
-            if($_GET['id'])
+            if($_GET['id'] && !$_GET['add'])
             {
                 $firm = $firms_model->getFirmForEdition($_GET['id']);
                 $values = $firm;
@@ -449,19 +449,22 @@ class firms_controller extends controller
 
     public function id()
     {
-        $divisions_model = new divisions_model();
-        $firms_model = new firms_model('firms', $this->system->city['alias']);
-        $firm = $firms_model->getFirm($_GET['id']);
-        foreach($firm['address'] as $k=>$v)
+        if(!$_GET['add'])
         {
-            $firm['address'][$k]['workdays'] = $this->tools->parse_workdays($v['workdays']);
+            $firms_model = new firms_model('firms', $this->system->city['alias']);
+            $firm = $firms_model->getFirm($_GET['id']);
+            foreach($firm['address'] as $k=>$v)
+            {
+                $firm['address'][$k]['workdays'] = $this->tools->parse_workdays($v['workdays']);
 
+            }
+            $this->system->log[] = print_r($firm,1);
+            $this->t->assign('firm',$firm);
+            $this->system->breadcrumbs = array(array(
+                'title' => $firm['name'],
+                'alias' => $this->system->parts[0] . '/?id=' . $firm['id']
+            ));
         }
-        $this->t->assign('firm',$firm);
-        $this->system->breadcrumbs = array(array(
-            'title' => $firm['name'],
-            'alias' => $this->system->parts[0] . '/?id=' . $firm['id']
-        ));
     }
 
     public function ajax()

@@ -27,6 +27,8 @@ class malls_controller extends controller
             else
                 $this->city = $cities[0];
         }
+        $this->t->assign('user_cities', $cities);
+
         if($this->city)
         {
             $malls_model = new malls_model('malls', $this->city['alias']);
@@ -34,22 +36,125 @@ class malls_controller extends controller
             $_GET['page'] ? $page = $_GET['page'] : $page = 1;
             $malls = $malls_model->getUserMalls($this->user['id'], $page*10-10 . ',10');
             $this->t->assign('malls', $malls);
-        }
-        $this->t->assign('user_cities', $cities);
-        $this->t->assign('city', $this->city);
-        $this->add_mall();
-        if($_POST)
-        {
-            $values = $_POST;
-            if(count($values['address']) < 1)
-                $values['address'] = array(1);
-        }
-        else
-        {
-            $values['region'] = $this->system->city['id_region'];
-            $values['city'] = $this->system->city['id'];
-            if(count($values['address']) < 1)
-                $values['address'] = array(1);
+            $this->t->assign('user_city', $this->city);
+            $this->add_mall();
+            if($_POST)
+            {
+                $values = $_POST;
+                if(count($values['address']) < 1)
+                    $values['address'] = array(1);
+            }
+            else
+            {
+                if($_GET['id'] && $_GET['add'])
+                {
+                    $firm = $malls_model->getMallForEdition($_GET['id']);
+                    $this->system->log[] = print_r($firm,1);
+                    $values = $firm;
+                    $values['image'] = 1;
+                    $i = 0;
+                    foreach($values['address'] as $k => $v)
+                    {
+                        $values['address'][$i] = $v;
+                        foreach($v['workdays'] as $workdays)
+                        {
+                            if($workdays['always'] == 1)
+                            {
+                                $values['address'][$i]['workdays']['radio'] = '24';
+                            }
+                            elseif($workdays['daily'] == 1)
+                            {
+                                $values['address'][$i]['workdays']['radio'] = 'daily';
+                                $keys = array_keys($v['workdays']);
+                                if(count($v['workdays']) == 2)
+                                {
+
+                                    if($v['workdays'][$keys[0]]['work_to'] == '23:59:59')
+                                    {
+                                        $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
+                                        $to = explode(':', $v['workdays'][$keys[1]]['work_to']);
+
+                                    }
+                                    else
+                                    {
+                                        $from = explode(':', $v['workdays'][$keys[1]]['work_from']);
+                                        $to = explode(':', $v['workdays'][$keys[0]]['work_to']);
+                                    }
+
+                                }
+                                else
+                                {
+                                    $from = explode(':', $v['workdays'][$keys[0]]['work_from']);
+                                    $to = explode(':', $v['workdays'][$keys[0]]['work_to']);
+                                }
+                                $values['address'][$i]['workdays']['daily']['from']['hour'] = $from[0];
+                                $values['address'][$i]['workdays']['daily']['from']['minute'] = $from[1];
+                                $values['address'][$i]['workdays']['daily']['to']['hour'] = $to[0];
+                                $values['address'][$i]['workdays']['daily']['to']['minute'] = $to[1];
+                            }
+                            else
+                            {
+                                $values['address'][$i]['workdays']['radio'] = 'schedule';
+                                $workdays = array();
+                                foreach($v['workdays'] as $val)
+                                {
+                                    $workdays[$val['weekday']][] = $val;
+                                }
+                                foreach($workdays as $day => $val)
+                                {
+                                    $next_weekday = $day != 'sun'? $this->tools->simple_weekdays[array_keys($this->tools->simple_weekdays, $day)[0] + 1] : 'mon';
+                                    if(count($workdays[$next_weekday]) == 2)
+                                    {
+                                        if(count($val) == 1)
+                                        {
+                                            $from = explode(':', $val[0]['work_from']);
+                                        }
+                                        else
+                                        {
+                                            $from = $val[0]['work_from'] == '00:00:00' ? explode(':', $val[1]['work_from']) : explode(':', $val[0]['work_from']);
+                                        }
+                                        $to = $workdays[$next_weekday][0]['work_from'] == '00:00:00' ? explode(':', $workdays[$next_weekday][0]['work_to']) : explode(':', $workdays[$next_weekday][1]['work_to']);
+                                    }
+                                    else
+                                    {
+                                        if(count($val) == 1)
+                                        {
+                                            $from = explode(':', $val[0]['work_from']);
+                                            $to = explode(':', $val[0]['work_to']);
+
+                                        }
+                                        else
+                                        {
+                                            if($val[0]['work_from'] == '00:00:00')
+                                            {
+                                                $from = explode(':', $val[1]['work_from']);
+                                                $to = explode(':', $val[1]['work_to']);
+                                            }
+                                            else
+                                            {
+                                                $from = explode(':', $val[0]['work_from']);
+                                                $to = explode(':', $val[0]['work_to']);
+                                            }
+                                        }
+                                    }
+                                    $values['address'][$i]['workdays'][$day]['checked'] = true;
+                                    $values['address'][$i]['workdays'][$day]['from']['hour'] = $from[0];
+                                    $values['address'][$i]['workdays'][$day]['from']['minute'] = $from[1];
+                                    $values['address'][$i]['workdays'][$day]['to']['hour'] = $to[0];
+                                    $values['address'][$i]['workdays'][$day]['to']['minute'] = $to[1];
+                                }
+                            }
+                        }
+
+                        $i ++;
+                        unset($values['address'][$k]);
+                    }
+                }
+                $values['region'] = $this->system->city['id_region'];
+                $values['city'] = $this->system->city['id'];
+                if(count($values['address']) < 1)
+                    $values['address'] = array(1);
+            }
         }
         $this->t->assign('values', $values);
     }
@@ -280,6 +385,25 @@ class malls_controller extends controller
             }
         }
     }
+
+    public function id()
+    {
+        if(!$_GET['add'])
+        {
+            $malls_model = new malls_model('malls', $this->system->city['alias']);
+            $mall = $malls_model->getMall($_GET['id']);
+            $key = $mall['address']['id_address'];
+            $mall['address'] = array( $key => $mall['address']);
+            $mall['address'][$mall['address']['id_address']]['workdays'] = $this->tools->parse_workdays($mall['address'][$key]['workdays']);
+            $this->system->log[] = print_r($mall,1);
+            $this->t->assign('firm',$mall);
+            $this->system->breadcrumbs = array(array(
+                'title' => $mall['name'],
+                'alias' => $this->system->parts[0] . '/?id=' . $mall['id']
+            ));
+        }
+    }
+
     public function ajax()
     {
         switch($_REQUEST['action'])

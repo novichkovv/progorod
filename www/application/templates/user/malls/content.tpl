@@ -22,11 +22,16 @@
     <div class="col-xs-offset-1">
         {foreach from=$malls item=firm}
             <div class="row">
-                <h3><a href="">{$firm.name} <small>{$firm.short_description}</small></a></h3>
+                <h3><a href="{$smarty.const.SITE_DIR}{$user_city.alias}/malls/?id={$firm.id}">{$firm.name} <small>{$firm.short_description}</small></a></h3>
             </div>
             <div class="row">
                 <div class="col-xs-11 col-sm-6 firms_list_logo">
-                    <a href=""><img src="{$smarty.const.SITE_DIR}uploads/images/{$city.alias}/firms/logo/mini/{$firm.id}.jpg" alt="{$firm.name}" title="{$firm.name}" /></a>
+                    <div class="view view-first firms_list_img_container">
+                        <img  class="firms_list_img" src="{$smarty.const.SITE_DIR}uploads/images/{$user_city.alias}/malls/logo/mini/{$firm.id}.jpg" alt="{$firm.name}" title="{$firm.name}" /></a>
+                        <div class="mask">
+                            <a  class="info" href="{$smarty.const.SITE_DIR}{$user_city.alias}/malls/?id={$firm.id}">Перейти</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs-11 col-sm-5">
                     <div class="list-group">

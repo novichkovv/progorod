@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-28 20:03:50
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:08:35
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/firms/id.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:92527367054735050150014-29843132%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1050870760547ca09356f9c4-84298217%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0a66065b7ef8c73455c1ba03d896af39b6d1778b' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/firms/id.tpl',
-      1 => 1417122370,
+      1 => 1417380600,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '92527367054735050150014-29843132',
+  'nocache_hash' => '1050870760547ca09356f9c4-84298217',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_54735050178b64_10950410',
   'variables' => 
   array (
     'system' => 0,
@@ -25,8 +23,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'address' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_547ca093d8b366_05120162',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54735050178b64_10950410')) {function content_54735050178b64_10950410($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include '/var/www/pro-gorod.loc/www/libs/Smarty/libs/plugins/function.math.php';
+<?php if ($_valid && !is_callable('content_547ca093d8b366_05120162')) {function content_547ca093d8b366_05120162($_smarty_tpl) {?><?php if (!is_callable('smarty_function_math')) include '/var/www/pro-gorod.loc/www/libs/Smarty/libs/plugins/function.math.php';
 ?><div class="row firm_info">
     <div id="firm_logo">
         <div class="col-md-7">
@@ -192,7 +192,27 @@ $_smarty_tpl->tpl_vars['address']->_loop = true;
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="delete_firm_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Удаление фирмы</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы уверены, что хотите удалить фирму? Все данные можно будет восстановить</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post" action="">
+                            <input type="hidden" name="id_firm" value="<?php echo $_smarty_tpl->tpl_vars['firm']->value['id'];?>
+">
+                            <button type="submit" class="btn btn-primary" name="delete_firm_btn">Да</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Нет</button>
+                        </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <div class="row">
 
         </div>

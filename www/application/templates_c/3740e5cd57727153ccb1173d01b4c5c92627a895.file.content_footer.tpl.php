@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:13:49
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:08:18
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/content_footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1848400159546a10adc09879-85859204%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:90079902547ca082b16595-58875060%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1848400159546a10adc09879-85859204',
+  'nocache_hash' => '90079902547ca082b16595-58875060',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10adc50332_66082166',
+  'unifunc' => 'content_547ca082b5f544_26177463',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a10adc50332_66082166')) {function content_546a10adc50332_66082166($_smarty_tpl) {?><footer>
+<?php if ($_valid && !is_callable('content_547ca082b5f544_26177463')) {function content_547ca082b5f544_26177463($_smarty_tpl) {?><footer>
     <div class="footer-body">
         <div class="container">
             <div class="col-md-4">
