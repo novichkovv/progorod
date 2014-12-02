@@ -5,6 +5,7 @@ $(document).ready(function()
     group_select('division','subdivision');
     $(body).on('change', "select[name='city']", function()
     {
+        if($("input[name='check_firms']").val())return;
         if($(this).val() != '')
             $(".street-input").removeAttr('disabled');
         else
@@ -17,6 +18,7 @@ $(document).ready(function()
     });
     $(body).on('keyup', ".street-input", function()
     {
+        if($("input[name='check_firms']").val())return;
         var building_input = $(this).closest('.address-group').find(".building-input");
         if($(this).val() != '' )
             $(building_input).removeAttr('disabled');

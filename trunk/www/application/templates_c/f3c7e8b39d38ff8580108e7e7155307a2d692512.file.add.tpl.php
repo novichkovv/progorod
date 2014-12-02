@@ -1,32 +1,34 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-20 20:49:39
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-02 19:38:06
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/malls/add.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1663143964546e24c60846a8-80825039%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:520671236547dd9eae5d6d6-88687545%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'f3c7e8b39d38ff8580108e7e7155307a2d692512' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/malls/add.tpl',
-      1 => 1416505777,
+      1 => 1417538277,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1663143964546e24c60846a8-80825039',
+  'nocache_hash' => '520671236547dd9eae5d6d6-88687545',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546e24c7614942_06839964',
+  'unifunc' => 'content_547dd9ec377700_28331014',
   'variables' => 
   array (
     'warning' => 0,
+    'check_firms' => 0,
+    'values' => 0,
     'regions' => 0,
     'region' => 0,
-    'values' => 0,
     'cities' => 0,
     'id_region' => 0,
     'item' => 0,
     'city' => 0,
+    'user_city' => 0,
     'i' => 0,
     'hours' => 0,
     'hour' => 0,
@@ -39,60 +41,65 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546e24c7614942_06839964')) {function content_546e24c7614942_06839964($_smarty_tpl) {?><form action="" method="post" id="firm_form">
+<?php if ($_valid && !is_callable('content_547dd9ec377700_28331014')) {function content_547dd9ec377700_28331014($_smarty_tpl) {?><form action="" method="post" id="firm_form">
     <div class="row">
         <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-7 col-xs-10 col-xs-offset-1">
             <div class="row">
                 <div class="text-center text-danger"><h2><?php echo $_smarty_tpl->tpl_vars['warning']->value;?>
 </h2></div>
-                <div class="form-group select-group">
-                    <label>Город</label>
-                    <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
-                       data-content="Выберите область, а затем город, в котором находится ваш торговый ценр"></i>
-                    <div class="form-group">
-                        <select name="region" class="form-control" data-require="1">
-                            <option value="">Выберите область</option>
-                            <?php  $_smarty_tpl->tpl_vars['region'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['region']->_loop = false;
+                <?php if ($_smarty_tpl->tpl_vars['check_firms']->value) {?>
+                    <input type="hidden" name="city" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['city'];?>
+">
+                <?php } else { ?>
+                    <div class="form-group select-group">
+                        <label>Город</label>
+                        <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
+                           data-content="Выберите область, а затем город, в котором находится ваш торговый ценр"></i>
+                        <div class="form-group">
+                            <select name="region" class="form-control" data-require="1">
+                                <option value="">Выберите область</option>
+                                <?php  $_smarty_tpl->tpl_vars['region'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['region']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['regions']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['region']->key => $_smarty_tpl->tpl_vars['region']->value) {
 $_smarty_tpl->tpl_vars['region']->_loop = true;
 ?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['region']->value['id'];?>
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['region']->value['id'];?>
 " <?php if ($_smarty_tpl->tpl_vars['values']->value['region']==$_smarty_tpl->tpl_vars['region']->value['id']) {?>selected="selected"<?php }?>><?php echo $_smarty_tpl->tpl_vars['region']->value['name'];?>
 </option>
-                            <?php } ?>
-                        </select>
-                        <div class="error-require">
-                            Вы не выбрали область
+                                <?php } ?>
+                            </select>
+                            <div class="error-require">
+                                Вы не выбрали область
+                            </div>
                         </div>
-                    </div>
-                    <?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
+                        <?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
  $_smarty_tpl->tpl_vars['id_region'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['cities']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars['item']->value) {
 $_smarty_tpl->tpl_vars['item']->_loop = true;
  $_smarty_tpl->tpl_vars['id_region']->value = $_smarty_tpl->tpl_vars['item']->key;
 ?>
-                        <div class="form-group <?php if ($_smarty_tpl->tpl_vars['values']->value['region']!=$_smarty_tpl->tpl_vars['id_region']->value) {?>child_select<?php }?> region_select" id="region_children_<?php echo $_smarty_tpl->tpl_vars['id_region']->value;?>
+                            <div class="form-group <?php if ($_smarty_tpl->tpl_vars['values']->value['region']!=$_smarty_tpl->tpl_vars['id_region']->value) {?>child_select<?php }?> region_select" id="region_children_<?php echo $_smarty_tpl->tpl_vars['id_region']->value;?>
 ">
-                            <select class="form-control" <?php if ($_smarty_tpl->tpl_vars['values']->value['region']==$_smarty_tpl->tpl_vars['id_region']->value) {?>name="city"<?php }?>>
-                                <option value="">Выберите город</option>
-                                <?php  $_smarty_tpl->tpl_vars['city'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['city']->_loop = false;
+                                <select class="form-control" <?php if ($_smarty_tpl->tpl_vars['values']->value['region']==$_smarty_tpl->tpl_vars['id_region']->value) {?>name="city"<?php }?>>
+                                    <option value="">Выберите город</option>
+                                    <?php  $_smarty_tpl->tpl_vars['city'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['city']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['item']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['city']->key => $_smarty_tpl->tpl_vars['city']->value) {
 $_smarty_tpl->tpl_vars['city']->_loop = true;
 ?>
-                                    <option value="<?php echo $_smarty_tpl->tpl_vars['city']->value['id'];?>
+                                        <option value="<?php echo $_smarty_tpl->tpl_vars['city']->value['id'];?>
 " <?php if ($_smarty_tpl->tpl_vars['values']->value['city']==$_smarty_tpl->tpl_vars['city']->value['id']) {?>selected="selected" <?php }?>><?php echo $_smarty_tpl->tpl_vars['city']->value['name'];?>
 </option>
-                                <?php } ?>
-                            </select>
-                            <div class="error-require">
-                                Вы не выбрали город
+                                    <?php } ?>
+                                </select>
+                                <div class="error-require">
+                                    Вы не выбрали город
+                                </div>
                             </div>
-                        </div>
-                    <?php } ?>
-                </div>
+                        <?php } ?>
+                    </div>
+                <?php }?>
                 <br>
                 <div class="form-group">
                     <label>Логотип</label>
@@ -103,12 +110,17 @@ $_smarty_tpl->tpl_vars['city']->_loop = true;
                     <div class="row">
                         <div class="thumbnail">
                             <div class="preview">
-                                <?php if ($_POST['image']) {?>
+                                <?php if ($_smarty_tpl->tpl_vars['values']->value['image']&&$_smarty_tpl->tpl_vars['values']->value['image']!='1') {?>
                                     <img src="<?php echo @constant('SITE_DIR');?>
 uploads/temp/<?php echo $_POST['image'];?>
 " />
+                                <?php } elseif ($_GET['id']) {?>
+                                    <img src="<?php echo @constant('SITE_DIR');?>
+uploads/images/<?php echo $_smarty_tpl->tpl_vars['user_city']->value['alias'];?>
+/malls/logo/normal/<?php echo $_smarty_tpl->tpl_vars['values']->value['id'];?>
+.jpg" />
                                 <?php }?>
-                                <input type="hidden" name="image" value="<?php echo $_POST['image'];?>
+                                <input type="hidden" name="image" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['image'];?>
 " data-require="1" />
                             </div>
                             <div class="caption">
@@ -123,7 +135,7 @@ uploads/temp/<?php echo $_POST['image'];?>
                 </div>
                 <div class="form-group">
                     <label>Название</label>
-                    <input class="form-control" name="name" value="<?php echo $_POST['name'];?>
+                    <input class="form-control" name="name" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['name'];?>
 " data-require="1">
                     <div class="error-require">Необходимо ввести название фирмы</div>
                 </div>
@@ -132,14 +144,14 @@ uploads/temp/<?php echo $_POST['image'];?>
                     <i class="informer glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="top"
                        data-content="Два-три слова, описывающих специализацию торгового центра. Краткое описание ставится
                        рядом с названием центра для более точной идентификации. Пример: 'Торгово-развлекательный центр' или 'Строительный центр'"></i>
-                    <input class="form-control" name="short_description" value="<?php echo $_POST['short_description'];?>
+                    <input class="form-control" name="short_description" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['short_description'];?>
 "  data-require="1">
                     <div class="error-require">Необходимо ввести краткое описание фирмы</div>
                     <p class="help-block">Пример "Торгово-развлекательный центр"</p>
                 </div>
                 <div class="form-group">
                     <label>Web-сайт</label>
-                    <input class="form-control" name="site" value="<?php echo $_POST['site'];?>
+                    <input class="form-control" name="site" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['site'];?>
 ">
                 </div>
                 <hr>
@@ -158,17 +170,26 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
                                data-content="Адрес, телефон и часы работы центра."></i>
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <input type="text" placeholder="Улица" <?php if (!$_smarty_tpl->tpl_vars['values']->value['city']) {?>disabled="disabled"<?php }?> class="street-input form-control" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+                                    <input type="text" placeholder="Улица" <?php if (!$_smarty_tpl->tpl_vars['values']->value['city']||$_smarty_tpl->tpl_vars['check_firms']->value) {?>disabled="disabled"<?php }?> class="street-input form-control" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
 ][street]" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['street'];?>
 " autocomplete="OFF" data-require="1">
                                     <div class="error-require">Неодбходимо ввести улицу</div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="text" placeholder="Здание" <?php if (!$_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]) {?>disabled="disabled"<?php }?>class="building-input form-control" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+                                    <input type="text" placeholder="Здание" <?php if (!$_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]||$_smarty_tpl->tpl_vars['check_firms']->value) {?>disabled="disabled"<?php }?> class="building-input form-control" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
 ][building]" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['building'];?>
 " autocomplete="OFF" data-require="1">
                                     <div class="error-require">Неодбходимо ввести здание</div>
                                 </div>
+                                <?php if ($_smarty_tpl->tpl_vars['check_firms']->value) {?>
+                                    <input type="hidden" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+][street]" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['street'];?>
+">
+                                    <input type="hidden" name="address[<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+][building]" value="<?php echo $_smarty_tpl->tpl_vars['values']->value['address'][$_smarty_tpl->tpl_vars['i']->value]['building'];?>
+">
+                                    <input type="hidden" name="check_firms" value="1">
+                                <?php }?>
                             </div>
                             <div class="form-group">
                                 <label>Телефон</label>
@@ -355,7 +376,11 @@ $_smarty_tpl->tpl_vars['minute']->_loop = true;
         </div>
     </div>
     <div class="row text-center">
-        <input type="hidden" name="id_user" value="<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
+        <?php if ($_GET['id']) {?>
+            <input type="hidden" name="id" value="<?php echo $_GET['id'];?>
+">
+        <?php }?>
+        <input type="hidden" name="id_user" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['values']->value['creator'])===null||$tmp==='' ? $_smarty_tpl->tpl_vars['user']->value['id'] : $tmp);?>
 ">
         <div class="error-form">Не все поля заполнены правильно</div>
         <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">

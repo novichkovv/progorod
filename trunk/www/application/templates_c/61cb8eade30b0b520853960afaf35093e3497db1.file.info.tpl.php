@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-17 18:13:49
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-02 19:42:36
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/info.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:200269299546a10ad81b5c6-86902966%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2030846819547debfca01459-18955494%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '200269299546a10ad81b5c6-86902966',
+  'nocache_hash' => '2030846819547debfca01459-18955494',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a10ad860fd4_60332153',
+  'unifunc' => 'content_547debfca9d602_78959976',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a10ad860fd4_60332153')) {function content_546a10ad860fd4_60332153($_smarty_tpl) {?><div class="row firm_info">
+<?php if ($_valid && !is_callable('content_547debfca9d602_78959976')) {function content_547debfca9d602_78959976($_smarty_tpl) {?><div class="row firm_info">
     <div id="firm_logo">
         <div class="col-md-7">
 

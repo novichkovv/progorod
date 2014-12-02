@@ -37,7 +37,26 @@ class malls_controller extends controller
             $malls = $malls_model->getUserMalls($this->user['id'], $page*10-10 . ',10');
             $this->t->assign('malls', $malls);
             $this->t->assign('user_city', $this->city);
+            if(isset($_POST['delete_mall_btn']))
+            {
+                if($malls_model->getById($_POST['id_mall'])['creator'] == $this->user['id'])
+                {
+                    $row = array();
+                    $row['id'] = $_POST['id_mall'];
+                    $row['mdate'] = date('Y-m-d H:i:s');
+                    $row['hidden'] = 1;
+                    $malls_model->insert($row);
+                    header('Location: ?');
+                    exit;
+                }
+            }
             $this->add_mall();
+            if($_GET['id'])
+            {
+                $address_groups_model = new default_model('address_groups', $this->city['alias']);
+                $check_firms = $address_groups_model->getByField('id_mall', $_GET['id'], false, 1)['id'];
+                $this->t->assign('check_firms', $check_firms);
+            }
             if($_POST)
             {
                 $values = $_POST;
@@ -49,7 +68,6 @@ class malls_controller extends controller
                 if($_GET['id'] && $_GET['add'])
                 {
                     $firm = $malls_model->getMallForEdition($_GET['id']);
-                    $this->system->log[] = print_r($firm,1);
                     $values = $firm;
                     $values['image'] = 1;
                     $i = 0;
@@ -161,7 +179,7 @@ class malls_controller extends controller
     public function add()
     {
         $this->system->breadcrumbs = array(array(
-            'title' => 'Добавление центра',
+            'title' => ( $_GET['id'] ? 'Редактирование ' : 'Добавление ') . 'центра',
             'alias' => 'malls/?add=1'
         ));
         $regions_model = new default_model('regions');
@@ -181,6 +199,7 @@ class malls_controller extends controller
         if(isset($_POST['add_firm_btn']))
         {
             if(!$_POST['id_user'] == $this->user['id'])header('Location: ?');
+
             $cities_model = new default_model('cities');
             $city = $cities_model->getById($_POST['city']);
             $cities = $this->tools->idArray($cities_model->getAll());
@@ -212,16 +231,29 @@ class malls_controller extends controller
                 return;
             }
             $date = date('Y-m-d H:i:s');
-            $malls_model = new default_model('malls', $city['alias']);
+            $malls_model = new malls_model('malls', $city['alias']);
+            if($malls_model->getById($_POST['id'])['creator'] == $this->user['id'])
+            {
+                header('Location: ?');
+                exit;
+            }
             $row = array();
             $row['name'] = $_POST['name'];
             $row['short_description'] = $_POST['short_description'];
             $row['description'] = $_POST['description'];
             $row['site'] = $_POST['site'];
-            $row['creator'] = $_POST['id_user'];
-            $row['cdate'] = $date;
-            if(isset($_POST['id']))
+            if(!$_POST['id'])
+            {
+                $row['creator'] = $_POST['id_user'];
+                $row['cdate'] = $date;
+            }
+            else
+            {
+                $row['mdate'] = $date;
                 $row['id'] = $_POST['id'];
+                $malls_model->deleteMallAddresses($_POST['id']);
+            }
+
             if($id_mall = $malls_model->insert($row))
             {
                 $streets_model = new cities_model('',$city['alias']);
@@ -233,7 +265,7 @@ class malls_controller extends controller
                 $address_groups_model = new default_model('address_groups',$city['alias']);
 
                 $logo = ROOT_DIR . 'uploads' . DS . 'temp' . DS . $_POST['image'];
-                if(file_exists($logo))
+                if(file_exists($logo)  && $_POST['image'] != 1 )
                 {
                     $normal_dir = ROOT_DIR . 'uploads' . DS . 'images' . DS . $city['alias'] . DS . 'malls' . DS . 'logo' . DS . 'normal' . DS;
                     if(!file_exists($normal_dir))mkdir($normal_dir,0777,true);
@@ -259,36 +291,40 @@ class malls_controller extends controller
                     $row['phone'] = $v['phone'];
                     $row['type'] = 1;
                     $row['cdate'] = $date;
-                    $xml = new SimpleXMLElement(file_get_contents('http://geocode-maps.yandex.ru/1.x/?geocode='.$city['name'].'+'.str_replace(' ', '+',$v['street']).'+'.str_replace(' ', '+',$v['building']).''));
-                    $address = $xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
-                    if($address)
+                    $geocode = file_get_contents('http://geocode-maps.yandex.ru/1.x/?geocode='.$city['name'].'+'.str_replace(' ', '+',$v['street']).'+'.str_replace(' ', '+',$v['building']).'');
+                    if($geocode)
                     {
-                        $f_building = $this->tools->filterBuildings($v['building']);
-                        $arr = explode(', ',$address);
-                        $street = trim(str_replace('улица', '', $arr[0]));
-                        $building = is_numeric($f_building) && $arr[1] != $f_building ? $f_building : $arr[1];
-                        $_POST['address'][$k]['street'] = $street;
-                        $_POST['address'][$k]['building'] = $building;
+                        $xml = new SimpleXMLElement($geocode);
+                        $address = $xml->GeoObjectCollection->featureMember[0]->GeoObject->name;
+                        if($address)
+                        {
+                            $f_building = $this->tools->filterBuildings($v['building']);
+                            $arr = explode(', ',$address);
+                            $street = trim(str_replace('улица', '', $arr[0]));
+                            $building = is_numeric($f_building) && $arr[1] != $f_building ? $f_building : $arr[1];
+                            $_POST['address'][$k]['street'] = $street;
+                            $_POST['address'][$k]['building'] = $building;
+                        }
+                        $pos = $xml->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+                        if($pos)
+                        {
+                            $arr = explode(' ', $pos);
+                            $row['longitude'] = $arr[0];
+                            $row['latitude'] = $arr[1];
+                        }
                     }
-                    $pos = $xml->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
-                    if($pos)
+                    if($streets_buildings[$_POST['address'][$k]['street']])
                     {
-                        $arr = explode(' ', $pos);
-                        $row['longitude'] = $arr[0];
-                        $row['latitude'] = $arr[1];
-                    }
-                    if($streets_buildings[$street])
-                    {
-                        $row['id_street'] = $streets_buildings[$street]['id'];
-                        if($streets_buildings[$street]['buildings'][$building])
-                            $row['id_building'] = $streets_buildings[$street]['buildings'][$building]['id_building'];
+                        $row['id_street'] = $streets_buildings[$_POST['address'][$k]['street']]['id'];
+                        if($streets_buildings[$_POST['address'][$k]['street']]['buildings'][$_POST['address'][$k]['building']])
+                            $row['id_building'] = $streets_buildings[$_POST['address'][$k]['street']]['buildings'][$_POST['address'][$k]['building']]['id_building'];
                         else
-                            $row['id_building'] = $building_model->insert(array('name' => $building, 'id_street' => $row['id_street'], 'cdate' => $date));
+                            $row['id_building'] = $building_model->insert(array('name' => $_POST['address'][$k]['building'], 'id_street' => $row['id_street'], 'cdate' => $date));
                     }
                     else
                     {
-                        $row['id_street'] = $str_model->insert(array('name' => $street, 'cdate' => $date));
-                        $row['id_building'] = $building_model->insert(array('name' => $building, 'id_street' => $row['id_street'], 'cdate' => $date));
+                        $row['id_street'] = $str_model->insert(array('name' => $_POST['address'][$k]['street'], 'cdate' => $date));
+                        $row['id_building'] = $building_model->insert(array('name' => $_POST['address'][$k]['building'], 'id_street' => $row['id_street'], 'cdate' => $date));
                     }
                     $id_address_group = $address_groups_model->insert($row);
                     $wd = array();
@@ -394,8 +430,7 @@ class malls_controller extends controller
             $mall = $malls_model->getMall($_GET['id']);
             $key = $mall['address']['id_address'];
             $mall['address'] = array( $key => $mall['address']);
-            $mall['address'][$mall['address']['id_address']]['workdays'] = $this->tools->parse_workdays($mall['address'][$key]['workdays']);
-            $this->system->log[] = print_r($mall,1);
+            $mall['address'][$key]['workdays'] = $this->tools->parse_workdays($mall['address'][$key]['workdays']);
             $this->t->assign('firm',$mall);
             $this->system->breadcrumbs = array(array(
                 'title' => $mall['name'],

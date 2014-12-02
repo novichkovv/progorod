@@ -15,7 +15,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'links' },
 		{ name: 'insert' },
 		{ name: 'forms' },
-		{ name: 'tools' },
+		{ name: 'tools' , groups: [ 'justifyRight', 'justifyLeft', 'justifyCenter' ]},
 		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'others' },
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },

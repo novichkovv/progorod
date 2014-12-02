@@ -1,30 +1,31 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-18 18:20:33
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-02 19:42:40
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/malls/info.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1639624704546a2ce6016b25-41414035%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:35146982547dec00258254-32122899%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '3f89605971999b766c8ac5701aa7e64177e32583' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/pro-gorod/malls/info.tpl',
-      1 => 1416258502,
+      1 => 1417380600,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1639624704546a2ce6016b25-41414035',
+  'nocache_hash' => '35146982547dec00258254-32122899',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_546a2ce63ead60_74279800',
   'variables' => 
   array (
     'system' => 0,
     'mall' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_547dec00571742_68786734',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546a2ce63ead60_74279800')) {function content_546a2ce63ead60_74279800($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_547dec00571742_68786734')) {function content_547dec00571742_68786734($_smarty_tpl) {?>
+<?php if ($_GET['id']) {?>
 <div class="row firm_info">
     <div id="firm_logo">
         <div class="col-md-7">
@@ -95,4 +96,8 @@ uploads/images/<?php echo $_smarty_tpl->tpl_vars['system']->value['city']['alias
 </span>  <small class="wow slideInRight" data-wow-delay="0.3s"><?php echo $_smarty_tpl->tpl_vars['mall']->value['short_description'];?>
 </small></h1>
     </div>
-</div><?php }} ?>
+</div>
+<?php } else { ?>
+    <?php echo $_smarty_tpl->getSubTemplate (((@constant('TEMPLATE_DIR')).($_smarty_tpl->tpl_vars['system']->value['template_folder'])).("list.tpl"), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
+<?php }?><?php }} ?>
