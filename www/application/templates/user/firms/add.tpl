@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="thumbnail">
                             <div class="preview">
-                                {if $smarty.post.image}
+                                {if $values.image && $values.image neq 1}
                                     <img src="{$smarty.const.SITE_DIR}uploads/temp/{$smarty.post.image}" />
                                 {elseif $smarty.get.id}
                                     <img src="{$smarty.const.SITE_DIR}uploads/images/{$user_city.alias}/firms/logo/normal/{$values.id}.jpg" />
@@ -265,7 +265,7 @@
     <div class="row text-center">
         <input type="hidden" name="id_user" value="{$user['id']}">
         {if $smarty.get.id}
-            <input type="hidden" name="id_firm" value="{$smarty.get.id}">
+            <input type="hidden" name="id" value="{$smarty.get.id}">
         {/if}
         <div class="error-form">Не все поля заполнены правильно</div>
         <input class="btn btn-lg btn-primary" type="submit" name="add_firm_btn" value="Сохранить">

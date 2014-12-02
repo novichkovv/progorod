@@ -10,34 +10,16 @@
             <div class="animate_down">
                 <div>
                     <br><br>
-                    {assign var="i" value=0}
                     {foreach from=$firm.address item=address}
-                        {if $i > 0}<div class="additional-addresses">{/if}
                         <table class="address-table">
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon glyphicon-globe text-danger"></span>
                                 </td>
-                                <td {if $address.id_mall}class="address_with_mall" {/if}>
+                                <td>
                                     <span>{$address.street}, {$address.building}</span>
-                                    {if $address.id_mall}
-                                        <div class="firms_mall_link">
-                                            <a href="{$smarty.const.SITE_DIR}{$system.city.alias}/torgovie_centri/?id={$address.id_mall}">
-                                                {$address.mall_short} {$address.mall_name}
-                                            </a>
-                                        </div>
-                                    {/if}
                                 </td>
                             </tr>
-                            {*{if $address.id_mall}*}
-                            {*<tr class="firms_mall_link">*}
-                            {*<td colspan="2">*}
-                            {*<a href="{$smarty.const.SITE_DIR}{$system.city.alias}/torgovie_centri/?id={$address.id_mall}">*}
-                            {*{$address.mall_short} {$address.mall_name}*}
-                            {*</a>*}
-                            {*</td>*}
-                            {*</tr>*}
-                            {*{/if}*}
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon glyphicon-phone text-primary"></span>
@@ -54,28 +36,16 @@
                                     {include file=$smarty.const.TEMPLATE_DIR|cat:'workdays.tpl' workdays=$address.workdays}
                                 </td>
                             </tr>
-                            {if $i eq 0}
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon glyphicon-link text-success"></span>
-                                    </td>
-                                    <td>
-                                        <a href="{$firm.site}" target="_blank">{$firm.site|@substr:7}</a>
-                                    </td>
-                                </tr>
-                            {/if}
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon glyphicon-link text-success"></span>
+                                </td>
+                                <td>
+                                    <a href="{$firm.site}" target="_blank">{$firm.site|@substr:7}</a>
+                                </td>
+                            </tr>
                         </table>
-                        {if $i > 0}
-                            {if $firm.address|@count eq $i + 1}
-                                <div class="btn btn-sm btn-default additional_address_hide_btn">Скрыть</div>
-                            {/if}
-                            </div>
-                        {/if}
-                        {if $i eq 0 && $firm.address|@count > 1}
-                            <div type="button" class="btn btn-sm btn-default additional_address_btn">Показать все адреса ({$firm.address|@count})</div>
-                        {/if}
                         <br>
-                        {assign var="i" value=$i+1}
                     {/foreach}
                 </div>
             </div>
@@ -94,10 +64,10 @@
             <a href="#actions" data-toggle="tab">Действия</a>
         </div>
         <div class="tab-button">
-            <a href="#profile" data-toggle="tab">О фирме</a>
+            <a href="#profile" data-toggle="tab">О центре</a>
         </div>
         <div class="tab-button">
-            <a href="#prices" data-toggle="tab">Цены</a>
+            <a href="#prices" data-toggle="tab">Фирмы</a>
         </div>
         <div class="tab-button">
             <a href="#news" data-toggle="tab">Новости</a>
@@ -106,26 +76,25 @@
 </div>
 <div class="tabs-footer">
 </div>
-
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in with-padding" id="actions">
             <br><br>
             <div class="jumbotron">
                 <div class="row text-center">
-                    <a class="btn btn-lg btn-info" href="{$smarty.const.SITE_DIR}{$system.city.alias}/firms/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-pencil"></i> Редактировать фирму</a>
-                    <a class="btn btn-lg btn-danger" href="#delete_firm_modal" data-toggle="modal" role="button"><i class="glyphicon glyphicon-remove-circle"></i> Удалить фирму</a>
+                    <a class="btn btn-lg btn-info" href="{$smarty.const.SITE_DIR}{$system.city.alias}/malls/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-pencil"></i> Редактировать центр</a>
+                    <a class="btn btn-lg btn-danger" href="#delete_firm_modal" data-toggle="modal" role="button"><i class="glyphicon glyphicon-remove-circle"></i> Удалить центр</a>
                 </div>
                 <br>
                 <div class="row text-center">
-                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/firms/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-shopping-cart"></i> Добавить товары и услуги</a>
+                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/malls/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-registration-mark"></i> Бренды центра</a>
                 </div>
                 <br>
                 <div class="row text-center">
-                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/firms/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-picture"></i> Добавить изображения</a>
+                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/malls/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-picture"></i> Добавить изображения</a>
                 </div>
                 <br>
                 <div class="row text-center">
-                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/firms/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-bullhorn"></i> Добавить новости</a>
+                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/malls/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-bullhorn"></i> Добавить новости</a>
                 </div>
             </div>
         </div>
@@ -134,15 +103,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Удаление фирмы</h4>
+                        <h4 class="modal-title">Удаление центра</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Вы уверены, что хотите удалить фирму? Все данные можно будет восстановить</p>
+                        <p>Вы уверены, что хотите удалить центр? Все данные можно будет восстановить</p>
                     </div>
                     <div class="modal-footer">
                         <form method="post" action="">
-                            <input type="hidden" name="id_firm" value="{$firm.id}">
-                            <button type="submit" class="btn btn-primary" name="delete_firm_btn">Да</button>
+                            <input type="hidden" name="id_mall" value="{$firm.id}">
+                            <button type="submit" class="btn btn-primary" name="delete_mall_btn">Да</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Нет</button>
                         </form>
                     </div>

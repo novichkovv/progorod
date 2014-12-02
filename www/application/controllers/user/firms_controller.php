@@ -219,11 +219,16 @@ class firms_controller extends controller
             }
             $date = date('Y-m-d H:i:s');
             $firms_model = new firms_model('firms', $city['alias']);
-            $row = array();
-            if($_POST['id_firm'])
+            if($firms_model->getById($_POST['id'])['creator'] == $this->user['id'])
             {
-                $row['id'] = $_POST['id_firm'];
-                $firms_model->deleteFirmAddresses($_POST['id_firm']);
+                header("Location: ?");
+                exit;
+            }
+            $row = array();
+            if($_POST['id'])
+            {
+                $row['id'] = $_POST['id'];
+                $firms_model->deleteFirmAddresses($_POST['id']);
             }
             $row['id_subdivision'] = $_POST['subdivision'];
             $row['id_net'] = $_POST['id_net'];
@@ -231,7 +236,7 @@ class firms_controller extends controller
             $row['short_description'] = $_POST['short_description'];
             $row['description'] = $_POST['description'];
             $row['site'] = $_POST['site'];
-            if(!$_POST['id_firm'])
+            if(!$_POST['id'])
             {
                 $row['creator'] = $_POST['id_user'];
                 $row['cdate'] = $date;
@@ -419,7 +424,7 @@ class firms_controller extends controller
     public function add()
     {
         $this->system->breadcrumbs = array(array(
-            'title' => 'Добавление фирмы',
+            'title' => ( $_GET['id'] ? 'Редактирование ' : 'Добавление ') . 'фирмы',
             'alias' => 'firms/?add=1'
         ));
         $regions_model = new default_model('regions');
@@ -458,7 +463,6 @@ class firms_controller extends controller
                 $firm['address'][$k]['workdays'] = $this->tools->parse_workdays($v['workdays']);
 
             }
-            $this->system->log[] = print_r($firm,1);
             $this->t->assign('firm',$firm);
             $this->system->breadcrumbs = array(array(
                 'title' => $firm['name'],

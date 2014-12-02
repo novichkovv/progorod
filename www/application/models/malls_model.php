@@ -94,6 +94,8 @@ class malls_model extends model
             workdays w ON wg.id_workday = w.id
         WHERE
             f.id = :id
+        AND
+            f.hidden = 0
         ORDER by ag.id, w.weekday
         ');
         $tmp = $this->get_all($stm, array('id' => $id));
@@ -124,6 +126,8 @@ class malls_model extends model
             malls
         WHERE
             creator = :creator
+        AND
+            hidden = 0
         LIMIT '. $limit.'
         ');
         $tmp = $this->get_all($stm, array('creator' => $creator));
@@ -197,6 +201,43 @@ class malls_model extends model
         ORDER BY ' . ( $params['location'] ? 'dist,' : '' ) . ' f.rating, w.id, w2.id
                 ');
         return $this->get_all($stm, $data);
+    }
+
+    public function deleteMallAddresses($id_mall)
+    {
+        if(!$id_mall)return;
+        $address_groups = $this->get_all($this->pdo->prepare('SELECT id FROM address_groups WHERE id_firm = :id_mall AND type = "1"'), array('id_mall' => $id_mall));
+        if($address_groups)
+        {
+            $arr = [];
+            $wd = [];
+            $prep = null;
+            foreach($address_groups as $v)
+            {
+                $arr[] = '?';
+                $wd[] = $v['id'];
+            }
+            if($arr)$prep = implode(',',$arr);
+            $workdays = $this->get_all($this->pdo->prepare('SELECT id_workday FROM workdays_groups WHERE id_address_group IN (' . $prep . ')'), $wd);
+            if($workdays)
+            {
+                $arr = [];
+                $wd = [];
+                $prep = null;
+                foreach($workdays as $v)
+                {
+                    $arr[] = '?';
+                    $wd[] = $v['id'];
+                }
+                if($arr)$prep = implode(',',$arr);
+                $stm = $this->pdo->prepare('DELETE FROM workdays WHERE id IN(' . $prep . ')');
+                $stm->execute($wd);
+                $stm = $this->pdo->prepare('DELETE FROM workdays_groups WHERE id_workday IN(' . $prep . ')');
+                $stm->execute($wd);
+                $stm = $this->pdo->prepare('DELETE FROM address_groups WHERE id_firm = :id_mall AND type = "1"');
+                $stm->execute(array('id_mall' => $id_mall));
+            }
+        }
     }
 
 }
