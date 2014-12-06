@@ -40,6 +40,8 @@ class malls_model extends model
             workdays w ON wg.id_workday = w.id
         WHERE
             f.id = :id
+        AND
+            f.hidden = 0
         ORDER BY ag.id, w.weekday
         ');
         $tmp = $this->get_all($stm, array('id' => $id));

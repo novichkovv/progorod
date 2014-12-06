@@ -121,7 +121,7 @@
                 </div>
                 <br>
                 <div class="row text-center">
-                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/firms/?add=1&id={$firm.id}"><i class="glyphicon glyphicon-picture"></i> Добавить изображения</a>
+                    <a class="btn btn-lg btn-default"  href="{$smarty.const.SITE_DIR}{$system.city.alias}/firms/images/?id={$firm.id}"><i class="glyphicon glyphicon-picture"></i> Добавить изображения</a>
                 </div>
                 <br>
                 <div class="row text-center">
