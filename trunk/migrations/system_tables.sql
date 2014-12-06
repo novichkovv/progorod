@@ -168,3 +168,8 @@ VALUES (
 );
 
 ALTER TABLE cities ADD name_prepositional VARCHAR (255) NOT NULL AFTER name_genitive;
+
+INSERT INTO `system_routes`( `project`, `alias`, `controller`, `title`, `position`, `parent`)
+VALUES (
+  'user','firms/images','images_controller.php','Изображения','4',7
+);
