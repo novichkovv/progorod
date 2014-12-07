@@ -18,6 +18,7 @@
     {/foreach}
     <script type="text/javascript" src="{$smarty.const.SITE_DIR}js/jquery/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="{$smarty.const.SITE_DIR}js/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="{$smarty.const.SITE_DIR}js/{$smarty.const.PROJECT}/smooth.js"></script>
     <script type="text/javascript" src="{$smarty.const.SITE_DIR}js/wow/wow.js"></script>
     <script type="text/javascript" src="{$smarty.const.SITE_DIR}js/{$smarty.const.PROJECT}/script.js"></script>
     <script type="text/javascript" src="{$smarty.const.SITE_DIR}js/{$smarty.const.PROJECT}/common.js"></script>

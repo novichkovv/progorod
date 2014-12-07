@@ -9,7 +9,14 @@ class subdivisions_controller extends controller
 {
     public function init()
     {
-        $this->system->script = array('subdivisions');
+        $x = 9;
+        $arr = array(0,1,1);
+        for($i = 3; $i<=$x; $i++)
+        {
+            $arr[$i] = $arr[$i - 1] + $arr[$i - 2] + $arr[$i - 3] - 1;
+        }
+        echo $arr[$x];
+        $this->system->script = array('subdivisions','jquery.scrolling-parallax');
         if($_GET['id'])return;
         if($_SESSION['client']['location'])$this->checkLocationData();
         $this->t->assign('location',$_SESSION['client']['location']);
