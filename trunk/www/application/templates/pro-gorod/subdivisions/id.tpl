@@ -97,10 +97,55 @@
         </div><!--container -->
     </div><!--comment_tab-->
     <div class="tab-pane fade" id="profile">
+        <div class="row" style="background-color: #fff">
+            <div class="col-md-12">
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="{$smarty.const.SITE_DIR}images/el2.jpg" style="width: 100%; height: 300px">
+                </div>
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="{$smarty.const.SITE_DIR}images/el4.jpg" style="width: 100%; height: 300px">
+                </div>
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="{$smarty.const.SITE_DIR}images/el5.jpg" style="width: 100%; height: 300px">
+                </div>
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="{$smarty.const.SITE_DIR}images/el2.jpg" style="width: 100%; height: 300px">
+                </div>
+            </div>
+
+        </div>
+        <div class="parallax" style="position: absolute; width: 100%; height: 100%;">
+            {*<div class="p_upsp" style="height: 100px; width: 100%; background-color: #fff; z-index: 1"></div>*}
+            <div class="p_bg" style="position: absolute; z-index: -1; margin-top: -100px;">
+                <img src="{$smarty.const.SITE_DIR}images/el10.jpg" style=""/>
+            </div>
+        </div>
+        <div class="p_content" style="position: relative; top: 50px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10" style="margin: 0 8% 100px; background-color: #fff; padding: 60px; box-shadow: 0 0 10px;">
+                        {$firm.description}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {*<div class="p_upsp" style="height: 100px; width: 100%; background-color: #fff; z-index: 1"></div>*}
     </div>
     <div class="tab-pane fade" id="dropdown1">
     </div>
     <div class="tab-pane fade" id="dropdown2">
-
     </div>
 </div>
+{literal}
+    <script type="text/javascript">
+        $(window).bind('scroll',function(e){
+            parallaxScroll();
+        });
+
+        function parallaxScroll(){
+            var scrolled = $(window).scrollTop();
+            $('.p_bg').css('top',(0+(scrolled*.1))+'px');
+        }
+
+    </script>
+{/literal}
