@@ -3,7 +3,7 @@
     <div class="thumbnail">
         <div class="preview">
             <img src="{$path}{$name}" />
-            <input type="hidden" name="image" value="{$name}" />
+            <input type="hidden" name="image[]" value="{$name}" />
         </div>
         <div class="caption">
             <button id="upload_logo" type="button" class="btn btn-default">Изменить файл</button>

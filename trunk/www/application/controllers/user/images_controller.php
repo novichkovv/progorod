@@ -9,10 +9,13 @@ class images_controller extends controller
 {
     public function init()
     {
-        $this->system->script = array('images','ajax-upload/ajaxupload.3.5');
+        $this->system->script = array('ajax-upload/ajaxupload.3.5','jquery.imgareaselect.min','images');
+        $this->system->style = array('imagecrop/imgareaselect-default');
     }
 
     public function after_auth()
     {
+        $this->system->log[] = print_r($_POST,1);
+
     }
 }
