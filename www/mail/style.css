@@ -1,0 +1,108 @@
+#bg_video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    background-size: cover;
+}
+#bg {
+    position: absolute;
+    background: url(../images/bg.png) repeat;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -101;
+}
+#bg {
+    animation: myfirst 5s;
+    -moz-animation: myfirst 5s;
+    -webkit-animation: myfirst 5s;
+@keyframes myfirst
+}
+{
+0%{opacity: 0;}
+50%{opacity: 0;}
+100% {opacity: 1;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+    0%{opacity: 0;}
+    50%{opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@-webkit-keyframes myfirst /* Safari Рё Chrome */
+{
+    0%{opacity: 0;}
+    50%{opacity: 0;}
+    100% {opacity: 1;}
+}
+#description {
+    color: #175373; list-style-image: url(../images/checkmark.png);
+}
+.panel, .btn, .input, .input-lg, .btn-lg, .form-control {
+    border-radius: 0 !important;
+}
+#main-panel {
+    min-width: 350px;
+}
+.input-lg {
+    min-width: 250px;
+}
+#logo {
+    margin-top: 5%;
+    position:relative;
+    z-index:1;
+}
+.animate_down {
+    -webkit-animation: animate_down 2s;
+    animation: animate_down 2s;
+}
+
+@-webkit-keyframes animate_down {
+    0% {margin-top: -100px; opacity: 0;}
+    50% {margin-top: -100px; opacity: 0;}
+    100% {margin-top: 0; opacity: 1;}
+}
+
+@keyframes animate_down {
+    0% {margin-top: -100px; opacity: 0;}
+    50% {margin-top: -100px; opacity: 0;}
+    100% {margin-top: 0; opacity: 1;}
+}
+.animate_left {
+    -webkit-animation: animate_left 2s;
+    animation: animate_left 2s;
+}
+
+@-webkit-keyframes animate_left {
+    0%{top: 200px; opacity: 0;}
+    100% {top: 10px; opacity: 1;}
+}
+
+@keyframes animate_left {
+    0%{top: 200px; opacity: 0;}
+    100% {top: 10px; opacity: 1;}
+}
+.animate_fade  {
+    -webkit-animation: animate_fade 1s;
+    animation: animate_fade 1s;
+}
+
+@-webkit-keyframes animate_fade {
+    0%{ opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes animate_fade {
+    0%{ opacity: 0;}
+    100% {opacity: 1;}
+}
