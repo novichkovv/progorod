@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:08:17
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-07 23:16:06
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/system_header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1578530666547ca081169d52-52761200%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '37bba2a7fac3b5bcb85c3219a15a78ca3192ff4d' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/pro-gorod/system_header.tpl',
-      1 => 1416778784,
+      1 => 1417983344,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_547ca0815030b6_41456663',
   'variables' => 
   array (
     'system' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'src' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_547ca0815030b6_41456663',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_547ca0815030b6_41456663')) {function content_547ca0815030b6_41456663($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
@@ -63,6 +63,9 @@ $_smarty_tpl->tpl_vars['href']->_loop = true;
 js/jquery/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="<?php echo @constant('SITE_DIR');?>
 js/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="<?php echo @constant('SITE_DIR');?>
+js/<?php echo @constant('PROJECT');?>
+/smooth.js"></script>
     <script type="text/javascript" src="<?php echo @constant('SITE_DIR');?>
 js/wow/wow.js"></script>
     <script type="text/javascript" src="<?php echo @constant('SITE_DIR');?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-12-05 18:35:40
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-08 19:52:19
          compiled from "/var/www/pro-gorod.loc/www/application/templates/user/ajax/multi_upload.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8929273785481cf7f3292f3-34887159%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd5e52d467b7bbd22e768329a47c5161f72d3aff8' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/user/ajax/multi_upload.tpl',
-      1 => 1417793733,
+      1 => 1418057520,
       2 => 'file',
     ),
   ),
@@ -31,7 +31,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <img src="<?php echo $_smarty_tpl->tpl_vars['path']->value;?>
 <?php echo $_smarty_tpl->tpl_vars['name']->value;?>
 " />
-            <input type="hidden" name="image" value="<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+            <input type="hidden" name="image[]" value="<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
 " />
         </div>
         <div class="caption">

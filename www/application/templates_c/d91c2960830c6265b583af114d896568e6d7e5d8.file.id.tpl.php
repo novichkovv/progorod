@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-12-01 20:08:18
+<?php /* Smarty version Smarty-3.1.19, created on 2014-12-07 23:16:21
          compiled from "/var/www/pro-gorod.loc/www/application/templates/pro-gorod/subdivisions/id.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:338318828547ca0825f79e3-91948542%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd91c2960830c6265b583af114d896568e6d7e5d8' => 
     array (
       0 => '/var/www/pro-gorod.loc/www/application/templates/pro-gorod/subdivisions/id.tpl',
-      1 => 1417380600,
+      1 => 1417983344,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_547ca082b08819_99166234',
   'variables' => 
   array (
     'comments' => 0,
@@ -26,8 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'user' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_547ca082b08819_99166234',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_547ca082b08819_99166234')) {function content_547ca082b08819_99166234($_smarty_tpl) {?><br>
 <div class="tabs">
@@ -150,11 +150,62 @@ images/delimiter-gray.png"><br>
         </div><!--container -->
     </div><!--comment_tab-->
     <div class="tab-pane fade" id="profile">
+        <div class="row" style="background-color: #fff">
+            <div class="col-md-12">
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="<?php echo @constant('SITE_DIR');?>
+images/el2.jpg" style="width: 100%; height: 300px">
+                </div>
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="<?php echo @constant('SITE_DIR');?>
+images/el4.jpg" style="width: 100%; height: 300px">
+                </div>
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="<?php echo @constant('SITE_DIR');?>
+images/el5.jpg" style="width: 100%; height: 300px">
+                </div>
+                <div class="col-md-3 text-center" style="overflow: hidden; margin: 20px 0;">
+                    <img src="<?php echo @constant('SITE_DIR');?>
+images/el2.jpg" style="width: 100%; height: 300px">
+                </div>
+            </div>
+
+        </div>
+        <div class="parallax" style="position: absolute; width: 100%; height: 100%;">
+            
+            <div class="p_bg" style="position: absolute; z-index: -1; margin-top: -100px;">
+                <img src="<?php echo @constant('SITE_DIR');?>
+images/el10.jpg" style=""/>
+            </div>
+        </div>
+        <div class="p_content" style="position: relative; top: 50px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10" style="margin: 0 8% 100px; background-color: #fff; padding: 60px; box-shadow: 0 0 10px;">
+                        <?php echo $_smarty_tpl->tpl_vars['firm']->value['description'];?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <div class="tab-pane fade" id="dropdown1">
     </div>
     <div class="tab-pane fade" id="dropdown2">
-
     </div>
 </div>
+
+    <script type="text/javascript">
+        $(window).bind('scroll',function(e){
+            parallaxScroll();
+        });
+
+        function parallaxScroll(){
+            var scrolled = $(window).scrollTop();
+            $('.p_bg').css('top',(0+(scrolled*.1))+'px');
+        }
+
+    </script>
+
 <?php }} ?>
