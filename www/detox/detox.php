@@ -11,18 +11,52 @@
 
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/style.css">
-    <link href="assets/css/docs.min.css" rel="stylesheet" />
-    <link href="assets/css/application.css" rel="stylesheet" />
-    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/animate.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/wow.js"></script>
+    <script type="text/javascript">
+        $ = jQuery.noConflict();
+        $(document).ready(function()
+        {
+            var wow = new WOW();
+            wow.init();
+            setInterval(function()
+            {
+                $(".wow1").show();
+                var wow = new WOW();
+                wow.init();
+            },
+            6000);
+            setTimeout(function(){
+                setInterval(function()
+                {
+                    $(".wow1").fadeOut(300);
+                }, 6000);
+            }, 3000);
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <!--<script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
-    <!--<script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
-    <!--[endif]-->
 
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png" />
-    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+            var wow2 = new WOW({boxClass: 'wow2'});
+
+            setTimeout(function(){
+                wow2.init();
+                setInterval(function()
+                {
+                    $(".wow2").css('display','block');
+                    var wow2 = new WOW();
+                    wow2.init({
+                        boxClass: 'wow2'
+                    });
+
+                },6000);
+                setInterval(function()
+                {
+                    $(".wow2").fadeOut(300);
+                }, 6000);
+            },3000);
+
+        });
+    </script>
+    <link rel="shortcut icon" href="images/favicon.ico" />
 </head>
 
 <body class="bs-docs-home">
@@ -54,19 +88,28 @@
 </header>
 <div  id="slider">
     <div class="container">
-        <div class="col-md-2 col-xs-3">
-            <img src="images/salad_icon.png" />
+        <div class="col-md-2 col-xs-3 ">
+            <section class=" wow wow1 fadeInLeft">
+                <img src="images/salad_icon.png" />
+            </section>
+            <section class="wow wow2 fadeInLeft" data-wow-delay="3s" style="position: absolute">
+                <img src="images/smoothie_icon.png" />
+            </section>
         </div>
-        <div class="col-xs-5">
+        <div class="col-xs-3 col-md-2">
             <br>
             <br>
             <div class="features">
                 <h3>RECEPIES</h3>
                 <div class="title-div"></div>
                 <span>Aid your Detox</span>
+                <br><br>
+                <h3 class="wow fadeInUp">
+                    Salads
+                </h3>
             </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 col-xs-offset-2 col-md-offset-4">
             <img src="images/ebooklet.png">
         </div>
         <!-- <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">B</span> -->

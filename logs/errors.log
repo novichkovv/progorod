@@ -2981,3 +2981,7 @@
 [Mon Dec 15 23:00:09.586321 2014] [:error] [pid 1724:tid 812] [client 127.0.0.1:50506] PHP Stack trace:
 [Mon Dec 15 23:00:09.586321 2014] [:error] [pid 1724:tid 812] [client 127.0.0.1:50506] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:0
 [Mon Dec 15 23:00:09.586321 2014] [:error] [pid 1724:tid 812] [client 127.0.0.1:50506] PHP   2. mysqli_connect() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:9
+[Tue Dec 16 22:42:10.113770 2014] [:error] [pid 1652:tid 808] [client 127.0.0.1:49388] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'ddetox_admin'@'localhost' (using password: YES) in C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php on line 9
+[Tue Dec 16 22:42:10.128771 2014] [:error] [pid 1652:tid 808] [client 127.0.0.1:49388] PHP Stack trace:
+[Tue Dec 16 22:42:10.128771 2014] [:error] [pid 1652:tid 808] [client 127.0.0.1:49388] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:0
+[Tue Dec 16 22:42:10.128771 2014] [:error] [pid 1652:tid 808] [client 127.0.0.1:49388] PHP   2. mysqli_connect() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:9
