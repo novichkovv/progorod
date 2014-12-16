@@ -5,6 +5,7 @@
  * Date: 11.12.14
  * Time: 19:51
  */
+session_start();
 require_once('config.php');
 if(!isset($_POST['export']))
 {
@@ -21,7 +22,6 @@ if(!isset($_POST['export']))
     <body>
     ');
 }
-session_start();
 if(!$_SESSION['login'])
 {
     echo ('
