@@ -133,12 +133,16 @@
     text-transform: uppercase !important;
     letter-spacing: 2px !important;
     font-family: 'PT Sans', sans-serif !important;
-    margin-bottom: 20px !important;
+    /*margin-bottom: 20px !important;*/
+    margin: 0 auto 20px !important;
 }
 #video {
     width: 60%;
     margin: 40px auto;
     float: left;
+}
+#video img{
+    width: 100%;
 }
 #package {
     width: 40%;
@@ -152,6 +156,18 @@
 }
 .gallery {
     margin: 30px 100px;
+}
+#video_frame {
+    width: 100%;
+    background-color: black;
+}
+#screen {
+    position: relative;
+}
+.slide2, .slide3 {
+    position: absolute;
+    top: 0;
+    display:none;
 }
 
 

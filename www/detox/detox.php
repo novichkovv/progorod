@@ -1,4 +1,3 @@
-<?php require_once('config.php'); ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,43 +17,41 @@
         $ = jQuery.noConflict();
         $(document).ready(function()
         {
+            var height = $("#video_frame").width()*0.65;
+            $("#video_frame").height(height);
+            $("#screen").css('top', "-" + height + 'px');
+            $("#screen").click(function(event)
+            {
+                $(this).fadeOut();
+                $("#video_frame").attr('src',$("#video_frame").attr('src') + '&autoplay=1');;
+            });
             var wow = new WOW();
             wow.init();
-            setInterval(function()
-            {
-                $(".wow1").show();
-                var wow = new WOW();
-                wow.init();
-            },
-            6000);
-            setTimeout(function(){
-                setInterval(function()
-                {
-                    $(".wow1").fadeOut(300);
-                }, 6000);
-            }, 3000);
+            slider(1);
 
-
-            var wow2 = new WOW({boxClass: 'wow2'});
-
-            setTimeout(function(){
-                wow2.init();
-                setInterval(function()
-                {
-                    $(".wow2").css('display','block');
-                    var wow2 = new WOW();
-                    wow2.init({
-                        boxClass: 'wow2'
-                    });
-
-                },6000);
-                setInterval(function()
-                {
-                    $(".wow2").fadeOut(300);
-                }, 6000);
-            },3000);
 
         });
+        function slider(i)
+        {
+            var mark = true;
+            var next_slide = i == 3 ? 1 : i + 1;
+            setTimeout(function()
+            {
+                $(".slide" + i).fadeOut('slow');
+                $(".slide" + next_slide).fadeIn('slow');
+                //slider(next_slide);
+                if(mark)
+                {
+                    $('.wow').each(function()
+                    {
+                        $(this).removeClass('animated');
+                        $(this).removeClass('fadeInLeft');
+                        $(this).removeClass('wow');
+                    });
+                    mark = null;
+                }
+            },5000);
+        }
     </script>
     <link rel="shortcut icon" href="images/favicon.ico" />
 </head>
@@ -89,14 +86,13 @@
 <div  id="slider">
     <div class="container">
         <div class="col-md-2 col-xs-3 ">
-            <section class=" wow wow1 fadeInLeft">
+            <section class="slide1 wow fadeInLeft">
                 <img src="images/salad_icon.png" />
             </section>
-            <section class="wow wow2 fadeInLeft" data-wow-delay="3s" style="position: absolute">
-                <img src="images/smoothie_icon.png" />
-            </section>
+            <img class="slide2" src="images/smoothie_icon.png" />
+            <img class="slide3" src="images/soup_icon.png" />
         </div>
-        <div class="col-xs-3 col-md-2">
+        <div class="col-xs-4 col-md-3">
             <br>
             <br>
             <div class="features">
@@ -104,12 +100,20 @@
                 <div class="title-div"></div>
                 <span>Aid your Detox</span>
                 <br><br>
-                <h3 class="wow fadeInUp">
-                    Salads
-                </h3>
+                <div style="position: absolute; text-align: center; width: 90%;">
+                    <h3 class="wow fadeInUp slide1">
+                        Salads
+                    </h3>
+                    <h3 class="slide2">
+                        Smoothies
+                    </h3>
+                    <h3 class="slide3">
+                        Soups
+                    </h3>
+                </div>
             </div>
         </div>
-        <div class="col-xs-4 col-xs-offset-2 col-md-offset-4">
+        <div class="col-xs-3 col-xs-offset-2 col-md-offset-1">
             <img src="images/ebooklet.png">
         </div>
         <!-- <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">B</span> -->
@@ -117,9 +121,17 @@
 </div>
 
 <div class="container" style="text-align: center;">
+    <div id="video">
+        <h1>DAY <?php echo $day - 3; ?></h1>
+        <h3><?php echo $subject; ?></h3>
+        <iframe id="video_frame" src="<?php echo strtr($video,array('watch?v='=>'embed/', 'https:'=>'', '&list' => '?list')); ?>" frameborder="0" allowfullscreen="allowfullscreen">
+
+        </iframe>
+        <img id="screen" src="mail/video.png" />
+
+    </div>
 <!--        <iframe id="video">-->
 <!--        </iframe>-->
-    <img id="video" src="mail/video.png" />
     <div id="package">
         <a href="http://www.drcolbert.com/21-day-detox-package-809.html" target="_blank"><img src="mail/detoxpack_2_1.jpg"  style="width: 200px; float: left"></a>
         <div style="float: left">
