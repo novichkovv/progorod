@@ -17,13 +17,10 @@
         $ = jQuery.noConflict();
         $(document).ready(function()
         {
-            var height = $("#video_frame").width()*0.65;
-            $("#video_frame").height(height);
-            $("#screen").css('top', "-" + height + 'px');
-            $("#screen").click(function(event)
+            $(".video-container").click(function()
             {
-                $(this).fadeOut();
-                $("#video_frame").attr('src',$("#video_frame").attr('src') + '&autoplay=1');;
+                $(".video-container img").fadeOut('slow');
+                $("#video_frame").attr('src',$("#video_frame").attr('src') + '&autoplay=1');
             });
             var wow = new WOW();
             wow.init();
@@ -39,7 +36,7 @@
             {
                 $(".slide" + i).fadeOut('slow');
                 $(".slide" + next_slide).fadeIn('slow');
-                //slider(next_slide);
+                slider(next_slide);
                 if(mark)
                 {
                     $('.wow').each(function()
@@ -63,21 +60,12 @@
     <div class="container">
         <div class="navbar-header">
             <img src="images/logo.png" />
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <div class="row">
-                <div class="col-md-8 col-sm-6 col-xs-6">
-                    <ul class="nav navbar-nav">
-                        <li ><a href="getting-started.php">Основы</a></li>
-                        <li ><a href="bootstraptheme.php">Примеры</a></li>
-                        <li><a href="http://goo.gl/JhGFgG" target="_blank">Шаблоны</a></li>
-                    </ul>
+                <div class="col-md-8 col-sm-6 col-xs-6 text-right">
+                    <h3 style="color: #666; margin: 10px;">Questions About the Detox?<br>
+                        Call <span style="color: black; font-size: 30px;">407-732-6952<span></h3>
                 </div>
             </div>
         </nav>
@@ -86,7 +74,7 @@
 <div  id="slider">
     <div class="container">
         <div class="col-md-2 col-xs-3 ">
-            <section class="slide1 wow fadeInLeft">
+            <section class="slide1 wow bounceInLeft">
                 <img src="images/salad_icon.png" />
             </section>
             <img class="slide2" src="images/smoothie_icon.png" />
@@ -96,24 +84,24 @@
             <br>
             <br>
             <div class="features">
-                <h3>RECEPIES</h3>
+                <h3 class="wow fadeInDown"  data-wow-delay="0.7s">RECEPIES</h3>
                 <div class="title-div"></div>
                 <span>Aid your Detox</span>
                 <br><br>
-                <div style="position: absolute; text-align: center; width: 90%;">
-                    <h3 class="wow fadeInUp slide1">
+                <div style="position: absolute; width: 90%; min-width: 250px;">
+                    <h3 class="wow fadeInUp slide1"  data-wow-delay="1.4s" style="width: 100%;">
                         Salads
                     </h3>
-                    <h3 class="slide2">
+                    <h3 class="slide2" style="width: 100%;">
                         Smoothies
                     </h3>
-                    <h3 class="slide3">
+                    <h3 class="slide3" style="width: 100%;">
                         Soups
                     </h3>
                 </div>
             </div>
         </div>
-        <div class="col-xs-3 col-xs-offset-2 col-md-offset-1">
+        <div class="col-xs-3 col-xs-offset-2 col-md-offset-3">
             <img src="images/ebooklet.png">
         </div>
         <!-- <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">B</span> -->
@@ -124,17 +112,16 @@
     <div id="video">
         <h1>DAY <?php echo $day - 3; ?></h1>
         <h3><?php echo $subject; ?></h3>
-        <iframe id="video_frame" src="<?php echo strtr($video,array('watch?v='=>'embed/', 'https:'=>'', '&list' => '?list')); ?>" frameborder="0" allowfullscreen="allowfullscreen">
-
-        </iframe>
-        <img id="screen" src="mail/video.png" />
-
+        <div class="video-container">
+            <iframe id="video_frame" src="<?php echo strtr($video,array('watch?v='=>'embed/', 'https:'=>'', '&list' => '?list')); ?>" frameborder="0" width="560" height="315" allowfullscreen="allowfullscreen">        </iframe>
+            <img src="images/video.jpg" />
+        </div>
     </div>
 <!--        <iframe id="video">-->
 <!--        </iframe>-->
     <div id="package">
-        <a href="http://www.drcolbert.com/21-day-detox-package-809.html" target="_blank"><img src="mail/detoxpack_2_1.jpg"  style="width: 200px; float: left"></a>
-        <div style="float: left">
+        <a href="http://www.drcolbert.com/21-day-detox-package-809.html" target="_blank"><img src="images/detoxpack.jpg"  style="width: 80%; margin: 0 10%; float: left"></a>
+        <div style="float: left; font-size: 130%;">
             <br><br>
             <span style="font-weight: 400; color: #0782C1;">Each 21 Day Detox Package Includes:</span>
             <ul style="color: #175373; list-style:none; text-align:left; padding: 10px;">
