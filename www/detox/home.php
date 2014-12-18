@@ -31,6 +31,6 @@ if(md5($row['email']) == $_GET['hash'])
 }
 else
 {
-    require_once('login.php');
+    require_once('auth.php');
     exit;
 }
