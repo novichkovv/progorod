@@ -23,11 +23,12 @@ if(isset($_POST['signin']))
         $date = date('Y-m-d H:i:s');
         $query = '
         INSERT INTO
-            detox_users
+            login_users
         SET
-            firstname = "' . $firstname . '",
+            username = "' . $firstname . '",
             email = "' . $email . '",
-            sdate = "' . $date . '"
+            password = "0258dd41630f47abf515fd88bb373c21"
+            timestamp = "' . $date . '"
         ';
         mysqli_query($con, $query);
         require_once('mailing_data.php');

@@ -5,6 +5,7 @@
  * Date: 17.12.14
  * Time: 19:20
  */
+session_start();
 require_once('config.php');
 
 require_once('mailing_data.php');
@@ -14,6 +15,12 @@ $res = mysqli_query($con, $query);
 $row = $res->fetch_assoc();
 if(md5($row['email']) == $_GET['hash'])
 {
+    $_SESSION['jigowatt']['activate'] = 1;
+    $_SESSION['jigowatt']['forcePwUpdate'] = 1;
+    $_SESSION['jigowatt']['user_level'] = 1;
+    $_SESSION['jigowatt']['email'] = $row['email'];
+    $_SESSION['jigowatt']['username'] = $row['firstname'];
+    $_SESSION['jigowatt']['user_id'] = $row['id'];
     if($_GET['day'] > $row['sent'])
     {
         echo 'access_denied';

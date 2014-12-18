@@ -2985,3 +2985,47 @@
 [Tue Dec 16 22:42:10.128771 2014] [:error] [pid 1652:tid 808] [client 127.0.0.1:49388] PHP Stack trace:
 [Tue Dec 16 22:42:10.128771 2014] [:error] [pid 1652:tid 808] [client 127.0.0.1:49388] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:0
 [Tue Dec 16 22:42:10.128771 2014] [:error] [pid 1652:tid 808] [client 127.0.0.1:49388] PHP   2. mysqli_connect() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:9
+[Wed Dec 17 22:59:41.225740 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Warning:  include_once(classes/login.class.php): failed to open stream: No such file or directory in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 1
+[Wed Dec 17 22:59:41.238741 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Stack trace:
+[Wed Dec 17 22:59:41.238741 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 22:59:41.239741 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 22:59:41.239741 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Warning:  include_once(): Failed opening 'classes/login.class.php' for inclusion (include_path='.;C:\\php\\pear') in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 1
+[Wed Dec 17 22:59:41.239741 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Stack trace:
+[Wed Dec 17 22:59:41.239741 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 22:59:41.239741 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 22:59:41.251742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Warning:  include_once(header.php): failed to open stream: No such file or directory in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 2
+[Wed Dec 17 22:59:41.251742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Stack trace:
+[Wed Dec 17 22:59:41.251742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 22:59:41.251742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 22:59:41.252742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Warning:  include_once(): Failed opening 'header.php' for inclusion (include_path='.;C:\\php\\pear') in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 2
+[Wed Dec 17 22:59:41.252742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Stack trace:
+[Wed Dec 17 22:59:41.252742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 22:59:41.252742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 22:59:41.252742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Fatal error:  Call to undefined function _e() in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 16
+[Wed Dec 17 22:59:41.252742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP Stack trace:
+[Wed Dec 17 22:59:41.252742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 22:59:41.253742 2014] [:error] [pid 1812:tid 808] [client 127.0.0.1:49526] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 23:00:52.963373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Warning:  include_once(classes/login.class.php): failed to open stream: No such file or directory in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 1
+[Wed Dec 17 23:00:52.963373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Stack trace:
+[Wed Dec 17 23:00:52.963373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 23:00:52.963373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 23:00:52.963373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Warning:  include_once(): Failed opening 'classes/login.class.php' for inclusion (include_path='.;C:\\php\\pear') in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 1
+[Wed Dec 17 23:00:52.963373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Stack trace:
+[Wed Dec 17 23:00:52.964373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 23:00:52.964373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Warning:  include_once(header.php): failed to open stream: No such file or directory in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 2
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Stack trace:
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Warning:  include_once(): Failed opening 'header.php' for inclusion (include_path='.;C:\\php\\pear') in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 2
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Stack trace:
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 23:00:52.965373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 23:00:52.966373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Fatal error:  Call to undefined function _e() in C:\\Sites\\pro-gorod.loc\\www\\detox\\login.php on line 16
+[Wed Dec 17 23:00:52.966373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP Stack trace:
+[Wed Dec 17 23:00:52.966373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:0
+[Wed Dec 17 23:00:52.966373 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49568] PHP   2. require_once() C:\\Sites\\pro-gorod.loc\\www\\detox\\home.php:34
+[Wed Dec 17 23:01:53.976915 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49594] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php on line 43, referer: http://pro-gorod.loc/detox/
+[Wed Dec 17 23:01:53.976915 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49594] PHP Stack trace:, referer: http://pro-gorod.loc/detox/
+[Wed Dec 17 23:01:53.976915 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49594] PHP   1. {main}() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:0, referer: http://pro-gorod.loc/detox/
+[Wed Dec 17 23:01:53.976915 2014] [:error] [pid 1812:tid 784] [client 127.0.0.1:49594] PHP   2. mail() C:\\Sites\\pro-gorod.loc\\www\\detox\\index.php:43, referer: http://pro-gorod.loc/detox/
