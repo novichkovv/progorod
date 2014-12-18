@@ -1,3 +1,10 @@
+body {
+    min-width: 500px;
+}
+#top {
+    background-color: #e2e9f5;
+    opacity: 0.9;
+}
 #bg_video {
     position: fixed;
     right: 0;
@@ -138,16 +145,16 @@
     margin: 0 auto 20px !important;
 }
 #video {
-    width: 60%;
+    /*width: 60%;*/
     margin: 40px auto;
-    float: left;
+    /*float: left;*/
 }
 #video img{
     width: 100%;
 }
 #package {
-    width: 40%;
-    float: left;
+    /*width: 40%;*/
+    /*float: left;*/
     padding: 30px;
 }
 .big-devidor {
@@ -194,6 +201,13 @@
     width: 100%;
     height: 100%;
 }
+#faq_content div {
+    margin: 10px 0;
+}
+#faq_content span {
+    padding-top: 10px;
+}
+
 
 
 /*########### Table of Contents ###########
@@ -324,7 +338,7 @@ header {border-top:6px solid #e1e4e7; display:block; background-color:#FFFFFF; f
 
 /* ######## 5 - Features Section Styles #########  */
 
-p.subti { color:#82898c; font-size:15px; margin:17px auto 0; width:490px; text-align:center; font-weight:300; display:block; line-height:38px;  }
+p.subti { color:#82898c; font-size:15px; margin:17px auto 0;  text-align:center; font-weight:300; display:block; line-height:38px;  }
 
 .featu { height:300px; }
 .featu-icon { width:180px; height:180px; display:block; border-radius:25px; margin:65px auto 0 ; font-family: "entypo"; text-align:center;
@@ -367,7 +381,7 @@ p.subti { color:#82898c; font-size:15px; margin:17px auto 0; width:490px; text-a
 .testimonials { height:730px; display:block; overflow:hidden; }
 .title-div2 { width:60px; border-radius:5px; height:4px; display:block; margin:25px auto 0; background-color:#ffffff; }
 .testimonials h3 { font-size:28px; color:#ffffff; text-align:center; text-transform:uppercase; letter-spacing:2px; padding:84px 0 0; }
-.testimonials p.subti { color:#ffffff; opacity:0.6; font-size:15px; margin:17px auto 0; width:490px; text-align:center; font-weight:300; display:block; line-height:38px;  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)" }
+.testimonials p.subti { color:#ffffff; opacity:0.6; font-size:15px; margin:17px auto 0; text-align:center; font-weight:300; display:block; line-height:38px;  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)" }
 
 .testi-img img { border-radius:400px; width:164px; height:164px }
 .testi-img  { border-radius:400px; width:164px; height:164px; margin:58px auto 0; position:relative;}
@@ -385,7 +399,7 @@ p.subti { color:#82898c; font-size:15px; margin:17px auto 0; width:490px; text-a
 
 .gallery { height:100%; display:block; padding:50px 0 0;}
 .gallery h3 { font-size:28px; color:#333940; text-align:center; text-transform:uppercase; letter-spacing:2px; }
-p.subti { color:#82898c; font-size:15px; margin:17px auto 0; width:490px; text-align:center; font-weight:300; display:block; line-height:38px;  }
+p.subti { color:#82898c; font-size:15px; margin:17px auto 0;; text-align:center; font-weight:300; display:block; line-height:38px;  }
 
 .gall { padding:68px 0 0; }
 .gall li { background-color:#ffffff; padding:9px; border:1px solid #e6e6e6; border-radius:4px; position:relative; }
@@ -462,7 +476,7 @@ img.c {  border-radius:400px;  position:absolute; left:0; top:0; z-index: 12; bo
 
 .cta { height:416px; display:block; }
 .cta h3 { font-size:28px; color:#ffffff; text-align:center; text-transform:uppercase; letter-spacing:2px; padding:35px 0 0; }
-.cta p.subti { color:#ffffff; opacity:0.6; font-size:15px; margin:17px auto 0; width:490px; text-align:center; font-weight:300; display:block; line-height:38px;  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; }
+.cta p.subti { color:#ffffff; opacity:0.6; font-size:15px; margin:17px auto 0; text-align:center; font-weight:300; display:block; line-height:38px;  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; }
 
 /* .cta a { width:190px; height:50px; display:block; border-radius:40px; background-color:#fdfdfd;  line-height:50px; box-shadow:0 3px 0 rgba(0,0,0,0.10); margin:45px auto 0; font-size:16px; font-weight:700; color:#7e8c9b; text-transform:uppercase; font-family: 'PT Sans', sans-serif; padding:0 0 0 30px;  } */
 
@@ -909,7 +923,7 @@ video#bgvid {
     .social-register a.facebook, .social-register a.twitter { float:none;   }
     .featu { height:900px; }
     .slider1 ul { width:480px!important; }
-    p.subti { width:460px;}
+    p.subti {}
     .slide1 .slide-img { float:none; width:100%; }
     .slide1 .slide-txt { float:none; width:100%; margin: 65px 0 0 0; }
     .slide1 .slide-img img {width:378px; margin:0 auto;  display:block;}
