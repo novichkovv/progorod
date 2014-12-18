@@ -235,7 +235,22 @@ body {
 
 /*########### Skins ###########*/
 
+footer { height:80px; background-color:#3a4046; display:block; }
+footer .privacy p { line-height:80px; font-size:13px; color:#727374; font-weight:300; }
+footer .privacy p a { color:#727374; }
 
+footer .privacy span { margin:0 5px 0; }
+
+footer .privacy { float:left; width:30%; }
+footer .privacy a:hover { color:#c1c1c1; }
+
+footer .copyr { float:left; text-align:center; width:40%; line-height:80px; font-weight:300; color:#727374; font-size:13px; }
+
+footer .copyr span { font-weight:400; color:#c1c1c1; }
+.social { width:30%; float:left; }
+.social li { font-family: "Entypo Social"; float:right; font-size:52px; margin:0 0 0 6px; line-height:80px;  }
+.social li a{ font-family: "Entypo Social"; float:right; font-size:52px; color:#ffffff; opacity:0.16; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=16)"; font-weight:400; }
+.social li a:hover { opacity:0.7;  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";  }
 
 /* ######## 1 - Reset Styles #########  */
 
