@@ -5,8 +5,10 @@
  * Date: 13.12.14
  * Time: 1:59
  */
-require_once('config.php');
-$con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+//require_once('config.php');
+//$con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+require_once('model.php');
+$model = new model('login_users');
 if(isset($_POST['signin']))
 {
     $warning = false;
@@ -16,21 +18,44 @@ if(isset($_POST['signin']))
         $warning = 'Email required!';
     elseif(!preg_match("/^.+@.+\..+$/",$_POST['email']))
         $warning = 'Incorrect email!';
+    elseif($user = $model->getByField('email', $_POST['email']))
+        $warning = 'Somebody already uses this email';
+    elseif($user = $model->getByField('username', $_POST['firstname']))
+        $warning = 'Somebody already uses this username';
     if(!$warning)
     {
-        $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
-        $email = mysqli_real_escape_string($con, $_POST['email']);
-        $date = date('Y-m-d H:i:s');
-        $query = '
-        INSERT INTO
-            login_users
-        SET
-            username = "' . $firstname . '",
-            email = "' . $email . '",
-            password = "0258dd41630f47abf515fd88bb373c21"
-            timestamp = "' . $date . '"
-        ';
-        mysqli_query($con, $query);
+        $row['username'] = $_POST['firstname'];
+        $row['email'] = $_POST['email'];
+        $letters = array();
+        for($i = 'a'; $i < 'z'; $i++)
+        {
+            $letters[] = $i;
+            $letters[] = strtoupper($i);
+        }
+        $password = '';
+        for($i = 0; $i <= 6; $i++)
+        {
+            if(rand(1,2) == 1)
+                $password .= $letters[rand(1,40)];
+            else
+                $password .= rand(1,9);
+
+        }
+        $row['password'] = md5($password);
+        $row['sdate'] = date('Y-m-d H:i:s');
+        $row['user_level'] = 'a:1:{i:0;s:1:"3";}';
+        $model->insert($row);
+//        $query = '
+//        INSERT INTO
+//            login_users
+//        SET
+//            firstnam = "' . $firstname .'",
+//            username = "' . $firstname . '",
+//            email = "' . $email . '",
+//            password = "0258dd41630f47abf515fd88bb373c21"
+//            timestamp = "' . $date . '"
+//        ';
+//        mysqli_query($con, $query);
         require_once('mailing_data.php');
         $subject = $subjects[0];
         $to = $_POST['email'];
@@ -41,7 +66,17 @@ if(isset($_POST['signin']))
 
         $headers .= 'To: ' . $_POST['firstname'] . ' <'.$to.'>' . "\r\n";
         $headers .= 'From: 21 Day Detox <no-reply@divinehealthdetox.com>' . "\r\n";
+        $mail .= 'You received this letter because you subscribed for 21 Dya Detox mailing on
+         <a href="http://divinehealthdetox.com">http://divinehealthdetox.com</a><br>'."\n";
+        $mail .= 'Your user data: <br>'."\n";
+        $mail .= '<b>username:</b> '.$row['username'].'<br>'."\n";
+        $mail .= '<b>password:</b> '.$password.'<br><br>'."\n";
+        $mail .= 'If you don\'t want to receive these emails, please click <a href="http://divinehealthdetox.com/detox/signout.php">here</a>'."\n";
+
+
         mail($to, $subject, $mail, $headers);
+
+
         header('Location: ' . SITE_DIR . 'success.html');
         exit;
     }
@@ -81,7 +116,7 @@ if(isset($_POST['signin']))
                                 <li>RENEW your mind by riding yourself of harmful toxins</li>
                             </ul>
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="firstname" placeholder="Enter your first name" value="<?php echo $_POST['firstname']; ?>" />
+                                <input type="text" class="form-control input-lg" name="firstname" placeholder="Enter username" value="<?php echo $_POST['firstname']; ?>" />
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control input-lg" name="email" placeholder="Enter your E-mail"  value="<?php echo $_POST['email']; ?>" />
