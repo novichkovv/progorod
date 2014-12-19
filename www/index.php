@@ -13,7 +13,7 @@ require_once(ROOT_DIR . 'application' . DS . 'core' . DS . 'config.php');
 /*
  * include autoloader
  */
-require_once(ROOT_DIR . 'application' . DS . 'core' . DS . 'autoloader.php' );
-session_start();
-$router = new router;
+//require_once(ROOT_DIR . 'application' . DS . 'core' . DS . 'autoloader.php' );
+//session_start();
+//$router = new router;
 
