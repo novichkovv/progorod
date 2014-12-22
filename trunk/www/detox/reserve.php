@@ -1,4 +1,9 @@
 <?php
+update login_users set sent=2, sdate='2014-12-16 10:00:00' where user_id > 7348
+
+*/5 * * * * /usr/bin/php /home/ddetox/public_html/detox/mailer.php
+
+alter table login_users alter sent set default 30
 /**
  * Created by PhpStorm.
  * User: novichkov
