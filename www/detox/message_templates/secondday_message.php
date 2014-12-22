@@ -33,13 +33,13 @@ $mail='
                 </li>
             </ul>
         </div>
-        <a href="http://www.drcolbert.com/21-day-detox-package-809.html"  target="_blank"><img src="' . SITE_DIR . 'mail/detoxpack_2_1.jpg"  style="width: 270px; float: left"></a>
-        <a href="http://www.drcolbert.com/21-day-detox-package-809.html"  target="_blank"><img src="' . SITE_DIR . 'images/button.png" style="margin-bottom: 30px;border-radius: 5px;box-shadow: 0 0 2px inset;" /></a>
+        <a href="http://www.drcolbert.com/21-day-detox-package-819.html"  target="_blank"><img src="' . SITE_DIR . 'mail/detoxpack_2_1.jpg"  style="width: 270px; float: left"></a>
+        <a href="http://www.drcolbert.com/21-day-detox-package-819.html"  target="_blank"><img src="' . SITE_DIR . 'images/button.png" style="margin-bottom: 30px;border-radius: 5px;box-shadow: 0 0 2px inset;" /></a>
     </div>
-    <div style="clear: both;"><a href="http://www.drcolbert.com/21-day-detox-package-809.html"  target="_blank"><img src="' . SITE_DIR . 'images/detoxpromobanner.jpg" /></a></div>
+    <div style="clear: both;"><a href="http://www.drcolbert.com/21-day-detox-package-819.html"  target="_blank"><img src="' . SITE_DIR . 'images/detoxpromobanner.jpg" /></a></div>
     <div style="clear: both">
-        <a href="' . SITE_DIR . 'reserve.php?day=' . $day . '&uid=' . $user['id'] . '&hash=' . md5($user['email']) .'">Click here if the email is not displayed corrected</a>
-    </div>
+        <a href="' . SITE_DIR . 'home.php?day=' . $day . '&uid=' . $user['user_id'] . '&hash=' . md5($user['email']) .'">Click here if the email is not displayed correctly</a>
+    <br><br>If you don\'t want to receive these emails, please click <a href="http://divinehealthdetox.com/detox/signout.php?mail='.$user['email'].'">here</a></div>
 </div>
 </body>
 </html>

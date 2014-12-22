@@ -5,12 +5,11 @@
  * Date: 13.12.14
  * Time: 1:59
  */
-//require_once('config.php');
-//$con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 require_once('model.php');
 $model = new model('login_users');
 if(isset($_POST['signin']))
 {
+    $u = $model->getByField('username', $_POST['firstname']);
     $warning = false;
     if(!$_POST['firstname'])
         $warning = 'First name required!';
@@ -18,9 +17,9 @@ if(isset($_POST['signin']))
         $warning = 'Email required!';
     elseif(!preg_match("/^.+@.+\..+$/",$_POST['email']))
         $warning = 'Incorrect email!';
-    elseif($user = $model->getByField('email', $_POST['email']))
-        $warning = 'Somebody already uses this email';
-    elseif($user = $model->getByField('username', $_POST['firstname']))
+//    elseif($user = $model->getByField('email', $_POST['email']))
+//        $warning = 'Somebody already uses this email';
+    elseif(trim($_POST['email']) != trim($u['email']))
         $warning = 'Somebody already uses this username';
     if(!$warning)
     {
@@ -42,20 +41,19 @@ if(isset($_POST['signin']))
 
         }
         $row['password'] = md5($password);
-        $row['sdate'] = date('Y-m-d H:i:s');
         $row['user_level'] = 'a:1:{i:0;s:1:"3";}';
-        $model->insert($row);
-//        $query = '
-//        INSERT INTO
-//            login_users
-//        SET
-//            firstnam = "' . $firstname .'",
-//            username = "' . $firstname . '",
-//            email = "' . $email . '",
-//            password = "0258dd41630f47abf515fd88bb373c21"
-//            timestamp = "' . $date . '"
-//        ';
-//        mysqli_query($con, $query);
+        $user = $model->getByField('email', $_POST['email']);
+        if($user['username'] == $_POST['firstname'])
+        {
+            $row = array();
+            $row['user_id'] = $user['user_id'];
+            $password = null;
+        }
+        $row['sdate'] = date('Y-m-d H:i:s');
+        $row['sent'] = 0;
+
+        $user_id = $model->insert($row);
+
         require_once('mailing_data.php');
         $subject = $subjects[0];
         $to = $_POST['email'];
@@ -64,18 +62,10 @@ if(isset($_POST['signin']))
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
-        $headers .= 'To: ' . $_POST['firstname'] . ' <'.$to.'>' . "\r\n";
-        $headers .= 'From: 21 Day Detox <no-reply@divinehealthdetox.com>' . "\r\n";
-        $mail .= 'You received this letter because you subscribed for 21 Dya Detox mailing on
-         <a href="http://divinehealthdetox.com">http://divinehealthdetox.com</a><br>'."\n";
-        $mail .= 'Your user data: <br>'."\n";
-        $mail .= '<b>username:</b> '.$row['username'].'<br>'."\n";
-        $mail .= '<b>password:</b> '.$password.'<br><br>'."\n";
-        $mail .= 'If you don\'t want to receive these emails, please click <a href="http://divinehealthdetox.com/detox/signout.php">here</a>'."\n";
-
+        $headers .= 'To: ' . $_POST['username'] . ' <'.$to.'>' . "\r\n";
+        $headers .= 'From: 21 Day Detox <info@divinehealthdetox.com>' . "\r\n";
 
         mail($to, $subject, $mail, $headers);
-
 
         header('Location: ' . SITE_DIR . 'success.html');
         exit;
@@ -87,6 +77,13 @@ if(isset($_POST['signin']))
 <head>
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/style.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        21 Days Detox Challenge | Sign In
+    </title>
+    <link rel="shortcut icon" href="<?php echo SITE_DIR; ?>images/favicon.ico" />
 </head>
 <body>
 <video autoplay="" poster="images/flowers.jpg" id="bg_video">
