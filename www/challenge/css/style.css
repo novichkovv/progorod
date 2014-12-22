@@ -3,7 +3,7 @@ body {
 }
 #sign-body {
     min-width: 500px;
-    background: url('../images/clouds.jpg') no-repeat;
+    background: url('../images/clouds4.jpg') repeat;
     /*background-color: rgba(36, 152, 246, 0.43);*/
 }
 #top {

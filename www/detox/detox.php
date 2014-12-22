@@ -33,7 +33,7 @@
         </nav>
     </div>
 </header>
-<div  id="slider" class="row">
+<div  id="slider" class="row  hidden-xs">
     <div class="container">
         <div class="col-md-2 col-sm-3 col-xs-5">
             <section class="slide1 wow bounceInLeft">
@@ -68,6 +68,43 @@
         </div>
     </div>
 </div>
+<div style="height: 100px; width: 100px" class="visible-xs"></div>
+<div id="slider-xs" class="slider-xs hidden">
+    <div class="row">
+        <div style="position: absolute; height: 100px; top: 100px; left: 0; right: 0;>
+            <section class="slide1 wow bounceInLeft">
+                <a href="../backend/salads.php" target="_blank"><img src="images/salad_icon.png" /></a>
+            </section>
+            <a href="../backend/smoothies.php" target="_blank"><img class="slide2" src="images/smoothie_icon.png" /></a>
+            <a href="../backend/soups.php" target="_blank"><img class="slide3" src="images/soup_icon.png" /></a>
+        </div>
+        <div  style="position: absolute; height: 100px; top: 300px;">
+            <br>
+            <br>
+            <div class="features" style="position: absolute;">
+                <div style="height: 50px;">
+                    <h3 class="wow fadeInUp slide1"  data-wow-delay="1.4s" style="width: 100%; position: absolute;top: 0;">
+                        <a href="../backend/salads.php" target="_blank">Salads</a>
+                    </h3>
+                    <h3 class="slide2" style="width: 100%;">
+                        <a href="../backend/smoothies.php" target="_blank">Smoothies</a>
+                    </h3>
+                    <h3 class="slide3" style="width: 100%;">
+                        <a href="../backend/soups.php" target="_blank">Soups</a>
+                    </h3>
+                </div>
+                <div class="title-div"></div>
+                <span>Aid your Detox</span>
+                <br><br>
+                <h3 class="wow fadeInDown"  data-wow-delay="0.7s">RECEPIES</h3>
+            </div>
+        </div>
+        <div class="hidden-xs col-sm-3 col-sm-offset-1 col-md-offset-3">
+            <a href="../backend/ebook.php" target="_blank"><img src="<?php echo SITE_DIR; ?>images/ebooklet.png"></a>
+        </div>
+    </div>
+</div>
+<div class="row"></div>
 <div class="container" style="text-align: center;">
     <?php if($video): ?>
     <div id="video" class="col-xs-12 col-sm-7">
@@ -165,23 +202,27 @@
         </div>
     </div>
     <img src="images/detox_timeline.jpg" width="100%">
-        <div class="gallery">
+    <div class="gallery">
+        <div class="col-xs-12">
             <div class="row" id="faq_content" style="padding-bottom:20px; padding-top: 20px;">
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4" style="color:#82898c; line-height:18px;">
+
+
+
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4" style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         How Much MaxOne Should I take?
                     </span>
                     <br><br>
                     Take one capsule in the morning after breakfast and one capsule after dinner before bed. It is critical.
                 </div>
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         How much Green Supremefood should I take?
                     </span>
                     <br><br>
                     Take one scoop of green supreme food in 4-6oz of water or any desired smoothie first thing in the morning.
                 </div>
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         How much Plant Protein should I take?
                     </span>
@@ -190,21 +231,21 @@
                 </div>
             </div>
             <div class="row" id="faq_content" style="padding-bottom:20px;">
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         How much Fiber Should I take?
                     </span>
                     <br><br>
                     Take one scoop of fiber with green supreme food or separately in 4-6oz of water. Stir and drink quickly as the fiber can coagulate quickly.
                     </div>
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         Do I need to take all four products during the 21 Day Detox?
                     </span>
                     <br><br>
                     If you are able to it is best to take all four nutritional products during the 21 Day Detox to maximize excretion of toxins. Even though it's best to aid the detox with all 4 products, you can a-la-carte the package or take none at all.
                 </div>
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         What are common symptoms of a detox?
                     </span>
@@ -213,7 +254,7 @@
                 </div>
             </div>
             <div class="row" id="faq_content" style="padding-bottom:20px;">
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         When should I not detox?
                     </span>
@@ -221,12 +262,12 @@
                     Consult your physicians before starting the detox program if you are: pregnant, nursing, or taking any medications.
                 </div>
 
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                         <span style="color:#175373; font-size:20px;">How do I know if I need to  detox?  </span>
                     <br><br>
                     You may need to detox if you are experiencing any of the following symptoms: fatigue, memory loss, premature aging, skin disorders, arthritis, hormone imbalances, anxiety, emotional disorders, cancer, heart disease.
                 </div>
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         What foods should I avoid during this 21 Day Detox?
                     </span>
@@ -236,21 +277,21 @@
                 </div>
             </div>
             <div class="row" id="faq_content" style="padding-bottom:20px;">
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         How much water should I drink?
                     </span>
                     <br>
                     Divide your weight by 2.2 (For example. If you weigh 140lbs (143 ÷ 2.2 = 65), so you should drink 65 oz water/ daily)
                 </div>
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         What water do you recommend?
                     </span>
                     <br><br>
                     I recommend drinking alkaline water. I have recommended Kagan and LifeIonizer for years. They are two brands I trust.
                 </div>
-                <div class="col-sm-offset-0 col-xs-offset-1 col-sm-4"  style="color:#82898c; line-height:18px;">
+                <div class="col-sm-offset-0 col-xs-12 col-sm-4"  style="color:#82898c; line-height:18px;">
                     <span style="color:#175373; font-size:20px;">
                         After the challenge begins, can I still sign up?
                     </span>
@@ -259,7 +300,7 @@
                 </div>
             </div>
             <div class="row" style="padding-bottom:30px">
-                <div class="col-md-8 col-md-offset-2" style="color:#82898c; line-height:18px; ">
+                <div class="col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" style="color:#82898c; line-height:18px; ">
                     <span style="color:#175373; font-size:20px;">
                         What foods can I eat during the 21 Day Detox?
                     </span>
@@ -271,6 +312,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
 <a href="http://www.drcolbert.com/21-day-detox-package-819.html" target="_blank"><img style="margin-bottom: -3px; width: 100%;" src="<?php echo SITE_DIR; ?>images/footer_banner.png" /></a>
 <footer>

@@ -1,5 +1,6 @@
 body {
-    min-width: 500px;
+    width: 100%;
+    /*min-width: 500px;*/
 }
 #top {
     background-color: #e2e9f5;
@@ -17,14 +18,14 @@ body {
     background-size: cover;
 }
 #bg {
-    position: absolute;
+    position: fixed;
     background: url(../images/bg.png) repeat;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
-    height: 100%;
+    /*width: 100%;*/
+    /*height: 100%;*/
     z-index: -101;
 }
 #bg {
@@ -54,18 +55,19 @@ body {
 }
 #description {
     color: #175373; list-style-image: url(../images/checkmark.png);
+    padding: 10px;
 }
 .panel, .btn, .input, .input-lg, .btn-lg, .form-control {
     border-radius: 0 !important;
 }
 #main-panel {
-    min-width: 350px;
+    /*min-width: 350px;*/
 }
 .input-lg {
-    min-width: 250px;
+    /*min-width: 250px;*/
 }
 #logo {
-    margin-top: 5%;
+    /*margin-top: 5%;*/
     position:relative;
     z-index:1;
 }
@@ -118,9 +120,21 @@ body {
     margin-top: 80px;
     background-image: url('../images/bg.png');
 }
+#slider-xs {
+    height: 450px;
+    margin-top: 80px;
+    background-image: url('../images/bg.png');
+}
+#slider-xs img {
+    margin: 20px auto;
+    height: 200px;
+}
 #slider img {
     margin-top: 20px;
     height: 170px;
+}
+#slider-xs a {
+    top: 100px;
 }
 .title-div {
     width: 60px;
@@ -163,7 +177,7 @@ body {
     clear: both;
 }
 .gallery {
-    margin: 30px 100px;
+    margin: 30px 10px;
 }
 #video h1{
     font-size: 35px;

@@ -37,7 +37,7 @@ $model = new model('login_users');
                         <div class="col-sm-8 col-sm-offset-2">
                             <div class="text-danger text-center"><h3><?php echo $warning; ?></h3></div>
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="firstname" placeholder="Enter username" value="<?php echo $_POST['firstname']; ?>" />
+                                <input type="text" class="form-control input-lg" name="username" placeholder="Enter username" value="<?php echo $_POST['firstname']; ?>" />
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control input-lg" name="email" placeholder="Enter your E-mail"  value="<?php echo $_POST['email']; ?>" />
