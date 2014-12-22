@@ -93,7 +93,7 @@ if($_SESSION['login'] == 'admin')
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
-			    <th>Emails sent</th>
+			                <th>Emails sent</th>
                             <th>Sign Up Date</th>
                         </tr>
                     </thead>

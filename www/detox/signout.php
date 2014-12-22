@@ -21,9 +21,15 @@ if(isset($_POST['sign_out']))
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/style.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        21 Days Detox Challenge | Sign Out
+    </title>
+    <link rel="shortcut icon" href="<?php echo SITE_DIR; ?>images/favicon.ico" />
 </head>
 <body>
 <div class="row" style="margin-top: 5%;">
