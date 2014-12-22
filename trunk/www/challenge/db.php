@@ -6,11 +6,11 @@
  * Time: 8:28
  */
 session_start();
-if(!$_SESSION['login'])
-{
-    echo 'fuck you';
-    exit;
-}
+//if(!$_SESSION['login'])
+//{
+//    echo 'fuck you';
+//    exit;
+//}
 require_once('config.php');
 $con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 ?>

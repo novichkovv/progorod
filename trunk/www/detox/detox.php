@@ -18,8 +18,6 @@
 </head>
 
 <body class="bs-docs-home">
-<a class="sr-only" href="#content">Skip to main content</a>
-
 <header class="navbar navbar-fixed-top docs-nav" id="top" role="banner">
     <div class="container">
         <div class="navbar-header">
@@ -39,10 +37,10 @@
     <div class="container">
         <div class="col-md-2 col-sm-3 col-xs-5">
             <section class="slide1 wow bounceInLeft">
-                <img src="images/salad_icon.png" />
+                <a href="../backend/salads.php" target="_blank"><img src="images/salad_icon.png" /></a>
             </section>
-            <img class="slide2" src="images/smoothie_icon.png" />
-            <img class="slide3" src="images/soup_icon.png" />
+            <a href="../backend/smoothies.php" target="_blank"><img class="slide2" src="images/smoothie_icon.png" /></a>
+            <a href="../backend/soups.php" target="_blank"><img class="slide3" src="images/soup_icon.png" /></a>
         </div>
         <div class="col-sm-4 col-md-3 col-xs-7">
             <br>
@@ -54,19 +52,19 @@
                 <br><br>
                 <div style="position: absolute; width: 90%; min-width: 250px;">
                     <h3 class="wow fadeInUp slide1"  data-wow-delay="1.4s" style="width: 100%;">
-                        Salads
+                        <a href="../backend/salads.php" target="_blank">Salads</a>
                     </h3>
                     <h3 class="slide2" style="width: 100%;">
-                        Smoothies
+                        <a href="../backend/smoothies.php" target="_blank">Smoothies</a>
                     </h3>
                     <h3 class="slide3" style="width: 100%;">
-                        Soups
+                        <a href="../backend/soups.php" target="_blank">Soups</a>
                     </h3>
                 </div>
             </div>
         </div>
         <div class="hidden-xs col-sm-3 col-sm-offset-1 col-md-offset-3">
-            <a href="http://divinehealthdetox.com/backend/ebook.php"><img src="<?php echo SITE_DIR; ?>images/ebooklet.png"></a>
+            <a href="../backend/ebook.php" target="_blank"><img src="<?php echo SITE_DIR; ?>images/ebooklet.png"></a>
         </div>
     </div>
 </div>
@@ -79,8 +77,12 @@
             <iframe id="video_frame" src="<?php echo strtr($video,array('watch?v='=>'embed/', 'https:'=>'', '&list' => '?list')); ?>" frameborder="0" width="560" height="315" allowfullscreen="allowfullscreen">        </iframe>
             <img src="images/video.jpg" />
         </div>
+        <a href="http://www.drcolbert.com/21-day-detox-package-819.html" target="_blank">
+            <img src="images/detoxpromobanner.jpg" style="width: 100%;" />
+        </a>
     </div>
     <div id="package" class="col-xs-12 col-sm-5">
+        <div class="hidden-xs"><br><br><br><br></div>
         <a href="http://www.drcolbert.com/21-day-detox-package-819.html" target="_blank"><img src="images/detoxpack.jpg"  style="width: 80%; margin: 0 10%; float: left"></a>
         <div style="float: left; font-size: 130%;">
             <br><br>
@@ -270,7 +272,7 @@
             </div>
         </div>
 </div>
-<a href=""><img style="margin-bottom: -3px; width: 100%;" src="<?php echo SITE_DIR; ?>images/footer_banner.png" /></a>
+<a href="http://www.drcolbert.com/21-day-detox-package-819.html" target="_blank"><img style="margin-bottom: -3px; width: 100%;" src="<?php echo SITE_DIR; ?>images/footer_banner.png" /></a>
 <footer>
     <div class="row">
         <div class="privacy">

@@ -17,14 +17,23 @@ $mail='
 <h1>21 Day Detox</h1></div>
 <div style="text-align: center;">
     <h2 style="color: #245269">' . $subject . '</h2>
-    <a href="' . $video . '" target="_blank">
+    <a href="' . SITE_DIR . 'home.php?day=0&uid=' . $user_id . '&hash=' . md5($_POST['email']) .'" target="_blank">
         <img src="' . SITE_DIR . 'mail/video.png" style="width: 460px;" />
     </a>
     <br><br>
      <div style="clear: both">
-        <a href="' . SITE_DIR . 'reserve.php?day=' . $day . '&uid=' . $user['id'] . '&hash=' . md5($user['email']) .'">Click here if the email is not displayed corrected</a>
+        <a href="' . SITE_DIR . 'home.php?day=0&uid=' . $user_id . '&hash=' . md5($_POST['email']) .'">Click here if the email is not displayed correctly</a>
     </div>
     ';
+$mail .= 'You received this letter because you had registered in 21 Day Detox mailing on
+         <a href="http://divinehealthdetox.com">http://divinehealthdetox.com</a><br><br>'."\n";
+if($password)
+{
+    $mail .= 'Your user data: <br>'."\n";
+    $mail .= '<b>username:</b> '.$_POST['username'].'<br>'."\n";
+    $mail .= '<b>password:</b> '.$password.'<br><br>'."\n";
+}
+$mail .= 'If you don\'t want to receive these emails, please click <a href="http://divinehealthdetox.com/detox/signout.php?mail='.$_POST['email'].'">here</a>'."\n";
 $mail .= '
 </div>
 </body>
