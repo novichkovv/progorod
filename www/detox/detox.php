@@ -73,6 +73,7 @@
     <div class="row">
         <div style="position: absolute; height: 100px; top: 100px; left: 0; right: 0;>
             <section class="slide1 wow bounceInLeft">
+            <section>
                 <a href="../backend/salads.php" target="_blank"><img src="images/salad_icon.png" /></a>
             </section>
             <a href="../backend/smoothies.php" target="_blank"><img class="slide2" src="images/smoothie_icon.png" /></a>
@@ -329,4 +330,5 @@
         <div class="footer-links"><h1><a href="http://www.drcolbert.com" target="_blank">Divine Health, Dr. Don Colbert, MD</a> | <a href="http://www.divinehelathwellness.com" target="_blank">Divine Health Wellness</a> | <a href="http://www.candoweightloss.com" target="_blank">"Can Do" Weightloss Challenge</a> | <a href="http://www.detox21dagen.nl/" target="_blank">21 Day Detox - Netherlands</a></h1></div>
     </div>
 </footer>
+</body>
 </html>

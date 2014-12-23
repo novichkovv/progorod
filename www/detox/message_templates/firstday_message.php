@@ -12,6 +12,7 @@ $mail = '
     <title></title>
 </head>
 <body>
+<div style="min-height: 1800px;">
 <div style="text-align: center;">
     <h2 style="color: cadetblue;">' . $subject . '</h2>
 ';
@@ -29,8 +30,9 @@ else
         <a href="' . SITE_DIR . 'home.php?day=' . $day . '&uid=' . $user['user_id'] . '&hash=' . md5($user['email']) .'">Click here if the email is not displayed correctly</a>
     </div>
 ';
-$mail .= 'If you don\'t want to receive these emails anymore, please click <a href="http://divinehealthdetox.com/detox/signout.php?mail='.$user['email'].'">here</a>'."\n";
+$mail .= '<br><br>If you don\'t want to receive these emails anymore, please click <a href="http://divinehealthdetox.com/detox/signout.php?mail='.$user['email'].'">here</a>'."\n";
 $mail .= '
+</div>
 </div>
 </body>
 </html>

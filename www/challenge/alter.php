@@ -22,9 +22,17 @@ $model = new model('login_users');
     <link rel="shortcut icon" href="<?php echo SITE_DIR; ?>images/favicon.png" />
 </head>
 <body id="sign-body">
+<!--<h3 style="color: #666; margin-left: 20px;">Questions About the Detox?<br>-->
+<!-- Call <span style="color: black; font-size: 30px;">407-732-6952<span></h3>-->
 <div class="spacer hidden-xs"></div>
 <div class="row">
-    <div class="col-xs-offset-0 col-xs-12 col-sm-offset-3 col-sm-6">
+    <div class="col-sm-3 hidden-xs text-center">
+        <img src="images/1.png">
+        <img src="images/2.png">
+        <img src="images/6.png">
+
+    </div>
+    <div class="col-xs-offset-0 col-xs-12 col-sm-offset-0 col-sm-6">
         <div class="panel panel-info" id="main-panel">
             <div id="header">
                 <div class="col-sm-4">
@@ -73,25 +81,30 @@ $model = new model('login_users');
             </div>
         </div>
     </div>
-</div>
-<div class="spacer hidden-xs"></div>
-<div class="container" style="padding: 37px 0 23px; background-color: #387b99; width: 100%; text-align: center;">
-    <h1 style="color: #fff; font-size: 35px;">I DON'T KNOW WHAT TO WRITE HERE</h1>
-</div>
-<div class="container" style="padding: 30px 0; background-color: #fff; width: 100%;">
-    <div class="row hidden-xs text-center">
-        <img src="images/6.png" />
-        <img src="images/4.png" />
-        <img src="images/5.png" />
-    </div>
-    <div class="row hidden-xs text-center">
-        <img src="images/2.png" />
-        <img src="images/3.png" />
-        <img src="images/1.png" />
+    <div class="col-sm-3 hidden-xs text-center">
+        <img src="images/3.png">
+        <img src="images/4.png">
+        <img src="images/5.png">
     </div>
 </div>
+<!--<div class="spacer hidden-xs"></div>-->
+<!--<div class="container" style="padding: 37px 0 23px; background-color: #387b99; width: 100%; text-align: center;">-->
+<!--    <h1 style="color: #fff; font-size: 35px;">I DON'T KNOW WHAT TO WRITE HERE</h1>-->
+<!--</div>-->
+<!--<div class="container" style="padding: 30px 0; background-color: #fff; width: 100%;">-->
+<!--    <div class="row hidden-xs text-center">-->
+<!--        <img src="images/6.png" />-->
+<!--        <img src="images/4.png" />-->
+<!--        <img src="images/5.png" />-->
+<!--    </div>-->
+<!--    <div class="row hidden-xs text-center">-->
+<!--        <img src="images/2.png" />-->
+<!--        <img src="images/3.png" />-->
+<!--        <img src="images/1.png" />-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="row visible-xs" style="background-color: #fff;">
+<div class="row visible-xs">
     <div class="text-center">
         <img src="images/4.png" />
         <img src="images/5.png" />

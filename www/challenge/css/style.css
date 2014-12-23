@@ -1,8 +1,8 @@
 body {
-    min-width: 500px;
+    /*min-width: 500px;*/
 }
 #sign-body {
-    min-width: 500px;
+    /*min-width: 500px;*/
     background: url('../images/clouds4.jpg') repeat;
     /*background-color: rgba(36, 152, 246, 0.43);*/
 }
@@ -12,41 +12,27 @@ body {
 }
 #questions {
     color: #fff;
-    float: right;
-    margin: 38px 40px 40px 0;
+    /*float: right;*/
+    margin: 38px auto 0;
     font-size: 24px;
+}
+#questions_div {
+    padding: 18px 0 0 30px;
+}
+.spacer {
+    height: 50px;
+    width: 100%;
 }
 #header {
     background-image:  url('../images/cando_header.png')!important;
     width: 100%;
-    height: 90px;
-    background-position: 1% 1%;
+    min-height: 90px;
     text-align: center;
-
-}
-
-@keyframes myfirst
-{
-    0%{opacity: 0;}
-    50%{opacity: 0;}
-    100% {opacity: 1;}
-}
-
-@-moz-keyframes myfirst /* Firefox */
-{
-    0%{opacity: 0;}
-    50%{opacity: 0;}
-    100% {opacity: 1;}
-}
-
-@-webkit-keyframes myfirst /* Safari Рё Chrome */
-{
-    0%{opacity: 0;}
-    50%{opacity: 0;}
-    100% {opacity: 1;}
 }
 #description {
-    color: #175373; list-style-image: url(../images/checkmark.png);
+    color: #175373;
+    list-style-image: url(../images/checkmark.png);
+    margin-left: 15px;
 }
 .panel, .btn, .input, .input-lg, .btn-lg, .form-control {
     border-radius: 0 !important;
@@ -55,11 +41,11 @@ body {
     padding: 15px 70px  !important;
 }
 #main-panel {
-    width: 500px;
+    /*width: 500px;*/
     margin: auto;
 }
 .input-lg {
-    min-width: 250px;
+    /*min-width: 250px;*/
 }
 #logo {
     position:relative;

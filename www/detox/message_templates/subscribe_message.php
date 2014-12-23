@@ -35,7 +35,7 @@ if($password)
     $mail .= '<b>username:</b> '.$_POST['firstname'].'<br>'."\n";
     $mail .= '<b>password:</b> '.$password.'<br><br>'."\n";
 }
-$mail .= 'If you don\'t want to receive these emails, please click <a href="http://divinehealthdetox.com/detox/signout.php?mail='.strtolower($_POST['email']).'">here</a>'."\n";
+$mail .= '<br><br>If you don\'t want to receive these emails, please click <a href="http://divinehealthdetox.com/detox/signout.php?mail='.strtolower($_POST['email']).'">here</a>'."\n";
 $mail .= '
     </div>
    </div>
