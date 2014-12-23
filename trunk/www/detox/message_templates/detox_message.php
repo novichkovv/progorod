@@ -13,6 +13,7 @@ $mail='
     <title></title>
 </head>
 <body>
+<div style="min-height: 900px;">
 <div style="text-align: center;color: #245269; width: 600px;"><h1 class="animate_fade">DAY ' . ($day - 3) . '</h1></div>
 <div style="text-align: center; width: 600px;">
     <div class="animate_left" style="width: 600px; text-align: center;"><h2 style="color: cadetblue; margin: 0 auto 20px; position: relative;">' . preg_replace("/Day\s[0-9]{1,2}\s-/", '', $subject) . '</h2></div>
@@ -48,6 +49,7 @@ $mail='
         <a href="' . SITE_DIR . 'home.php?day=' . $day . '&uid=' . $user['user_id'] . '&hash=' . md5($to) .'">Click here if the email is not displayed corrected</a>
         <br><br>If you don\'t want to receive these emails anymore, please click <a href="http://divinehealthdetox.com/detox/signout.php?mail='.$to.'">here</a>
     </div>
+</div>
 </div>
 </body>
 </html>
