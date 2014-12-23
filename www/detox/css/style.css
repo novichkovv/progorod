@@ -935,12 +935,12 @@ video#bgvid {
     .main-section .main-left a { float:none; margin:45px auto 0; }
     .vjs-poster { background-size:100% auto!important; }
     #overlay_form { width:300px; }
-    #overlay_form p.subti { width:280px; }
+    #overlay_form p.subti { }
     .form-contact { width:300px; }
     #overlay_form2 { width:300px; }
-    #overlay_form2 p.subti { width:280px; }
+    #overlay_form2 p.subti { }
     #overlay_form3 { width:300px; }
-    #overlay_form3 p.subti { width:280px; }
+    #overlay_form3 p.subti { }
     .wrap input, .wrap textarea { width:260px; }
     .social-register { width:300px; height:130px; }
     .social-register p { display:none; }
@@ -976,7 +976,7 @@ video#bgvid {
     tr td:first-child {   text-align: left; }
     .wrap textarea { width:260px!important;  max-width: 260px;
         min-width: 260px; }
-    .cta p.subti { width:470px; }
+    .cta p.subti {  }
     footer .privacy p { font-size:8px; }
 }
 
@@ -1024,7 +1024,6 @@ video#bgvid {
     .social-register a.facebook, .social-register a.twitter { float:none;   }
     .featu { height:900px; }
     .slider1 ul { width:300px!important; }
-    p.subti { width:300px;}
     .slide1 .slide-img { float:none; width:100%; }
     .slide1 .slide-txt { float:none; width:100%; margin: 65px 0 0 0; }
     .slide1 .slide-img img {width:300px; margin:0 auto;  display:block;}
