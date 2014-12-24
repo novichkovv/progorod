@@ -40,6 +40,7 @@
                     <form name="sign_in" action="" method="post">
 
                         <div class="col-sm-8 col-sm-offset-2" >
+                            <?php if(!$_POST['signin']): ?>
                             <ul id="description">
                                 <li>
                                     The Fastest Way to Burn Fat in 42 Days
@@ -51,15 +52,16 @@
                                     Free Video's of Dr. Colbert Walking You through the Program
                                 </li>
                             </ul>
-                            <div class="text-danger text-center"><h3><?php echo $warning; ?></h3></div>
+                            <?php endif; ?>
+                            <div class="text-danger text-center" style="font-size: 20px; padding: 10px;" ><h3><?php echo $warning; ?></h3></div>
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="user_login" placeholder="Enter username" value="<?php echo $_POST['firstname']; ?>" />
+                                <input type="text" class="form-control input-lg" name="user_login" placeholder="Enter username" value="<?php echo $_POST['user_login']; ?>" />
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control input-lg" name="email" placeholder="Enter your E-mail"  value="<?php echo $_POST['email']; ?>" />
+                                <input type="email" class="form-control input-lg" name="user_email" placeholder="Enter your E-mail"  value="<?php echo $_POST['user_email']; ?>" />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="phone" placeholder="Enter your Phone Number"  value="<?php echo $_POST['email']; ?>" />
+                                <input type="text" class="form-control input-lg" name="phone" placeholder="Enter your Phone Number"  value="<?php echo $_POST['phone']; ?>" />
                             </div>
                             <br>
                             <div class="form-group text-center">

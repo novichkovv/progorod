@@ -23,6 +23,11 @@ body {
     height: 50px;
     width: 100%;
 }
+.header {
+    height: 200px;
+    background-color: #fff;
+    width: 100%;
+}
 #header {
     background-image:  url('../images/cando_header.png')!important;
     width: 100%;
