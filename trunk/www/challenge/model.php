@@ -50,10 +50,10 @@ class model
     }
     public function insert(array $row, $show = false)
     {
-        if(isset($row['user_id']))
+        if(isset($row['ID']))
         {
-            $id = $row['user_id'];
-            unset($row['user_id']);
+            $id = $row['ID'];
+            unset($row['ID']);
         }
         $rows = array();
         $names = array();
@@ -68,9 +68,9 @@ class model
         if(isset($id))
         {
             $stm = $this->pdo->prepare(
-                'UPDATE ' . $this->table . ' SET ' . implode(', ', $data) . ' WHERE user_id = :user_id'
+                'UPDATE ' . $this->table . ' SET ' . implode(', ', $data) . ' WHERE ID = :ID'
             );
-            $row['user_id'] = $id;
+            $row['ID'] = $id;
         }
         else $stm = $this->pdo->prepare(
             'INSERT INTO ' . $this->table . ' (' . implode(', ', $rows) . ') VALUES ( ' . implode(', ', $names) . ')'
@@ -82,7 +82,7 @@ class model
     }
     public function getById($id)
     {
-        $stm = $this->pdo->prepare('SELECT * FROM ' . $this->table . ' WHERE id = ?');
+        $stm = $this->pdo->prepare('SELECT * FROM ' . $this->table . ' WHERE ID = ?');
         return $this->get_row($stm, array($id));
     }
     public function getByField($field, $value, $show_all = false, $order = "", $limit = '', $show = false)
@@ -104,10 +104,10 @@ class model
     {
         if($id == '')return;
         $stm = $this->pdo->prepare('
-        DELETE FROM ' . $this->table . ' WHERE id = :id
+        DELETE FROM ' . $this->table . ' WHERE ID = :ID
         ');
         if($show)echo $stm->queryString;
-        if($stm->execute(array('id'=>$id)))
+        if($stm->execute(array('ID'=>$id)))
             return true;
         else
             return false;
@@ -139,7 +139,7 @@ class model
     public function countByField($field, $value)
     {
         $stm = $this->pdo->prepare('
-        SELECT COUNT(id) count FROM ' . $this->table . ' WHERE ' . $field . ' = :' .$field . '
+        SELECT COUNT(ID) count FROM ' . $this->table . ' WHERE ' . $field . ' = :' .$field . '
         ');
         return $this->get_row($stm, array($field => $value))['count'];
     }
