@@ -5,6 +5,8 @@
  * Date: 13.12.14
  * Time: 1:59
  */
+session_start();
+$_SESSION['wsl::plugin']= 'WordPress Social Login 2.1.5';
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +22,7 @@
     <link rel="shortcut icon" href="<?php echo SITE_DIR; ?>images/favicon.png" />
 </head>
 <body id="sign-body">
+<a href="../diet-plan/">a</a>
 <div class="spacer hidden-xs"></div>
 <div class="row">
     <div class="col-xs-offset-0 col-xs-12 col-sm-offset-3 col-sm-6">

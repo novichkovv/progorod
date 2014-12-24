@@ -17,10 +17,10 @@ function send($to, $subject, $template, $user, array $content = array(), $day = 
     echo $headers;
     echo $mail;
     //mail($to, $subject, $mail, $headers);
-//    if($user['ID'])
-//    {
-//        $model = new model('wp_users');
-//        $model->insert(array('ID' => $user['ID'], 'sent' => $day));
-//    }
+    if($user['ID'])
+    {
+        $model = new model('wp_users');
+        $model->insert(array('ID' => $user['ID'], 'sent' => $day));
+    }
 }
 
