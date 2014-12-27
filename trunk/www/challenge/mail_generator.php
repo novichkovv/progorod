@@ -14,9 +14,9 @@ function send($to, $subject, $template, $user, array $content = array(), $day = 
 
     $headers .= 'To: ' . $user['user_login'] . ' <'.$to.'>' . "\r\n";
     $headers .= 'From: "Can Do" Challenge <info@divinehealthdetox.com>' . "\r\n";
-    echo $headers;
-    echo $mail;
-    //mail($to, $subject, $mail, $headers);
+//    echo $headers;
+//    echo $mail;
+    mail($to, $subject, $mail, $headers);
     if($user['ID'])
     {
         $model = new model('wp_users');
