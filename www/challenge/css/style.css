@@ -31,6 +31,13 @@ body {
 .video {
     box-shadow: 0 0 20px;
 }
+.package {
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0 5px #85c0ca inset;
+padding:4px;
+}
 #header {
     background-image:  url('../images/cando_header.png')!important;
     width: 100%;
@@ -285,6 +292,39 @@ outline:none;
 #faq_content span {
     padding-top: 10px;
 }
+
+
+/*----*****---- << Toggle & Accordion >> ----*****----*/
+
+
+
+.dt-sc-toggle-frame-set { float:left; width:100%; margin:0px; padding:0px; }
+
+.dt-sc-toggle-frame h5.dt-sc-toggle-accordion, .dt-sc-toggle-frame h5.dt-sc-toggle { clear:both; margin:0px; background:#f5f5f5; }
+
+.dt-sc-toggle-frame h5.dt-sc-toggle-accordion span, .dt-sc-toggle-frame h5.dt-sc-toggle span { display:block; padding:17px 15px 16px 43px; border-bottom:5px solid #eff0f0; }
+
+.dt-sc-toggle-frame h5.dt-sc-toggle-accordion.active span, .dt-sc-toggle-frame h5.dt-sc-toggle.active span, .dt-sc-toggle-frame h5.dt-sc-toggle-accordion.active span:hover { color:grey !important; }
+
+.dt-sc-toggle-content { clear:both; padding:20px 0px 20px; display:none; }
+
+
+
+h5.dt-sc-toggle, h5.dt-sc-toggle-accordion { clear:both; position:relative; padding-left:25px; -webkit-transition:all 300ms linear; -moz-transition:all 300ms linear; -o-transition:all 300ms linear; -ms-transition:all 300ms linear; transition:all 300ms linear; }
+
+h5.dt-sc-toggle:before, h5.dt-sc-toggle-accordion:before { font-family:FontAwesome; font-style:normal; font-weight:normal; text-decoration:inherit; font-size:18px; position:absolute; top:0px; left:0px; content:"▼"; }
+
+h5.dt-sc-toggle.active:before, h5.dt-sc-toggle-accordion.active:before { content:"▲"; }
+
+.dt-sc-toggle-frame h5.dt-sc-toggle-accordion.active span, .dt-sc-toggle-frame h5.dt-sc-toggle.active a, .dt-sc-toggle-frame h5.dt-sc-toggle-accordion.active:before, .dt-sc-toggle-frame h5.dt-sc-toggle.active:before, .dt-sc-toggle-frame h5.dt-sc-toggle-accordion.active:hover, .dt-sc-toggle-frame h5.dt-sc-toggle.active:hover { color:grey; }
+
+
+
+.dt-sc-toggle-frame h5.dt-sc-toggle-accordion:before, .dt-sc-toggle-frame h5.dt-sc-toggle:before { top:17px; left:15px; }
+
+
+
+.dt-sc-toggle-frame h5.dt-sc-toggle, .dt-sc-toggle-frame h5.dt-sc-toggle-accordion { padding:0px; }
 
 
 

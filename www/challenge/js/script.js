@@ -8,11 +8,17 @@ $(document).ready(function()
     {
         var frame = $("#video_frame");
         $(".video-container img").fadeOut('slow');
-        $(frame).attr('src',$(frame).attr('src') + '&autoplay=1');
+        $(frame).attr('src',$(frame).attr('src') + '?autoplay=1');
     });
-    var wow = new WOW();
-    wow.init();
+    //var wow = new WOW();
+    //wow.init();
     slider(1);
+    $(".dt-sc-toggle").click(function()
+    {
+        if($(this).hasClass('active'))$(this).removeClass('active');
+        else $(this).addClass('active');
+        $(this).parent().find('.dt-sc-toggle-content').slideToggle();
+    });
 });
 function slider(i)
 {
