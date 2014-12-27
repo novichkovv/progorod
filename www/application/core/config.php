@@ -21,7 +21,7 @@ define('HOST', 'localhost');
 define('CHARSET', 'utf-8');
 define('DEFAULT_DB', 'common');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '18A5pq86');
+define('DB_PASSWORD', '');
 define ('SMARTY_DIR', ROOT_DIR . 'libs' . DS . 'Smarty' . DS . 'libs' . DS);
 define('MEMCACHED', false);
 
