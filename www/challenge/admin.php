@@ -57,11 +57,12 @@ if(!$_SESSION['login'])
     </div>
     ');
 }
+
 if($_SESSION['login'] == 'admin')
 {
 
     $con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $query = 'SELECT * FROM login_users ORDER BY user_id DESC';
+    $query = 'SELECT * FROM wp_users ORDER BY ID DESC';
     $res = mysqli_query($con, $query);
     if(isset($_POST['export']))
     {
@@ -80,7 +81,7 @@ if($_SESSION['login'] == 'admin')
     echo '
 <br><br><br>
     <div class="row">
-        <div class="col-md-10 col-md-offset-1 col-sm-12">
+        <div class="col-md-12 col-md-offset-0 col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">21 Days Detox Program Subscribers</h3>
@@ -92,6 +93,7 @@ if($_SESSION['login'] == 'admin')
                         <tr>
                             <th>Name</th>
                             <th>Username</th>
+                            <th>phone</th>
                             <th>Email</th>
 			    <th>Emails sent</th>
                             <th>Sign Up Date</th>
@@ -104,13 +106,16 @@ if($_SESSION['login'] == 'admin')
          echo '
                         <tr>
                             <td>
-                                ' . $row['name'] . '
+                                ' . $row['display_name'] . '
                             </td>
                             <td>
-                                ' . $row['username'] . '
+                                ' . $row['user_login'] . '
                             </td>
                             <td>
-                                ' . $row['email'] . '
+                                ' . $row['phone'] . '
+                            </td>
+                            <td>
+                                ' . $row['user_email'] . '
                             </td>
 				            <td>
                                 ' . $row['sent'] . '

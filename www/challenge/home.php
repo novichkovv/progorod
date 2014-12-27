@@ -5,6 +5,7 @@
  * Date: 24.12.14
  * Time: 21:58
  */
+session_start();
 require_once('model.php');
 require_once('mailing_data.php');
 $model = new model('wp_users');
@@ -31,5 +32,6 @@ if(!$subject)
 //    header('Location: http://1000lbschallenge.com/404/');
 //    exit;
 }
+$_SESSION['user'] = $user;
 $video = $data[$_GET['day']]['video'];
 require_once('templates/home.php');

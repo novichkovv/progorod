@@ -8,7 +8,10 @@
 error_reporting(E_ALL & ~E_NOTICE);
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT_DIR', realpath($_SERVER['DOCUMENT_ROOT']) . DS );
-require_once(ROOT_DIR . 'application' . DS . 'core' . DS . 'config.php');
+if(file_exists(ROOT_DIR . 'application' . DS . 'core' . DS . 'config.php'))
+    require_once(ROOT_DIR . 'application' . DS . 'core' . DS . 'config.php');
+else
+    require_once('var/www/pro-gorod/application' . DS . 'core' . DS . 'config.php');
 
 /*
  * include autoloader

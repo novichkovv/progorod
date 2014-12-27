@@ -58,6 +58,7 @@ if(isset($_POST['signin']))
         $user = $model->getById($id);
         require_once('mail_generator.php');
         send($user['user_email'], 'Here are Your Next Steps', 'subscribe', $user, array('password' => $password));
+        header('Location: success.php');
     }
 }
 require_once('templates/index.php');
