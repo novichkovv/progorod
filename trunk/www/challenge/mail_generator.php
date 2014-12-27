@@ -13,9 +13,9 @@ function send($to, $subject, $template, $user, array $content = array(), $day = 
     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
     $headers .= 'To: ' . $user['user_login'] . ' <'.$to.'>' . "\r\n";
-    $headers .= 'From: "Can Do" Challenge <info@divinehealthdetox.com>' . "\r\n";
-//    echo $headers;
-//    echo $mail;
+    $headers .= 'From: "Can Do" Challenge <info@1000lbschallenge.com>' . "\r\n";
+   // echo $headers;
+    //echo $mail;
     mail($to, $subject, $mail, $headers);
     if($user['ID'])
     {

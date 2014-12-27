@@ -23,6 +23,7 @@
 </head>
 <body id="sign-body">
 <img src="images/cando3.png" />
+<div class="hidden-xs" style="position: relative; float: right; top: 30px; color: #fff; font-size: 25px; margin-right: 10px;">Questions? (407)732-6952</div>
 <div class="header">
     <div class="route hidden-xs">
         <div style="margin: auto;">
@@ -76,7 +77,7 @@
                     <iframe id="video_frame" src="<?php echo strtr($video, array('watch?v='=>'embed/', 'https:'=>'', '&list' => '?list')); ?>" frameborder="0" width="560" height="315" allowfullscreen="allowfullscreen">        </iframe>
                     <img src="<?php echo SITE_DIR; ?>images/video2.jpg" />
                 </div>
-                <img src="<?php echo SITE_DIR; ?>images/5percent.jpg" style="width: 100%;" />
+                <a target="_blank" href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html"><img src="<?php echo SITE_DIR; ?>images/5percent.jpg" style="width: 100%;" /></a>
             </div>
         </div>
         <div class="col-sm-4 col-md-6">
@@ -85,7 +86,7 @@
                     <table style="width: 100%; height: 100%;" class="visible-md visible-lg">
                         <tr>
                             <td style="width: 56%;">
-                                <img src="<?php echo SITE_DIR; ?>images/cando_delux_1.jpg" style="width: 100%;" />
+                                <a target="_blank" href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html"><img src="<?php echo SITE_DIR; ?>images/cando_delux_1.jpg" style="width: 100%;" /></a>
                             </td>
                             <td style="vertical-align: middle; padding: 10px;">
                                 <h3>The Deluxe "Can Do" Weightloss System Includes:</h3>
@@ -100,13 +101,14 @@
                     </table>
                     <div class="visible-sm visible-xs">
                         <div class="col-md-7">
-                            <img src="<?php echo SITE_DIR; ?>images/cando_delux_1.jpg" style="width: 100%;" />
+                            <a target="_blank" href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html"><img src="<?php echo SITE_DIR; ?>images/cando_delux_1.jpg" style="width: 100%;" /></a>
                         </div>
                         <div class="col-md-5" style="padding: 10px 0;">
                             <h3>The Deluxe "Can Do" Weightloss System Includes:</h3>
                             <ul id="description" style="position: relative; bottom: 0px; text-align: left; font-size: 14px; width: 90%; margin-left: 30px; ">
                                 <li>Plant Protein</li>
-                                <li>Green Supremefood</li>
+                                <li>Green Supremefood
+                                </li>
                                 <li>Rapid Waist Reduction Drops</li>
                             </ul>
                         </div>
@@ -115,7 +117,7 @@
                 </div>
 
                 <div style="width: 100%;  background-color: #eee;">
-                    <a href=""><img src="<?php echo SITE_DIR; ?>images/button.png" style="width: 80%; margin: 3.6% auto; border-radius: 4px; box-shadow: 0 0 2px;"/></a>
+                    <a target="_blank" href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html"><img src="<?php echo SITE_DIR; ?>images/button.png" style="width: 80%; margin: 3.6% auto; border-radius: 4px; box-shadow: 0 0 2px;"/></a>
                 </div>
             </div>
         </div>

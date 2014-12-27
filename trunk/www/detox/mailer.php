@@ -16,9 +16,12 @@ while($row = $res->fetch_assoc())
 {
     $users[] = $row;
 }
+$i = 0;
     foreach($users as $k => $user)
     {
-        $day = date_diff(new DateTime(), new DateTime($user['sdate']))->days;
+        if($i == 30)break;
+        $date = date('Y-m-d 05:00:00', strtotime($user['sdate']));
+        $day = date_diff(new DateTime(), new DateTime($date))->days;
         if($day == 0)continue;
         if($user['sent'] >= $day)continue;
         $to = $user['email'];
@@ -41,5 +44,6 @@ while($row = $res->fetch_assoc())
         mail($to, $subject, $mail, $headers);
         $query = 'UPDATE login_users SET sent = "' . $day . '" WHERE user_id = "' . $user['user_id'] . '"';
         mysqli_query($con, $query);
+        $i ++;
     }
 

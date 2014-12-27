@@ -19,7 +19,7 @@ $data[2] = array(
 );
 $data[3] = array(
     'subject' => 'Here is How to Customize this Challenge for You',
-    'video' => 'https://www.youtube.com/my_videos?o=U&pi=3'
+    'video' => 'https://www.youtube.com/watch?v=9G9NBbl7yeU'
 );
 $data[4] = array(
     'subject' => 'Last Call: Challenge Begins Tomorrow!',
