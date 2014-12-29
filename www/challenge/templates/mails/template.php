@@ -14,7 +14,7 @@ $mail = '
 <body>
     <div style="min-height: ' . $min_height . 'px;">
 ';
-include($template . '.php');
+include(ROOT_DIR . 'templates' . DS . 'mails' . DS . $template . '.php');
 $mail .= '
         <div style="clear: both; text-align: center;">
             <a href="' . SITE_DIR . 'home.php?day=' . $day . '&uid=' . $user['ID'] . '&hash=' . md5($to) .'">Click here if the email is not displayed corrected</a>

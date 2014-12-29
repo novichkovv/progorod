@@ -5,7 +5,7 @@
  * Date: 19.12.14
  * Time: 18:12
  */
-require_once('config.php');
+require_once(realpath($_SERVER['DOCUMENT_ROOT']) . DIRECTORY_SEPARATOR . 'challenge' . DIRECTORY_SEPARATOR . 'config.php');
 class model
 {
     public $table;

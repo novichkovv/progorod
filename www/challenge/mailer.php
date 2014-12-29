@@ -35,4 +35,5 @@ foreach($users as $k => $user)
     send($to, $subject, 'main', $user, array('subject' => $subject, 'video' => $video), $day);
     $i++;
 }
+echo $i;
 

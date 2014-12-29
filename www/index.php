@@ -19,8 +19,8 @@ if(isset($_POST['signin']))
         $warning = 'Incorrect email!';
 //    elseif($user = $model->getByField('email', $_POST['email']))
 //        $warning = 'Somebody already uses this email';
-    elseif(trim($u['email']) && trim(strtolower($_POST['email'])) != trim(strtolower($u['email'])))
-        $warning = 'Somebody already uses this username';
+//    elseif(trim($u['email']) && trim(strtolower($_POST['email'])) != trim(strtolower($u['email'])))
+//        $warning = 'Somebody already uses this username';
     if(!$warning)
     {
         $row['username'] = $_POST['firstname'];
@@ -113,10 +113,10 @@ if(isset($_POST['signin']))
                                 <li>RENEW your mind by riding yourself of harmful toxins</li>
                             </ul>
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="firstname" placeholder="Enter username" value="<?php echo $_POST['firstname']; ?>" />
+                                <input type="text" class="form-control input-lg" name="firstname" placeholder="Enter Your First Name" value="<?php echo $_POST['firstname']; ?>" />
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control input-lg" name="email" placeholder="Enter your E-mail"  value="<?php echo $_POST['email']; ?>" />
+                                <input type="email" class="form-control input-lg" name="email" placeholder="Enter Your E-mail"  value="<?php echo $_POST['email']; ?>" />
                             </div>
                             <div class="form-group text-center">
                                 <input type="submit" class="btn btn-lg btn-primary" name="signin" value="JOIN THE 21 DAY DETOX" />

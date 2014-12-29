@@ -5,7 +5,7 @@ RewriteRule ^index\.php$ - [L]
 RewriteRule ^challenge/(.*)\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+RewriteRule . /index_wp.php [L]
 </IfModule>
 
 # BEGIN s2Member GZIP exclusions
