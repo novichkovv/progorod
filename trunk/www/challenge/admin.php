@@ -26,7 +26,7 @@ if(!$_SESSION['login'])
 {
     echo ('
     <br><br><br><br><br><br><br>
-    <div class="row">
+    <div class="row" style="margin: 30px;">
         <form name="login" action="controller.php" method="post">
         <div class="col-xs-offset-4 col-xs-4">
             <div class="panel panel-warning">
@@ -84,7 +84,7 @@ if($_SESSION['login'] == 'admin')
         <div class="col-md-12 col-md-offset-0 col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">21 Days Detox Program Subscribers</h3>
+                    <h3 class="panel-title">"Can Do" Challenge Subscribers</h3>
                 </div>
                 <div class="panel-body">
                 <div class="table">

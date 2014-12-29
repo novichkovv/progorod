@@ -7,9 +7,10 @@
  */
 
 define ('DS', DIRECTORY_SEPARATOR);
-define ('SITE_DIR', 'http://' . ( $_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : 'lonty.ru') . '/challenge/');
+define('ROOT_DIR', realpath($_SERVER['DOCUMENT_ROOT']) . DS . 'challenge' . DS);
+define ('SITE_DIR', 'http://' . ( $_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : '1000lbschallenge.com') . '/challenge/');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '18A5pq86');
+define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'detox');
 define('DB_CHARSET', 'utf8');

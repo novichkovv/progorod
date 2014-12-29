@@ -8,7 +8,10 @@
 
 function send($to, $subject, $template, $user, array $content = array(), $day = 0, $min_height = 900)
 {
-    include('templates/mails/template.php');
+    if(!file_exists('templates/mails/template.php'))
+        include(ROOT_DIR . 'templates/mails/template.php');
+    else
+        include(ROOT_DIR .'templates/mails/template.php');
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 

@@ -46,4 +46,5 @@ $i = 0;
         mysqli_query($con, $query);
         $i ++;
     }
+echo $i;
 

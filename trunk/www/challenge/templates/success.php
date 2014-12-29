@@ -19,7 +19,7 @@
     </title>
     <link rel="shortcut icon" href="<?php echo SITE_DIR; ?>images/favicon.png" />
 </head>
-<body id="sign-body">
+<body <?php if(!$mobile) echo 'id="sign-body"'; ?>>
 <div class="spacer hidden-xs"></div>
 <div class="row">
     <div class="col-xs-offset-0 col-xs-12 col-sm-offset-3 col-sm-6">
@@ -48,7 +48,7 @@
 </div>
 <div class="spacer hidden-xs"></div>
 <div class="container" style="padding: 37px 0 23px; background-color: #387b99; width: 100%; text-align: center;">
-    <h1 style="color: #fff; font-size: 35px;">I DON'T KNOW WHAT TO WRITE HERE</h1>
+    <h1 style="color: #fff; font-size: 35px;">"I Can Do all things through Christ who Stregthens me" - <i>Phillipians 4:13</i></h1>
 </div>
 <div class="container" style="padding: 30px 0; background-color: #fff; width: 100%;">
     <div class="row hidden-xs text-center">
@@ -75,5 +75,22 @@
         <img src="images/3.png" />
     </div>
 </div>
+<script type="text/javascript">
+    adroll_adv_id = "5GRB7NSSVNHJLG7BF2SVFN";
+    adroll_pix_id = "CRWVTWIJ5BCW7C3HCM4C2K";
+    (function () {
+        var oldonload = window.onload;
+        window.onload = function(){
+            __adroll_loaded=true;
+            var scr = document.createElement("script");
+            var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+            scr.setAttribute('async', 'true');
+            scr.type = "text/javascript";
+            scr.src = host + "/j/roundtrip.js";
+            ((document.getElementsByTagName('head') || [null])[0] ||
+                document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+            if(oldonload){oldonload()}};
+    }());
+</script>
 </body>
 </html>

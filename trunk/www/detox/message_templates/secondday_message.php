@@ -15,6 +15,7 @@ $mail='
 <div style="min-height: 900px;">
     <div style="text-align: center; width: 730px;">
         <div class="animate_left" style="width: 730px; text-align: center;"><h2 style="color: cadetblue; margin: auto; position: relative;">' . $subject . '</h2></div>
+        <a href="' . SITE_DIR . 'home.php?day=' . $day . '&uid=' . $user['user_id'] . '&hash=' . md5($user['email']) .'&redirect=ebook" target="_blank"><img src="'.SITE_DIR.'images/ebooklet.png"></a>
         <div style="width: 620px; margin: auto;">
             <div style="float: left">
                 <br><br>

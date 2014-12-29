@@ -7,13 +7,13 @@
  */
 
     require_once('model.php');
-    $model = new model('login_users');
-    $user = $model->getByField('email', $_GET['mail']);
+    $model = new model('wp_users');
+    $user = $model->getByField('user_email', $_GET['mail']);
     $user['sent'] = 100;
 if(isset($_POST['sign_out']))
 {
     $model->insert($user);
-    if($user['user_id'])$success = true;
+    if($user['ID'])$success = true;
 }
 
 
@@ -30,7 +30,7 @@ if(isset($_POST['sign_out']))
     <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
         <div class="panel panel-info" id="main-panel">
             <div class="panel-heading text-center">
-                <h3>DR. COLBERT'S 21 DAY DETOX</h3>
+                <h3>"Can Do" Weight Loss Challenge</h3>
             </div>
             <div class="panel-body">
                 <div class="row text-center">
@@ -41,7 +41,7 @@ if(isset($_POST['sign_out']))
                         else
                         echo '
                         <form action="" method="post">
-                            <h1>Do you want to sign out from 21 day detox program with <b>'.$user['email'].'</b>?</h1>
+                            <h1>Do you want to sign out from "Can Do" Weight Loss Challenge with <b>'.$user['user_email'].'</b>?</h1>
                             <input type="submit" name="sign_out" value="Sign Out" class="btn btn-lg btn-warning">
                         </form>
                         ';
@@ -53,5 +53,22 @@ if(isset($_POST['sign_out']))
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    adroll_adv_id = "5GRB7NSSVNHJLG7BF2SVFN";
+    adroll_pix_id = "CRWVTWIJ5BCW7C3HCM4C2K";
+    (function () {
+        var oldonload = window.onload;
+        window.onload = function(){
+            __adroll_loaded=true;
+            var scr = document.createElement("script");
+            var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+            scr.setAttribute('async', 'true');
+            scr.type = "text/javascript";
+            scr.src = host + "/j/roundtrip.js";
+            ((document.getElementsByTagName('head') || [null])[0] ||
+                document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+            if(oldonload){oldonload()}};
+    }());
+</script>
 </body>
 </html>
