@@ -11,7 +11,7 @@ $data[0] = array(
 );
 $data[1] = array(
     'subject' => 'Understanding the Can Do Nutritional System',
-    'video' => 'https://www.youtube.com/watch?v=C9BdGCw6wh8'
+    'video' => 'https://www.youtube.com/watch?v=sWyT7tkKQuc'
 );
 $data[2] = array(
     'subject' => 'Angela\'s Advice for Losing 75 Pounds!',

@@ -5,14 +5,14 @@
  * Date: 13.12.14
  * Time: 1:59
  */
-require_once('challenge/model.php');
+require_once('model.php');
 $model = new model('wp_users');
 if(isset($_POST['signin']))
 {
     $warning = false;
     $u = $model->getByField('user_login', $_POST['user_login']);
     if(!$_POST['user_login'])
-        $warning = 'First name required!';
+        $warning = 'Username required!';
     elseif(!$_POST['user_email'])
         $warning = 'Email required!';
     elseif(!preg_match("/^.+@.+\..+$/",strtolower($_POST['user_email'])))
@@ -54,13 +54,13 @@ if(isset($_POST['signin']))
         $row['sdate'] = date('Y-m-d H:i:s');
         $id = $model->insert($row);
         $user = $model->getById($id);
-        require_once('challenge/mail_generator.php');
+        require_once('mail_generator.php');
         send($user['user_email'], 'Here are Your Next Steps', 'subscribe', $user, array('password' => $password));
-        header('Location: challenge/success.php');
+        header('Location: success.php');
     }
 }
-require_once('challenge/mobile_detect.php');
+require_once('mobile_detect.php');
 $detect  = new mobile_detect();
 if($detect->isMobile() || $detect->isTablet())
     $mobile = true;
-require_once('challenge/templates/index.php');
+require_once('templates/index.php');

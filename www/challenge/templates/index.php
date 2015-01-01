@@ -13,6 +13,7 @@ $_SESSION['wsl::plugin']= 'WordPress Social Login 2.1.5';
 <head>
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_DIR; ?>css/style.css">
+	<script type="text/javascript" src="<?php echo SITE_DIR; ?>js/jquery.js"></script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -65,9 +66,16 @@ $_SESSION['wsl::plugin']= 'WordPress Social Login 2.1.5';
                             <div class="form-group">
                                 <input type="text" class="form-control input-lg" name="phone" placeholder="Enter Your Phone #"  value="<?php echo $_POST['phone']; ?>" />
                             </div>
+							<div class="form-group">
+								<div class="checkbox">
+									<label>										
+										<input  style="margin-top: 1px;" type="checkbox" name="accept"  value="1" />I accept the <a href="<?php echo SITE_DIR; ?>templates/privacy_policy.html" target="__blank">candoweightloss.com Privacy Policy</a>
+									</label>
+								</div>
+                            </div>
                             <br>
-                            <div class="form-group text-center">
-                                <input type="submit" class="btn btn-lg btn-primary" name="signin" value="I CAN DO!" />
+                            <div class="form-group text-center disabled">
+                                <input type="submit" class="btn btn-lg btn-primary" name="signin" value="I CAN DO!"  disabled />
                             </div>
                         </div>
                     </form>
@@ -106,6 +114,27 @@ $_SESSION['wsl::plugin']= 'WordPress Social Login 2.1.5';
     </div>
 </div>
 <script type="text/javascript">
+	$ = jQuery.noConflict();
+	$(document).ready(function()
+	{
+		$("input[name='accept']").click(function()
+		{
+			if($(this).prop('checked'))
+			{
+				$("input[name='signin']").removeAttr('disabled');
+				$("input[name='signin']").parent().removeClass('disabled');
+			}
+			else
+			{
+				$("input[name='signin']").attr('disabled', 'disabled');
+				$("input[name='signin']").parent().addClass('disabled');
+			}
+		});
+		$('body').on('click',".disabled",function()
+		{
+			alert('You must accept the candoweightloss.com Privacy Policy first!');
+		});
+	});
     adroll_adv_id = "5GRB7NSSVNHJLG7BF2SVFN";
     adroll_pix_id = "CRWVTWIJ5BCW7C3HCM4C2K";
     (function () {
@@ -124,3 +153,110 @@ $_SESSION['wsl::plugin']= 'WordPress Social Login 2.1.5';
 </script>
 </body>
 </html>
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <link rel="stylesheet" type="text/css" href="--><?php //echo SITE_DIR; ?><!--css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="--><?php //echo SITE_DIR; ?><!--css/style.css">-->
+<!--    <meta charset="utf-8" />-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge" />-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1" />-->
+<!--    <title>-->
+<!--        Can Do | Weightloss Challenge-->
+<!--    </title>-->
+<!--    <link rel="shortcut icon" href="--><?php //echo SITE_DIR; ?><!--images/favicon.png" />-->
+<!--</head>-->
+<!--<body id="sign-body">-->
+<!--<div class="spacer hidden-xs"></div>-->
+<!--<div class="row">-->
+<!--    <div class="col-sm-3 hidden-xs text-center side-images">-->
+<!--        <img src="images/1.png" />-->
+<!--        <img src="images/2.png" />-->
+<!--        <img src="images/6.png" />-->
+<!--    </div>-->
+<!--    <div class="col-xs-offset-0 col-xs-12 col-sm-offset-0 col-sm-6">-->
+<!--        <div class="panel panel-info" id="main-panel">-->
+<!--            <div id="header">-->
+<!--                <div class="col-sm-4">-->
+<!--                    <img src="--><?php //echo SITE_DIR; ?><!--images/cando3.png" id="logo" />-->
+<!--                </div>-->
+<!--                <div class="col-sm-6" id="questions_div">-->
+<!--                    <span id="questions">Questions? (407)732-6952</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="panel-body">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-sm-10 col-sm-offset-1">-->
+<!---->
+<!--                    </div>-->
+<!--                    <form name="sign_in" action="" method="post">-->
+<!---->
+<!--                        <div class="col-sm-8 col-sm-offset-2" >-->
+<!--                            <ul id="description">-->
+<!--                                <li>-->
+<!--                                    The Fastest Way to Burn Fat in 42 Days-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    Lose Inches around your waist, stomach and thighs-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    Free Video's of Dr. Colbert Walking You through the Program-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                            <div class="text-danger text-center"><h3>--><?php //echo $warning; ?><!--</h3></div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input type="text" class="form-control input-lg" name="username" placeholder="Enter Your First Name" value="--><?php //echo $_POST['firstname']; ?><!--" />-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input type="email" class="form-control input-lg" name="email" placeholder="Enter Your E-mail"  value="--><?php //echo $_POST['email']; ?><!--" />-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input type="text" class="form-control input-lg" name="phone" placeholder="Enter Your Phone Number"  value="--><?php //echo $_POST['email']; ?><!--" />-->
+<!--                            </div>-->
+<!--                            <br>-->
+<!--                            <div class="form-group text-center">-->
+<!--                                <input type="submit" class="btn btn-lg btn-primary" name="signin" value="I CAN DO!" />-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-sm-3 hidden-xs text-center side-images">-->
+<!--        <img src="images/3.png" />-->
+<!--        <img src="images/4.png" />-->
+<!--        <img src="images/5.png" />-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="row visible-xs">-->
+<!--    <div class="text-center">-->
+<!--        <img src="images/4.png" />-->
+<!--        <br><img src="images/5.png" />-->
+<!--        <br><img src="images/6.png" />-->
+<!--        <br><img src="images/1.png" />-->
+<!--        <br>-->
+<!--        <img src="images/2.png" />-->
+<!--        <br>-->
+<!--        <img src="images/3.png" />-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script type="text/javascript">-->
+<!--    adroll_adv_id = "5GRB7NSSVNHJLG7BF2SVFN";-->
+<!--    adroll_pix_id = "CRWVTWIJ5BCW7C3HCM4C2K";-->
+<!--    (function () {-->
+<!--        var oldonload = window.onload;-->
+<!--        window.onload = function(){-->
+<!--            __adroll_loaded=true;-->
+<!--            var scr = document.createElement("script");-->
+<!--            var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");-->
+<!--            scr.setAttribute('async', 'true');-->
+<!--            scr.type = "text/javascript";-->
+<!--            scr.src = host + "/j/roundtrip.js";-->
+<!--            ((document.getElementsByTagName('head') || [null])[0] ||-->
+<!--                document.getElementsByTagName('script')[0].parentNode).appendChild(scr);-->
+<!--            if(oldonload){oldonload()}};-->
+<!--    }());-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
