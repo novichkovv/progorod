@@ -28,7 +28,7 @@ $mail .= '
         <div style="float: left">
             <br><br>'."\n";
 $mail .= '
-        <a href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html" target="_blank"><img style="width: 460px;" src="' . SITE_DIR . 'images/5percent.jpg" alt="Your package" /></a>
+        <a href="http://www.drcolbert.com/can-do-weightloss-package-764.html" target="_blank"><img style="width: 460px;" src="' . SITE_DIR . 'images/5percent.jpg" alt="Your package" /></a>
         '."\n";
 $mail .= '
          <a href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html" target="_blank"><img src="' . SITE_DIR . 'images/button.png" style="margin-bottom: 30px;border-radius: 5px;box-shadow: 0 0 2px inset; width: 350px;" /></a>

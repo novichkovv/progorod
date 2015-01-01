@@ -62,6 +62,10 @@ if($_SESSION['login'] == 'admin')
 {
 
     $con=mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $query = 'SELECT count(ID) count FROM wp_users WHERE sdate > "2014-12-27 00:00:00"';
+    $res = mysqli_query($con,$query);
+    $row = $res->fetch_assoc();
+    $count = $row['count'];
     $query = 'SELECT * FROM wp_users ORDER BY ID DESC';
     $res = mysqli_query($con, $query);
     if(isset($_POST['export']))
@@ -81,6 +85,7 @@ if($_SESSION['login'] == 'admin')
     echo '
 <br><br><br>
     <div class="row">
+        <h3>Total new subscribers quantity: ' . $count . '</h3>
         <div class="col-md-12 col-md-offset-0 col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">

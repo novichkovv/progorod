@@ -7,7 +7,7 @@
  */
 $mail .= '
 <div style="text-align: center;color: #245269;">
-    <a href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html" target="_blank"><img alt="discount coupon" src="' . SITE_DIR . 'images/5percent.jpg" style="width: 600px;margin-top: 30px;" /></a>
+    <a href="http://www.drcolbert.com/can-do-weightloss-package-764.html" target="_blank"><img alt="discount coupon" src="' . SITE_DIR . 'images/5percent.jpg" style="width: 600px;margin-top: 30px;" /></a>
     <h1>"Can Do" Challenge</h1>
 </div>
 <div style="text-align: center;">

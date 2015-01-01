@@ -81,7 +81,7 @@
                     <iframe id="video_frame" src="<?php echo strtr($video, array('watch?v='=>'embed/', 'https:'=>'', '&list' => '?list')); ?>" frameborder="0" width="560" height="315" allowfullscreen="allowfullscreen">        </iframe>
                     <img src="<?php echo SITE_DIR; ?>images/video2.jpg" />
                 </div>
-                <a target="_blank" href="http://www.drcolbert.com/can-do-weightloss-alternate-package.html"><img src="<?php echo SITE_DIR; ?>images/5percent.jpg" style="width: 100%;" /></a>
+                <a target="_blank" href="http://www.drcolbert.com/can-do-weightloss-package-764.html"><img src="<?php echo SITE_DIR; ?>images/5percent.jpg" style="width: 100%;" /></a>
             </div>
         </div>
         <div class="col-sm-4 col-md-6">
