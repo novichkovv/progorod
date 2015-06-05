@@ -9,23 +9,6 @@ class subdivisions_controller extends controller
 {
     public function init()
     {
-        $x = 123;
-        $a = 0;
-        $b = 1;
-        $c = 1;
-        if($x == 1)echo 1;
-        if($x == 2)echo 1;
-        if($x == 3)echo 1;
-        for($i = 3; $i<$x; $i++)
-        {
-            $res = $a + $b + $c - 1;
-            $a = $b;
-            $b = $c;
-            $c = $res;
-//            $arr[$i] = $arr[$i - 1] + $arr[$i - 2] + $arr[$i - 3] - 1;
-//            unset($arr[$])
-        }
-        echo $res;//$arr[$x];
         $this->system->script = array('subdivisions','jquery.scrolling-parallax');
         if($_GET['id'])return;
         if($_SESSION['client']['location'])$this->checkLocationData();
@@ -105,7 +88,7 @@ class subdivisions_controller extends controller
 
     public function handler()
     {
-        session_destroy();
+        //session_destroy();
         if(isset($_POST['add_comment_btn']))
         {
             $warning = false;
